@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "omoe",
+    "model": "qwen35-35b",
+    "results_dir": "/root/autodl-tmp/workspace/experiment/results/omoe/qwen35-35b/20260411_184757_omoe-qwen35-35b_limit240"
+  },
+  "experiments": [
+    {
+      "rr": 5.0,
+      "throughput_req_s": 1.344907583134091,
+      "output_throughput_tok_s": 25.858223122563267,
+      "total_token_throughput": 324.527699707189,
+      "completed": 269,
+      "failed": 731,
+      "duration_s": 200.01374322921038,
+      "ttft_ms": {
+        "mean": 11585.41479528809,
+        "median": 11539.010038599372,
+        "std": 1253.519049082364,
+        "p99": 13627.983325719832
+      },
+      "tpot_ms": {
+        "mean": 1847.3758762000089,
+        "median": 2372.5861395325733,
+        "std": 1330.0874885472022,
+        "p99": 5185.510902553797
+      },
+      "itl_ms": {
+        "mean": 307.49376834301074,
+        "median": 284.2078395187855,
+        "std": 97.65860240827,
+        "p99": 566.7650019749999
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 199,
+      "max_output_tokens_per_s": 611.0
+    }
+  ]
+}

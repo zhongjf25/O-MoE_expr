@@ -1,0 +1,917 @@
+============================================
+  O-MoE Qwen3.5-35B Serving Configuration
+============================================
+  Model:                  /root/autodl-tmp/models/Qwen3.5-35B-A3B
+  CUDA_VISIBLE_DEVICES:   6,7
+  GPU Memory Util:        0.86
+  TP Size:                1
+  Offload Expert Limit:   240
+  Max Model Len:          8192
+  Port:                   8028
+============================================
+[INFO] GPU Status:
+name, memory.total [MiB], memory.free [MiB]
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+
+[INFO] Starting O-MoE Qwen3.5-35B service...
+[INFO] Press Ctrl+C to stop
+
+(APIServer pid=285347) INFO 04-11 18:48:04 [utils.py:293] 
+(APIServer pid=285347) INFO 04-11 18:48:04 [utils.py:293]        █     █     █▄   ▄█
+(APIServer pid=285347) INFO 04-11 18:48:04 [utils.py:293]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.16.1rc0
+(APIServer pid=285347) INFO 04-11 18:48:04 [utils.py:293]   █▄█▀ █     █     █     █  model   /root/autodl-tmp/models/Qwen3.5-35B-A3B
+(APIServer pid=285347) INFO 04-11 18:48:04 [utils.py:293]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=285347) INFO 04-11 18:48:04 [utils.py:293] 
+(APIServer pid=285347) INFO 04-11 18:48:04 [utils.py:229] non-default args: {'model_tag': '/root/autodl-tmp/models/Qwen3.5-35B-A3B', 'port': 8028, 'model': '/root/autodl-tmp/models/Qwen3.5-35B-A3B', 'max_model_len': 8192, 'enforce_eager': True, 'gpu_memory_utilization': 0.86, 'enable_prefix_caching': False, 'offload_expert': True, 'offload_expert_limit': 240, 'dynamic_cache_enabled': True, 'expert_no_copy_compute': True, 'enable_chunked_prefill': False, 'async_scheduling': False}
+(APIServer pid=285347) INFO 04-11 18:48:04 [model.py:532] Resolved architecture: Qwen3_5MoeForConditionalGeneration
+(APIServer pid=285347) INFO 04-11 18:48:04 [model.py:1556] Using max model len 8192
+(APIServer pid=285347) WARNING 04-11 18:48:04 [arg_utils.py:2088] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
+(APIServer pid=285347) INFO 04-11 18:48:04 [vllm.py:748] Asynchronous scheduling is disabled.
+(APIServer pid=285347) WARNING 04-11 18:48:04 [vllm.py:782] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=285347) WARNING 04-11 18:48:04 [vllm.py:793] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=285347) INFO 04-11 18:48:04 [vllm.py:933] Cudagraph is disabled under eager mode
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:16 [core.py:100] Initializing a V1 LLM engine (v0.16.1rc0) with config: model='/root/autodl-tmp/models/Qwen3.5-35B-A3B', speculative_config=None, tokenizer='/root/autodl-tmp/models/Qwen3.5-35B-A3B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/root/autodl-tmp/models/Qwen3.5-35B-A3B, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:17 [parallel_state.py:1307] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.17.0.2:47621 backend=nccl
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:17 [parallel_state.py:1535] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0, EPLB rank N/A
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:21 [base.py:106] Offloader set to NoopOffloader
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:21 [gpu_model_runner.py:4310] Starting to load model /root/autodl-tmp/models/Qwen3.5-35B-A3B...
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:22 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:22 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:22 [unquantized.py:186] Using TRITON backend for Unquantized MoE
+(EngineCore_DP0 pid=285819) INFO 04-11 18:48:25 [cuda.py:402] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:   0% Completed | 0/14 [00:00<?, ?it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:   7% Completed | 1/14 [00:00<00:05,  2.58it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  14% Completed | 2/14 [00:00<00:05,  2.28it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  21% Completed | 3/14 [00:01<00:05,  2.19it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  29% Completed | 4/14 [00:01<00:04,  2.21it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  36% Completed | 5/14 [00:02<00:04,  2.15it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  43% Completed | 6/14 [00:02<00:03,  2.19it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  50% Completed | 7/14 [00:03<00:03,  2.22it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  57% Completed | 8/14 [00:03<00:02,  2.22it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  64% Completed | 9/14 [00:04<00:02,  1.91it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  71% Completed | 10/14 [00:04<00:02,  1.96it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  79% Completed | 11/14 [00:05<00:01,  2.02it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  86% Completed | 12/14 [00:05<00:00,  2.02it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards:  93% Completed | 13/14 [00:06<00:00,  1.67it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards: 100% Completed | 14/14 [00:06<00:00,  2.02it/s]
+(EngineCore_DP0 pid=285819) 
+Loading safetensors checkpoint shards: 100% Completed | 14/14 [00:06<00:00,  2.05it/s]
+(EngineCore_DP0 pid=285819) 
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:04 [default_loader.py:293] Loading weights took 6.82 seconds
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:27 [gpu_model_runner.py:4407] Model loading took 8.34 GiB memory and 64.486417 seconds
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:27 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:32 [gpu_worker.py:412] Available KV cache memory: 16.53 GiB
+(EngineCore_DP0 pid=285819) `torch_dtype` is deprecated! Use `dtype` instead!
+(EngineCore_DP0 pid=285819) [debug] size 49152 2097152 2097152
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:32 [block_utils.py:1148] [debug] available_memory: 17746213295,         num_blocks: 541568, num_huge_blocks: 8462,         kv_page_size: 32768, huge_page_size: 2097152,         num_expert_in_huge_block: 1,         num_conv_in_huge_block: 42,         num_ssm_in_huge_block: 1
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:32 [block_utils.py:1619] GPU KV cache size: 2,166,272 tokens
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:32 [block_utils.py:1624] Maximum concurrency for 8,192 tokens per request: 49233.45x
+(EngineCore_DP0 pid=285819) 2026-04-11 18:49:32,887 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(EngineCore_DP0 pid=285819) 2026-04-11 18:49:33,428 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(EngineCore_DP0 pid=285819) WARNING 04-11 18:49:33 [fused_moe.py:1577] Using default MoE config. Performance might be sub-optimal! Config file not found at /root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/configs/E=256,N=512,device_name=NVIDIA_GeForce_RTX_5090.json
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:33 [core.py:291] init engine (profile, create kv cache, warmup model) took 6.67 seconds
+(EngineCore_DP0 pid=285819) WARNING 04-11 18:49:33 [expert_hotset.py:332] Loading non-converged expert hotset profile from /root/autodl-tmp/workspace/vllm-offloading/expert_hotset_profiles/Qwen3.5-35B-A3B.json (sampled_requests=500).
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:33 [expert_manager.py:184] Auto-initialized cached_num_experts=60 using total_expert_blocks=8462, reserved_first_layer_blocks=768, adjustable_layers=39, raw_per_layer=65.76.
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:34 [vllm.py:748] Asynchronous scheduling is disabled.
+(EngineCore_DP0 pid=285819) WARNING 04-11 18:49:34 [vllm.py:782] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore_DP0 pid=285819) WARNING 04-11 18:49:34 [vllm.py:793] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore_DP0 pid=285819) INFO 04-11 18:49:34 [vllm.py:933] Cudagraph is disabled under eager mode
+(APIServer pid=285347) INFO 04-11 18:49:34 [api_server.py:495] Supported tasks: ['generate']
+(APIServer pid=285347) WARNING 04-11 18:49:34 [model.py:1357] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=285347) INFO 04-11 18:49:34 [serving.py:185] Warming up chat template processing...
+(APIServer pid=285347) INFO 04-11 18:49:35 [hf.py:318] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=285347) INFO 04-11 18:49:35 [serving.py:210] Chat template warmup completed in 978.9ms
+(APIServer pid=285347) INFO 04-11 18:49:35 [api_server.py:500] Starting vLLM API server 0 on http://0.0.0.0:8028
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:38] Available routes are:
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /openapi.json, Methods: HEAD, GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /docs, Methods: HEAD, GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /docs/oauth2-redirect, Methods: HEAD, GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /redoc, Methods: HEAD, GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /tokenize, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /detokenize, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /load, Methods: GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /version, Methods: GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /health, Methods: GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /metrics, Methods: GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/models, Methods: GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /ping, Methods: GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /ping, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /invocations, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/responses, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/completions, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/completions/render, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /v1/messages, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=285347) INFO 04-11 18:49:35 [launcher.py:47] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=285347) INFO:     Started server process [285347]
+(APIServer pid=285347) INFO:     Waiting for application startup.
+(APIServer pid=285347) INFO:     Application startup complete.
+(APIServer pid=285347) INFO:     127.0.0.1:56290 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:56300 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:56308 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:56320 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO 04-11 18:49:45 [loggers.py:267] Engine 000: Avg prompt throughput: 0.1 tokens/s, Avg generation throughput: 0.3 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 92.7%, Expert cache: 2616 resident experts, Pool free huge/KV/expert: 614/0/0, Est. available KV blocks: 39296, Prefix cache hit rate: 0.0%
+(APIServer pid=285347) INFO:     127.0.0.1:35062 - "GET /metrics HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35062 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35070 - "POST /v1/completions HTTP/1.1" 200 OK
+(EngineCore_DP0 pid=285819) /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py:1181: UserWarning: Input tensor shape suggests potential format mismatch: seq_len (12) < num_heads (16). This may indicate the inputs were passed in head-first format [B, H, T, ...] Please verify your input tensor format matches the expected shape [B, T, H, ...].
+(EngineCore_DP0 pid=285819)   return fn(*args, **kwargs)
+(EngineCore_DP0 pid=285819) /root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/utils.py:113: UserWarning: Input tensor shape suggests potential format mismatch: seq_len (12) < num_heads (32). This may indicate the inputs were passed in head-first format [B, H, T, ...] when head_first=False was specified. Please verify your input tensor format matches the expected shape [B, T, H, ...].
+(EngineCore_DP0 pid=285819)   return fn(*contiguous_args, **contiguous_kwargs)
+(APIServer pid=285347) INFO:     127.0.0.1:35080 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35086 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35094 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35110 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35114 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO 04-11 18:49:55 [loggers.py:267] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 92.7%, Expert cache: 2616 resident experts, Pool free huge/KV/expert: 614/0/0, Est. available KV blocks: 39296, Prefix cache hit rate: 0.0%
+(APIServer pid=285347) INFO:     127.0.0.1:35116 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35118 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47254 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47268 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47284 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47290 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47302 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47304 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47306 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47320 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47322 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47328 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47330 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47340 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47356 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47366 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47376 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47392 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47400 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47412 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47420 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47432 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47438 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47442 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47454 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47458 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47474 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47482 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47488 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47490 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47496 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47502 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47504 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47518 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47524 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47528 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47532 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47538 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47554 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47560 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47566 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47576 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47592 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47598 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47602 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO 04-11 18:50:05 [loggers.py:267] Engine 000: Avg prompt throughput: 1.2 tokens/s, Avg generation throughput: 0.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 93.3%, Expert cache: 2621 resident experts, Pool free huge/KV/expert: 567/54/0, Est. available KV blocks: 36342, Prefix cache hit rate: 0.0%
+(APIServer pid=285347) INFO:     127.0.0.1:47618 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47630 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47640 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47650 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47656 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47658 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47660 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47668 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47672 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47676 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46084 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46096 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46106 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46116 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46128 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46144 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46152 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46156 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46170 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46182 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46194 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46210 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46226 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46230 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46236 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46242 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46248 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46260 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46264 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46278 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46290 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46292 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46294 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46296 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46310 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46316 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46324 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46340 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46346 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35114 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47304 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46350 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46356 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46370 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46378 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46390 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46404 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46418 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46430 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46442 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46446 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47432 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46452 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46454 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46462 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46470 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46482 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46486 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46498 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO 04-11 18:50:15 [loggers.py:267] Engine 000: Avg prompt throughput: 1028.6 tokens/s, Avg generation throughput: 58.0 tokens/s, Running: 36 reqs, Waiting: 71 reqs, GPU KV cache usage: 99.2%, Expert cache: 2398 resident experts, Pool free huge/KV/expert: 70/174/0, Est. available KV blocks: 4654, Prefix cache hit rate: 0.0%
+(APIServer pid=285347) INFO:     127.0.0.1:47442 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46510 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46514 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35116 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46518 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41828 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41832 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47488 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41846 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41854 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41870 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47502 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41880 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41894 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41906 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41910 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41918 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41926 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47592 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47656 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47376 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47660 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41938 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47640 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47328 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47566 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41942 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41954 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41966 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47290 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41980 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41990 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47554 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41992 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47392 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42008 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42020 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47504 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46194 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46128 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46236 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46152 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42028 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42030 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO 04-11 18:50:25 [loggers.py:267] Engine 000: Avg prompt throughput: 1299.0 tokens/s, Avg generation throughput: 224.2 tokens/s, Running: 74 reqs, Waiting: 55 reqs, GPU KV cache usage: 99.6%, Expert cache: 1997 resident experts, Pool free huge/KV/expert: 33/60/0, Est. available KV blocks: 2172, Prefix cache hit rate: 0.0%
+(APIServer pid=285347) INFO:     127.0.0.1:47672 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46116 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42046 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42060 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42062 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46156 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40906 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40916 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46310 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47438 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46442 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40928 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40938 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46290 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46356 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46446 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40942 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40944 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40954 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40970 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40976 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40984 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47432 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46292 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35118 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46404 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46106 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46454 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40996 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47488 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46346 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47268 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41006 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46452 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41014 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41016 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41032 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41036 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41038 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41042 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41054 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41056 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47442 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41070 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41074 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41086 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41092 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41094 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41100 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41114 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41120 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41134 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41138 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41150 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41160 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO 04-11 18:50:35 [loggers.py:267] Engine 000: Avg prompt throughput: 1128.8 tokens/s, Avg generation throughput: 379.9 tokens/s, Running: 110 reqs, Waiting: 57 reqs, GPU KV cache usage: 99.2%, Expert cache: 1589 resident experts, Pool free huge/KV/expert: 69/94/0, Est. available KV blocks: 4510, Prefix cache hit rate: 0.0%
+(APIServer pid=285347) INFO:     127.0.0.1:35094 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41926 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46514 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41162 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41166 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47602 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48326 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48328 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48336 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48352 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48364 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47504 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47660 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48372 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48380 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35116 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46226 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47328 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47554 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46340 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46194 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42028 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46442 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35062 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48396 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48400 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48416 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48430 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40976 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48442 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40984 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41918 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40916 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48446 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41906 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48462 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48472 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48474 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48476 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48482 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48496 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48510 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48512 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40954 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46356 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47412 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41042 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47538 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46454 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47392 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48516 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48528 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48534 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO 04-11 18:50:45 [loggers.py:267] Engine 000: Avg prompt throughput: 1105.1 tokens/s, Avg generation throughput: 430.3 tokens/s, Running: 140 reqs, Waiting: 51 reqs, GPU KV cache usage: 99.2%, Expert cache: 1255 resident experts, Pool free huge/KV/expert: 70/54/0, Est. available KV blocks: 4534, Prefix cache hit rate: 0.0%
+(APIServer pid=285347) INFO:     127.0.0.1:41036 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48550 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41016 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48562 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48566 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48568 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48574 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42020 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47366 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33144 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:35094 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33148 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47482 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33152 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47640 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41032 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33164 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46514 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33166 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33178 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33184 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33192 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33208 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41926 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41138 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33220 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46452 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41134 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33236 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47650 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:40906 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33246 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33258 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33270 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48400 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41092 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47602 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47356 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO 04-11 18:50:55 [loggers.py:267] Engine 000: Avg prompt throughput: 938.6 tokens/s, Avg generation throughput: 425.0 tokens/s, Running: 160 reqs, Waiting: 50 reqs, GPU KV cache usage: 98.8%, Expert cache: 1011 resident experts, Pool free huge/KV/expert: 103/320/0, Est. available KV blocks: 6912, Prefix cache hit rate: 0.0%
+(APIServer pid=285347) INFO:     127.0.0.1:48352 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47438 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33272 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33274 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33276 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33278 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33282 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33286 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:33290 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46430 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41906 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:46340 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42572 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42588 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42590 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42592 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42604 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47504 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42606 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42610 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42618 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42624 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42628 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42630 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42642 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:47442 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:41056 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42650 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42660 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42666 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42670 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42680 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:42694 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=285347) INFO:     127.0.0.1:48482 - "POST /v1/completions HTTP/1.1" 200 OK
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [dump_input.py:72] Dumping input data for V1 LLM engine (v0.16.1rc0) with config: model='/root/autodl-tmp/models/Qwen3.5-35B-A3B', speculative_config=None, tokenizer='/root/autodl-tmp/models/Qwen3.5-35B-A3B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/root/autodl-tmp/models/Qwen3.5-35B-A3B, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': ['language_model.model.layers.0.mlp.experts', 'language_model.model.layers.1.mlp.experts', 'language_model.model.layers.2.mlp.experts', 'language_model.model.layers.3.mlp.experts', 'language_model.model.layers.4.mlp.experts', 'language_model.model.layers.5.mlp.experts', 'language_model.model.layers.6.mlp.experts', 'language_model.model.layers.7.mlp.experts', 'language_model.model.layers.8.mlp.experts', 'language_model.model.layers.9.mlp.experts', 'language_model.model.layers.10.mlp.experts', 'language_model.model.layers.11.mlp.experts', 'language_model.model.layers.12.mlp.experts', 'language_model.model.layers.13.mlp.experts', 'language_model.model.layers.14.mlp.experts', 'language_model.model.layers.15.mlp.experts', 'language_model.model.layers.16.mlp.experts', 'language_model.model.layers.17.mlp.experts', 'language_model.model.layers.18.mlp.experts', 'language_model.model.layers.19.mlp.experts', 'language_model.model.layers.20.mlp.experts', 'language_model.model.layers.21.mlp.experts', 'language_model.model.layers.22.mlp.experts', 'language_model.model.layers.23.mlp.experts', 'language_model.model.layers.24.mlp.experts', 'language_model.model.layers.25.mlp.experts', 'language_model.model.layers.26.mlp.experts', 'language_model.model.layers.27.mlp.experts', 'language_model.model.layers.28.mlp.experts', 'language_model.model.layers.29.mlp.experts', 'language_model.model.layers.30.mlp.experts', 'language_model.model.layers.31.mlp.experts', 'language_model.model.layers.32.mlp.experts', 'language_model.model.layers.33.mlp.experts', 'language_model.model.layers.34.mlp.experts', 'language_model.model.layers.35.mlp.experts', 'language_model.model.layers.36.mlp.experts', 'language_model.model.layers.37.mlp.experts', 'language_model.model.layers.38.mlp.experts', 'language_model.model.layers.39.mlp.experts']}, 
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [dump_input.py:79] Dumping scheduler output for model execution: SchedulerOutput(scheduled_new_reqs=[NewRequestData(req_id=cmpl-bench-44bd2164-269-0-8cb91027,prompt_token_ids_len=778,prefill_token_ids_len=None,mm_features=[],sampling_params=SamplingParams(n=1, presence_penalty=0.0, frequency_penalty=0.0, repetition_penalty=1.0, temperature=1.0, top_p=0.95, top_k=20, min_p=0.0, seed=None, stop=[], stop_token_ids=[248044], bad_words=[], include_stop_str_in_output=False, ignore_eos=False, max_tokens=15, min_tokens=0, logprobs=None, prompt_logprobs=None, skip_special_tokens=True, spaces_between_special_tokens=True, truncate_prompt_tokens=None, structured_outputs=None, extra_args=None),block_ids=([[140121, 5497], [323322, 5498], [323418, 5715], [497241, 5716], [323421, 5717], [497244, 7668], [497247, 7669], [323424, 5859], [497250, 5860], [323427, 5861]], [[497253, 1984], [497256, 1985], [497259, 2115], [497262, 2116], [497265, 2117], [878196, 2143], [878199, 2144], [878202, 2166], [878205, 2167], [878208, 2168]], [[878211, 6970], [878214, 2298], [878217, 2299], [878094, 2300], [878097, 6971], [878100, 6972], [878103, 6973], [878106, 2313], [878109, 2314], [878112, 2315]], [[467917, 467918, 467919, 467920, 467921, 467922, 467923, 467924, 467925, 467926, 467927, 467928, 467929, 467930, 252892, 252893, 252894, 252895, 467931, 467932, 467933, 467934, 252900, 252901, 467935, 252903, 467936, 467937, 467938, 467939, 252908, 368621, 368622, 368623, 368624, 368625, 368626, 368627, 368628, 252911, 467950, 114381, 467952, 467953, 467954, 467955, 114382, 467957, 467958], [114383, 114384, 126963, 422199, 422200, 422201, 422202, 422203, 422204, 422205, 422206, 422207, 433858, 433857, 203471, 446336, 446337, 446338, 446339, 446340, 446341, 446342, 446343, 446344, 446345, 446346, 446347, 446348, 446349, 446350, 446351, 446352, 446353, 446354, 446355, 446356, 446357, 446358, 446359, 446360, 446361, 446362, 446363, 446364, 446365, 446366, 446367, 446368, 446369], [446370, 446371, 446372, 446373, 446374, 446375, 446376, 446377, 446378, 446379, 446380, 446381, 446382, 446383, 446384, 446385, 446386, 446387, 446388, 446389, 446390, 446391, 446392, 446393, 446394, 446395, 446396, 446397, 446398, 446399, 155913, 155912, 155928, 155935, 155938, 155937, 155954, 155904, 155905, 155906, 155907, 155908, 155909, 155910, 155911, 155956, 155955, 155914, 155915], [155916, 155917, 155918, 155919, 155920, 155921, 155922, 155923, 155924, 155925, 155926, 155927, 155929, 155930, 155931, 155932, 155933, 155936, 155939, 155940, 155941, 155942, 155943, 155944, 155945, 155946, 155947, 155948, 155949, 155950, 155951, 155952, 155953, 155964, 155962, 155963, 155957, 155959, 155960, 155961, 155958, 155965, 155966, 155967, 155934, 155977, 156018, 155976, 155984], [155968, 155980, 155981, 155982, 155983, 155969, 155985, 155986, 155987, 155988, 155989, 155990, 155991, 155992, 155993, 155971, 155995, 155996, 155997, 155998, 155999, 156000, 156001, 156002, 156003, 156006, 156017, 156020, 156021, 156028, 156023, 156024, 156025, 156026, 156027, 155979, 155978, 156030, 156031, 155994, 156004, 156005, 156009, 156010, 156016, 155974, 156019, 156022, 156029], [155975, 156007, 156008, 156011, 155970, 156012, 155972, 156013, 155973, 156014, 156015, 156036, 156035, 156034, 156033, 156032, 156037, 156038, 156039, 156040, 156041, 156042, 156043, 156044, 156045, 156046, 156047, 156048, 156049, 156050, 156051, 156052, 156053, 156054, 156055, 156056, 156057, 156058, 156059, 156060, 156061, 156062, 156063, 156064, 156065, 156066, 156067, 156068, 156069], [156070, 156071, 156072, 156073, 156074, 156075, 156076, 156077, 156078, 156079, 156080, 156081, 156082, 156083, 156084, 156085, 156086, 156087, 156088, 156089, 156090, 156091, 156092, 156093, 156094, 156095, 156100, 156101, 156102, 156103, 156104, 156105, 156106, 156107, 156108, 156109, 156110, 156111, 156112, 156113, 156114, 156115, 156116, 156117, 156118, 156119, 156120, 156121, 156122], [156123, 156124, 156125, 156126, 156127, 156128, 156129, 156130, 156131, 156132, 156133, 156134, 156135, 156136, 156137, 156138, 156139, 156140, 156141, 156142, 156143, 156144, 156145, 156146, 156147, 156148, 156149, 156150, 156151, 156152, 156153, 156154, 156155, 156156, 156157, 156158, 156159, 156096, 156097, 156098, 156099, 156160, 156161, 156162, 156163, 156164, 156165, 156166, 156167], [156168, 156169, 156170, 156171, 156172, 156173, 156174, 156175, 156176, 156177, 156178, 156179, 156180, 156181, 156182, 156183, 156184, 156185, 156186, 156187, 156188, 156189, 156190, 156191, 156192, 156193, 156194, 156195, 156196, 156197, 156198, 156199, 156200, 156201, 156202, 156203, 156204, 156205, 156206, 156207, 156208, 156209, 156210, 156211, 156212, 156213, 156214, 156215, 156216], [156217, 156218, 156219, 156220, 156221, 156222, 156223, 156224, 156225, 156226, 156227, 156228, 156229, 156230, 156231, 156232, 156233, 156234, 156235, 156236, 156237, 156238, 156239, 156240, 156241, 156242, 156243, 156244, 156245, 156246, 156247, 156248, 156249, 156250, 156251, 156252, 156253, 156254, 156255, 156256, 156257, 156258, 156259, 156260, 156261, 156262, 156263, 156264, 156265]]),num_computed_tokens=0,lora_request=None,prompt_embeds_shape=None)], scheduled_cached_reqs=CachedRequestData(req_ids=['cmpl-bench-44bd2164-1-0-849bfa7e', 'cmpl-bench-44bd2164-2-0-8c461adb', 'cmpl-bench-44bd2164-3-0-a90a397d', 'cmpl-bench-44bd2164-5-0-8cfd8fc8', 'cmpl-bench-44bd2164-9-0-a8dd9a02', 'cmpl-bench-44bd2164-11-0-954100b7', 'cmpl-bench-44bd2164-13-0-8b3854b2', 'cmpl-bench-44bd2164-15-0-bda80551', 'cmpl-bench-44bd2164-16-0-a2f32bee', 'cmpl-bench-44bd2164-17-0-94ff274c', 'cmpl-bench-44bd2164-19-0-bf6fc80f', 'cmpl-bench-44bd2164-20-0-ab29a217', 'cmpl-bench-44bd2164-25-0-bd108af2', 'cmpl-bench-44bd2164-27-0-9b7f5880', 'cmpl-bench-44bd2164-31-0-b1b7713d', 'cmpl-bench-44bd2164-32-0-81e62c55', 'cmpl-bench-44bd2164-33-0-9e9f42e4', 'cmpl-bench-44bd2164-36-0-acf146c3', 'cmpl-bench-44bd2164-37-0-b0c193ef', 'cmpl-bench-44bd2164-40-0-9dd2380b', 'cmpl-bench-44bd2164-41-0-be78baba', 'cmpl-bench-44bd2164-42-0-abfe9849', 'cmpl-bench-44bd2164-43-0-87887b8a', 'cmpl-bench-44bd2164-46-0-bcb653ae', 'cmpl-bench-44bd2164-48-0-876186b9', 'cmpl-bench-44bd2164-50-0-a338633d', 'cmpl-bench-44bd2164-52-0-a97b70e5', 'cmpl-bench-44bd2164-53-0-9924341f', 'cmpl-bench-44bd2164-57-0-91f67c19', 'cmpl-bench-44bd2164-59-0-8d65e0f1', 'cmpl-bench-44bd2164-61-0-b44f7ac0', 'cmpl-bench-44bd2164-62-0-a412da15', 'cmpl-bench-44bd2164-63-0-a9eef500', 'cmpl-bench-44bd2164-67-0-bfbe64c4', 'cmpl-bench-44bd2164-70-0-95878589', 'cmpl-bench-44bd2164-71-0-973707c8', 'cmpl-bench-44bd2164-73-0-af71c0c7', 'cmpl-bench-44bd2164-75-0-87be7097', 'cmpl-bench-44bd2164-77-0-92a9fdd0', 'cmpl-bench-44bd2164-78-0-a5020ab8', 'cmpl-bench-44bd2164-79-0-85097d7b', 'cmpl-bench-44bd2164-80-0-90b8d9b7', 'cmpl-bench-44bd2164-81-0-9f1e0ff1', 'cmpl-bench-44bd2164-84-0-a3bdb6e5', 'cmpl-bench-44bd2164-85-0-9708f65d', 'cmpl-bench-44bd2164-87-0-a30ab9d4', 'cmpl-bench-44bd2164-88-0-b0353b3a', 'cmpl-bench-44bd2164-91-0-b1707576', 'cmpl-bench-44bd2164-92-0-a5c5c83c', 'cmpl-bench-44bd2164-93-0-87542be3', 'cmpl-bench-44bd2164-95-0-8a49d1f3', 'cmpl-bench-44bd2164-96-0-82f2284d', 'cmpl-bench-44bd2164-97-0-857bc4ac', 'cmpl-bench-44bd2164-99-0-9dfbff19', 'cmpl-bench-44bd2164-106-0-91a1e82f', 'cmpl-bench-44bd2164-107-0-8fb684c5', 'cmpl-bench-44bd2164-108-0-831af583', 'cmpl-bench-44bd2164-109-0-a2a66294', 'cmpl-bench-44bd2164-110-0-84e7cd1a', 'cmpl-bench-44bd2164-112-0-8f524e75', 'cmpl-bench-44bd2164-115-0-b3d81e21', 'cmpl-bench-44bd2164-116-0-9265df53', 'cmpl-bench-44bd2164-117-0-b1c46080', 'cmpl-bench-44bd2164-119-0-9a8cd5d2', 'cmpl-bench-44bd2164-120-0-87341952', 'cmpl-bench-44bd2164-121-0-b41852ba', 'cmpl-bench-44bd2164-122-0-ada086b9', 'cmpl-bench-44bd2164-123-0-84f6c93b', 'cmpl-bench-44bd2164-124-0-ada17973', 'cmpl-bench-44bd2164-126-0-9efc8279', 'cmpl-bench-44bd2164-129-0-a50ea242', 'cmpl-bench-44bd2164-130-0-b07afd39', 'cmpl-bench-44bd2164-131-0-a53a160e', 'cmpl-bench-44bd2164-133-0-b32ff931', 'cmpl-bench-44bd2164-136-0-94e7d51b', 'cmpl-bench-44bd2164-137-0-88a1f9a5', 'cmpl-bench-44bd2164-138-0-a806f55b', 'cmpl-bench-44bd2164-139-0-a92f04a9', 'cmpl-bench-44bd2164-140-0-908372ae', 'cmpl-bench-44bd2164-141-0-b06a2677', 'cmpl-bench-44bd2164-142-0-88c62c8e', 'cmpl-bench-44bd2164-144-0-a27ba353', 'cmpl-bench-44bd2164-146-0-ac46a716', 'cmpl-bench-44bd2164-150-0-a32f7042', 'cmpl-bench-44bd2164-151-0-85f915b1', 'cmpl-bench-44bd2164-152-0-bd9c7bee', 'cmpl-bench-44bd2164-154-0-8e7450e8', 'cmpl-bench-44bd2164-155-0-bdb448fb', 'cmpl-bench-44bd2164-156-0-b2188c30', 'cmpl-bench-44bd2164-157-0-81780688', 'cmpl-bench-44bd2164-158-0-bbb3106a', 'cmpl-bench-44bd2164-159-0-90795f50', 'cmpl-bench-44bd2164-160-0-89155be2', 'cmpl-bench-44bd2164-163-0-a3012da0', 'cmpl-bench-44bd2164-166-0-973c96c4', 'cmpl-bench-44bd2164-167-0-be6a9861', 'cmpl-bench-44bd2164-168-0-9cddc4f4', 'cmpl-bench-44bd2164-170-0-a911e49b', 'cmpl-bench-44bd2164-171-0-95d721f6', 'cmpl-bench-44bd2164-172-0-aa320d46', 'cmpl-bench-44bd2164-174-0-a8a3652a', 'cmpl-bench-44bd2164-177-0-ab120a71', 'cmpl-bench-44bd2164-178-0-9cb92c45', 'cmpl-bench-44bd2164-179-0-b5e852b3', 'cmpl-bench-44bd2164-180-0-917f8156', 'cmpl-bench-44bd2164-181-0-a719c1ff', 'cmpl-bench-44bd2164-183-0-a3660a67', 'cmpl-bench-44bd2164-184-0-8cf91a38', 'cmpl-bench-44bd2164-186-0-b53e2609', 'cmpl-bench-44bd2164-187-0-9db27ee6', 'cmpl-bench-44bd2164-189-0-977e77eb', 'cmpl-bench-44bd2164-193-0-805bdff2', 'cmpl-bench-44bd2164-195-0-a6530868', 'cmpl-bench-44bd2164-198-0-8d86701b', 'cmpl-bench-44bd2164-199-0-a423a05c', 'cmpl-bench-44bd2164-200-0-af653d5d', 'cmpl-bench-44bd2164-202-0-8d8bb8e1', 'cmpl-bench-44bd2164-203-0-aac4ab69', 'cmpl-bench-44bd2164-204-0-be017bfe', 'cmpl-bench-44bd2164-205-0-a9867dab', 'cmpl-bench-44bd2164-208-0-86e09957', 'cmpl-bench-44bd2164-209-0-a8a21bf6', 'cmpl-bench-44bd2164-213-0-9769ec31', 'cmpl-bench-44bd2164-214-0-bd81b2be', 'cmpl-bench-44bd2164-216-0-94d0355c', 'cmpl-bench-44bd2164-217-0-a48d28d8', 'cmpl-bench-44bd2164-218-0-82a94881', 'cmpl-bench-44bd2164-220-0-a2cc05ea', 'cmpl-bench-44bd2164-222-0-9a0de07d', 'cmpl-bench-44bd2164-223-0-84bf6775', 'cmpl-bench-44bd2164-224-0-a15e812b', 'cmpl-bench-44bd2164-225-0-947794e7', 'cmpl-bench-44bd2164-226-0-95e3bbb4', 'cmpl-bench-44bd2164-227-0-96466fdc', 'cmpl-bench-44bd2164-228-0-9e20bde6', 'cmpl-bench-44bd2164-230-0-9155b2fe', 'cmpl-bench-44bd2164-231-0-ab8da39b', 'cmpl-bench-44bd2164-232-0-9e8e1adb', 'cmpl-bench-44bd2164-233-0-a65fd7f0', 'cmpl-bench-44bd2164-234-0-bb5c12c4', 'cmpl-bench-44bd2164-236-0-91bf1897', 'cmpl-bench-44bd2164-237-0-8803561b', 'cmpl-bench-44bd2164-238-0-bfda7a75', 'cmpl-bench-44bd2164-239-0-a474a439', 'cmpl-bench-44bd2164-240-0-bfdd3075', 'cmpl-bench-44bd2164-241-0-947c99ce', 'cmpl-bench-44bd2164-242-0-8fc2c0d1', 'cmpl-bench-44bd2164-243-0-968be08a', 'cmpl-bench-44bd2164-245-0-85cb3b63', 'cmpl-bench-44bd2164-246-0-80b182b0', 'cmpl-bench-44bd2164-247-0-a33fed8a', 'cmpl-bench-44bd2164-248-0-971b0a55', 'cmpl-bench-44bd2164-250-0-a51d65bc', 'cmpl-bench-44bd2164-251-0-bb674641', 'cmpl-bench-44bd2164-252-0-a81c64d2', 'cmpl-bench-44bd2164-253-0-bf2dadc2', 'cmpl-bench-44bd2164-254-0-9ebeb9bb', 'cmpl-bench-44bd2164-255-0-8ef2d7ac', 'cmpl-bench-44bd2164-256-0-bbf82ba2', 'cmpl-bench-44bd2164-257-0-9699bc48', 'cmpl-bench-44bd2164-258-0-9ec86d9e', 'cmpl-bench-44bd2164-259-0-94ecacba', 'cmpl-bench-44bd2164-260-0-868a861f', 'cmpl-bench-44bd2164-261-0-9d4f31bb', 'cmpl-bench-44bd2164-262-0-acda9b95', 'cmpl-bench-44bd2164-263-0-b02d4499', 'cmpl-bench-44bd2164-264-0-a7a94d1c', 'cmpl-bench-44bd2164-265-0-9a5146e4', 'cmpl-bench-44bd2164-266-0-ae656972', 'cmpl-bench-44bd2164-267-0-94f8f060', 'cmpl-bench-44bd2164-268-0-93eb3482'],resumed_req_ids=set(),new_token_ids_lens=[],all_token_ids_lens={},new_block_ids=[([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[260817], [260818], [260819], [260820], [260821], [260823], [260824], [260825], [260826], [260822]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[260827], [260828], [260830], [260831], [260832], [260833], [260834], [260835], [260836], [260837]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[260838], [260839], [260840], [260841], [260842], [260843], [260844], [260845], [260846], [260847]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[260848], [260849], [260850], [260851], [260852], [260853], [260854], [260855], [260856], [260857]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[260858], [260859], [260860], [260861], [260862], [260863], [126950], [126951], [126952], [126953]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[65293], [126954], [126955], [126956], [203483], [126957], [203484], [126958], [203485], [126959]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[203486], [126960], [203487], [126961], [203488], [126962], [203489], [65342], [65343], [65344]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[65345], [65346], [65347], [65348], [65349], [65350], [65351], [126964], [126965], [203490]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[433886], [126966], [433887], [126967], [126968], [126969], [127840], [127841], [127842], [127843]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[127844], [127845], [127846], [127847], [92019], [321396], [321397], [433894], [173946], [433895]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[203474], [433896], [433906], [433907], [433908], [467904], [467905], [467906], [467907], [467908]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([], [], [], [[467909], [467910], [260829], [467911], [467912], [467913], [467914], [467915], [252876], [467916]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]]), ([[]], [[]], [[]], [[]])],num_computed_tokens=[198, 200, 183, 202, 189, 589, 185, 430, 181, 187, 809, 229, 543, 175, 499, 200, 816, 172, 172, 163, 159, 430, 162, 961, 152, 154, 411, 992, 161, 153, 167, 919, 314, 175, 659, 899, 242, 209, 404, 135, 147, 478, 134, 151, 147, 366, 153, 142, 138, 174, 316, 256, 252, 433, 123, 114, 164, 150, 122, 154, 171, 117, 108, 103, 1092, 341, 385, 120, 130, 481, 105, 111, 135, 441, 126, 97, 107, 122, 677, 91, 91, 90, 84, 132, 116, 123, 106, 77, 76, 317, 78, 238, 775, 104, 112, 72, 77, 138, 651, 578, 127, 77, 530, 84, 199, 758, 85, 418, 171, 60, 864, 213, 455, 798, 64, 51, 54, 78, 86, 194, 57, 294, 50, 96, 50, 62, 42, 841, 531, 105, 39, 327, 205, 48, 184, 393, 28, 844, 28, 64, 108, 49, 367, 915, 87, 102, 67, 96, 56, 25, 74, 38, 247, 36, 712, 25, 506, 50, 387, 14, 732, 480, 191, 72, 21, 136, 320, 10, 35, 38, 51],num_output_tokens=[175, 175, 175, 175, 175, 175, 175, 175, 175, 175, 173, 172, 167, 167, 163, 162, 161, 158, 157, 154, 154, 153, 152, 150, 148, 147, 145, 144, 141, 139, 137, 136, 136, 135, 133, 132, 130, 128, 126, 126, 125, 124, 124, 121, 121, 120, 120, 117, 117, 116, 115, 114, 113, 112, 107, 106, 105, 104, 104, 102, 101, 101, 100, 98, 97, 97, 97, 96, 96, 95, 94, 93, 92, 91, 89, 89, 88, 87, 86, 85, 84, 82, 81, 76, 75, 74, 73, 72, 71, 70, 70, 70, 69, 67, 65, 65, 64, 63, 63, 62, 62, 60, 59, 59, 58, 57, 56, 55, 54, 54, 53, 49, 47, 45, 45, 44, 44, 43, 43, 42, 41, 40, 37, 36, 35, 34, 34, 32, 30, 30, 29, 28, 28, 28, 26, 24, 23, 22, 22, 21, 19, 19, 18, 17, 17, 16, 16, 15, 14, 13, 13, 12, 11, 11, 10, 10, 9, 8, 8, 8, 8, 6, 6, 5, 4, 4, 3, 3, 2, 1, 1]), num_scheduled_tokens={cmpl-bench-44bd2164-258-0-9ec86d9e: 1, cmpl-bench-44bd2164-91-0-b1707576: 1, cmpl-bench-44bd2164-158-0-bbb3106a: 1, cmpl-bench-44bd2164-200-0-af653d5d: 1, cmpl-bench-44bd2164-225-0-947794e7: 1, cmpl-bench-44bd2164-27-0-9b7f5880: 1, cmpl-bench-44bd2164-97-0-857bc4ac: 1, cmpl-bench-44bd2164-37-0-b0c193ef: 1, cmpl-bench-44bd2164-138-0-a806f55b: 1, cmpl-bench-44bd2164-108-0-831af583: 1, cmpl-bench-44bd2164-250-0-a51d65bc: 1, cmpl-bench-44bd2164-16-0-a2f32bee: 1, cmpl-bench-44bd2164-71-0-973707c8: 1, cmpl-bench-44bd2164-268-0-93eb3482: 1, cmpl-bench-44bd2164-195-0-a6530868: 1, cmpl-bench-44bd2164-157-0-81780688: 1, cmpl-bench-44bd2164-36-0-acf146c3: 1, cmpl-bench-44bd2164-122-0-ada086b9: 1, cmpl-bench-44bd2164-156-0-b2188c30: 1, cmpl-bench-44bd2164-46-0-bcb653ae: 1, cmpl-bench-44bd2164-67-0-bfbe64c4: 1, cmpl-bench-44bd2164-31-0-b1b7713d: 1, cmpl-bench-44bd2164-42-0-abfe9849: 1, cmpl-bench-44bd2164-80-0-90b8d9b7: 1, cmpl-bench-44bd2164-129-0-a50ea242: 1, cmpl-bench-44bd2164-166-0-973c96c4: 1, cmpl-bench-44bd2164-92-0-a5c5c83c: 1, cmpl-bench-44bd2164-41-0-be78baba: 1, cmpl-bench-44bd2164-218-0-82a94881: 1, cmpl-bench-44bd2164-242-0-8fc2c0d1: 1, cmpl-bench-44bd2164-77-0-92a9fdd0: 1, cmpl-bench-44bd2164-222-0-9a0de07d: 1, cmpl-bench-44bd2164-139-0-a92f04a9: 1, cmpl-bench-44bd2164-155-0-bdb448fb: 1, cmpl-bench-44bd2164-50-0-a338633d: 1, cmpl-bench-44bd2164-15-0-bda80551: 1, cmpl-bench-44bd2164-151-0-85f915b1: 1, cmpl-bench-44bd2164-75-0-87be7097: 1, cmpl-bench-44bd2164-48-0-876186b9: 1, cmpl-bench-44bd2164-189-0-977e77eb: 1, cmpl-bench-44bd2164-213-0-9769ec31: 1, cmpl-bench-44bd2164-236-0-91bf1897: 1, cmpl-bench-44bd2164-124-0-ada17973: 1, cmpl-bench-44bd2164-163-0-a3012da0: 1, cmpl-bench-44bd2164-198-0-8d86701b: 1, cmpl-bench-44bd2164-160-0-89155be2: 1, cmpl-bench-44bd2164-223-0-84bf6775: 1, cmpl-bench-44bd2164-267-0-94f8f060: 1, cmpl-bench-44bd2164-238-0-bfda7a75: 1, cmpl-bench-44bd2164-63-0-a9eef500: 1, cmpl-bench-44bd2164-217-0-a48d28d8: 1, cmpl-bench-44bd2164-159-0-90795f50: 1, cmpl-bench-44bd2164-186-0-b53e2609: 1, cmpl-bench-44bd2164-252-0-a81c64d2: 1, cmpl-bench-44bd2164-140-0-908372ae: 1, cmpl-bench-44bd2164-265-0-9a5146e4: 1, cmpl-bench-44bd2164-226-0-95e3bbb4: 1, cmpl-bench-44bd2164-136-0-94e7d51b: 1, cmpl-bench-44bd2164-95-0-8a49d1f3: 1, cmpl-bench-44bd2164-216-0-94d0355c: 1, cmpl-bench-44bd2164-255-0-8ef2d7ac: 1, cmpl-bench-44bd2164-232-0-9e8e1adb: 1, cmpl-bench-44bd2164-131-0-a53a160e: 1, cmpl-bench-44bd2164-112-0-8f524e75: 1, cmpl-bench-44bd2164-181-0-a719c1ff: 1, cmpl-bench-44bd2164-11-0-954100b7: 1, cmpl-bench-44bd2164-32-0-81e62c55: 1, cmpl-bench-44bd2164-99-0-9dfbff19: 1, cmpl-bench-44bd2164-13-0-8b3854b2: 1, cmpl-bench-44bd2164-141-0-b06a2677: 1, cmpl-bench-44bd2164-254-0-9ebeb9bb: 1, cmpl-bench-44bd2164-204-0-be017bfe: 1, cmpl-bench-44bd2164-241-0-947c99ce: 1, cmpl-bench-44bd2164-174-0-a8a3652a: 1, cmpl-bench-44bd2164-106-0-91a1e82f: 1, cmpl-bench-44bd2164-184-0-8cf91a38: 1, cmpl-bench-44bd2164-269-0-8cb91027: 778, cmpl-bench-44bd2164-214-0-bd81b2be: 1, cmpl-bench-44bd2164-259-0-94ecacba: 1, cmpl-bench-44bd2164-84-0-a3bdb6e5: 1, cmpl-bench-44bd2164-123-0-84f6c93b: 1, cmpl-bench-44bd2164-171-0-95d721f6: 1, cmpl-bench-44bd2164-224-0-a15e812b: 1, cmpl-bench-44bd2164-228-0-9e20bde6: 1, cmpl-bench-44bd2164-120-0-87341952: 1, cmpl-bench-44bd2164-79-0-85097d7b: 1, cmpl-bench-44bd2164-88-0-b0353b3a: 1, cmpl-bench-44bd2164-256-0-bbf82ba2: 1, cmpl-bench-44bd2164-126-0-9efc8279: 1, cmpl-bench-44bd2164-81-0-9f1e0ff1: 1, cmpl-bench-44bd2164-3-0-a90a397d: 1, cmpl-bench-44bd2164-262-0-acda9b95: 1, cmpl-bench-44bd2164-263-0-b02d4499: 1, cmpl-bench-44bd2164-227-0-96466fdc: 1, cmpl-bench-44bd2164-233-0-a65fd7f0: 1, cmpl-bench-44bd2164-33-0-9e9f42e4: 1, cmpl-bench-44bd2164-93-0-87542be3: 1, cmpl-bench-44bd2164-87-0-a30ab9d4: 1, cmpl-bench-44bd2164-154-0-8e7450e8: 1, cmpl-bench-44bd2164-150-0-a32f7042: 1, cmpl-bench-44bd2164-2-0-8c461adb: 1, cmpl-bench-44bd2164-167-0-be6a9861: 1, cmpl-bench-44bd2164-220-0-a2cc05ea: 1, cmpl-bench-44bd2164-177-0-ab120a71: 1, cmpl-bench-44bd2164-121-0-b41852ba: 1, cmpl-bench-44bd2164-243-0-968be08a: 1, cmpl-bench-44bd2164-107-0-8fb684c5: 1, cmpl-bench-44bd2164-239-0-a474a439: 1, cmpl-bench-44bd2164-70-0-95878589: 1, cmpl-bench-44bd2164-53-0-9924341f: 1, cmpl-bench-44bd2164-146-0-ac46a716: 1, cmpl-bench-44bd2164-237-0-8803561b: 1, cmpl-bench-44bd2164-20-0-ab29a217: 1, cmpl-bench-44bd2164-119-0-9a8cd5d2: 1, cmpl-bench-44bd2164-144-0-a27ba353: 1, cmpl-bench-44bd2164-234-0-bb5c12c4: 1, cmpl-bench-44bd2164-168-0-9cddc4f4: 1, cmpl-bench-44bd2164-240-0-bfdd3075: 1, cmpl-bench-44bd2164-193-0-805bdff2: 1, cmpl-bench-44bd2164-251-0-bb674641: 1, cmpl-bench-44bd2164-115-0-b3d81e21: 1, cmpl-bench-44bd2164-5-0-8cfd8fc8: 1, cmpl-bench-44bd2164-133-0-b32ff931: 1, cmpl-bench-44bd2164-78-0-a5020ab8: 1, cmpl-bench-44bd2164-142-0-88c62c8e: 1, cmpl-bench-44bd2164-247-0-a33fed8a: 1, cmpl-bench-44bd2164-85-0-9708f65d: 1, cmpl-bench-44bd2164-137-0-88a1f9a5: 1, cmpl-bench-44bd2164-59-0-8d65e0f1: 1, cmpl-bench-44bd2164-52-0-a97b70e5: 1, cmpl-bench-44bd2164-110-0-84e7cd1a: 1, cmpl-bench-44bd2164-172-0-aa320d46: 1, cmpl-bench-44bd2164-231-0-ab8da39b: 1, cmpl-bench-44bd2164-117-0-b1c46080: 1, cmpl-bench-44bd2164-62-0-a412da15: 1, cmpl-bench-44bd2164-96-0-82f2284d: 1, cmpl-bench-44bd2164-187-0-9db27ee6: 1, cmpl-bench-44bd2164-199-0-a423a05c: 1, cmpl-bench-44bd2164-202-0-8d8bb8e1: 1, cmpl-bench-44bd2164-257-0-9699bc48: 1, cmpl-bench-44bd2164-61-0-b44f7ac0: 1, cmpl-bench-44bd2164-1-0-849bfa7e: 1, cmpl-bench-44bd2164-264-0-a7a94d1c: 1, cmpl-bench-44bd2164-109-0-a2a66294: 1, cmpl-bench-44bd2164-230-0-9155b2fe: 1, cmpl-bench-44bd2164-9-0-a8dd9a02: 1, cmpl-bench-44bd2164-266-0-ae656972: 1, cmpl-bench-44bd2164-19-0-bf6fc80f: 1, cmpl-bench-44bd2164-17-0-94ff274c: 1, cmpl-bench-44bd2164-261-0-9d4f31bb: 1, cmpl-bench-44bd2164-260-0-868a861f: 1, cmpl-bench-44bd2164-205-0-a9867dab: 1, cmpl-bench-44bd2164-248-0-971b0a55: 1, cmpl-bench-44bd2164-246-0-80b182b0: 1, cmpl-bench-44bd2164-179-0-b5e852b3: 1, cmpl-bench-44bd2164-40-0-9dd2380b: 1, cmpl-bench-44bd2164-180-0-917f8156: 1, cmpl-bench-44bd2164-183-0-a3660a67: 1, cmpl-bench-44bd2164-253-0-bf2dadc2: 1, cmpl-bench-44bd2164-152-0-bd9c7bee: 1, cmpl-bench-44bd2164-178-0-9cb92c45: 1, cmpl-bench-44bd2164-73-0-af71c0c7: 1, cmpl-bench-44bd2164-203-0-aac4ab69: 1, cmpl-bench-44bd2164-208-0-86e09957: 1, cmpl-bench-44bd2164-245-0-85cb3b63: 1, cmpl-bench-44bd2164-209-0-a8a21bf6: 1, cmpl-bench-44bd2164-170-0-a911e49b: 1, cmpl-bench-44bd2164-116-0-9265df53: 1, cmpl-bench-44bd2164-57-0-91f67c19: 1, cmpl-bench-44bd2164-130-0-b07afd39: 1, cmpl-bench-44bd2164-43-0-87887b8a: 1, cmpl-bench-44bd2164-25-0-bd108af2: 1}, total_num_scheduled_tokens=949, scheduled_spec_decode_tokens={}, scheduled_encoder_inputs={}, num_common_prefix_blocks=[0, 0, 0, 0], finished_req_ids=['cmpl-bench-44bd2164-185-0-81b5eecb'], free_encoder_mm_hashes=[], preempted_req_ids=[], has_structured_output_requests=false, pending_structured_output_tokens=false, num_invalid_spec_tokens=null, kv_connector_metadata=null, ec_connector_metadata=null, required_expert_shrink_blocks=5, expert_cache_delta=ExpertCacheDelta(delta_id=181, experts_to_load=[], experts_to_evict=[[6, 64], [30, 99]], new_expert_to_block={}, evict_commit_mode='table'))
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [dump_input.py:81] Dumping scheduler stats: SchedulerStats(num_running_reqs=172, num_waiting_reqs=65, step_counter=0, current_wave=0, kv_cache_usage=0.9961002127156701, encoder_cache_usage=0.0, num_cached_experts=899, num_free_huge_blocks=33, num_free_kv_blocks=22, num_free_expert_blocks=0, estimated_available_kv_blocks=2134, prefix_cache_stats=PrefixCacheStats(reset=False, requests=0, queries=0, hits=0, preempted_requests=0, preempted_queries=0, preempted_hits=0), connector_prefix_cache_stats=None, kv_cache_eviction_events=[], spec_decoding_stats=None, kv_connector_stats=None, waiting_lora_adapters={}, running_lora_adapters={}, cudagraph_stats=None, perf_stats=None)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158] EngineCore encountered a fatal error.
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158] Traceback (most recent call last):
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1149, in run_engine_core
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     engine_core.run_busy_loop()
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1184, in run_busy_loop
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     self._process_engine_step()
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1215, in _process_engine_step
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     outputs, model_executed = self.step_fn()
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]                               ^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 452, in step
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     model_output = future.result()
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]                    ^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/concurrent/futures/_base.py", line 449, in result
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self.__get_result()
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     raise self._exception
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/uniproc_executor.py", line 79, in collective_rpc
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     result = run_method(self.driver_worker, method, args, kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/serial_utils.py", line 459, in run_method
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return func(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/worker_base.py", line 377, in execute_model
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self.worker.execute_model(scheduler_output)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return func(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_worker.py", line 712, in execute_model
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     output = self.model_runner.execute_model(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return func(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3712, in execute_model
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     model_output = self._model_forward(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]                    ^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3208, in _model_forward
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self.model(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self._call_impl(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return forward_call(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_5.py", line 735, in forward
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     hidden_states = self.language_model.model(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/compilation/decorators.py", line 389, in __call__
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self.forward(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 1209, in forward
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     hidden_states, residual = layer(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]                               ^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self._call_impl(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return forward_call(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 1103, in forward
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     self.linear_attn(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self._call_impl(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return forward_call(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_5.py", line 186, in forward
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     torch.ops.vllm.gdn_attention_core(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_ops.py", line 1209, in __call__
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self._op(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 1507, in gdn_attention_core
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     self._forward_core(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 821, in _forward_core
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     ) = self.chunk_gated_delta_rule(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self._call_impl(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return forward_call(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return self._forward_method(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 201, in forward_native
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return fla_chunk_gated_delta_rule(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 1181, in _fn
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return fn(*args, **kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/chunk.py", line 207, in chunk_gated_delta_rule
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     o, final_state = ChunkGatedDeltaRuleFunction.apply(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/autograd/function.py", line 583, in apply
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return super().apply(*args, **kwargs)  # type: ignore[misc]
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/utils.py", line 113, in wrapper
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return fn(*contiguous_args, **contiguous_kwargs)
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/amp/autocast_mode.py", line 477, in decorate_fwd
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     return fwd(*args, **kwargs)  # pyrefly: ignore [not-callable]
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/chunk.py", line 94, in forward
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     g, o, A, final_state, w, h, v_new = chunk_gated_delta_rule_fwd(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/chunk.py", line 49, in chunk_gated_delta_rule_fwd
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     h, v_new, final_state = chunk_gated_delta_rule_fwd_h(
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/chunk_delta_h.py", line 317, in chunk_gated_delta_rule_fwd_h
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     k.new_empty(N, H, V, K, dtype=torch.float32) if output_final_state else None
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158]     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) ERROR 04-11 18:51:00 [core.py:1158] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 344.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 317.06 MiB is free. Including non-PyTorch memory, this process has 30.92 GiB memory in use. Of the allocated memory 25.90 GiB is allocated by PyTorch, and 735.51 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+(EngineCore_DP0 pid=285819) Process EngineCore_DP0:
+(EngineCore_DP0 pid=285819) Traceback (most recent call last):
+(APIServer pid=285347) ERROR 04-11 18:51:00 [async_llm.py:702] AsyncLLM output_handler failed.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [async_llm.py:702] Traceback (most recent call last):
+(APIServer pid=285347) ERROR 04-11 18:51:00 [async_llm.py:702]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=285347) ERROR 04-11 18:51:00 [async_llm.py:702]     outputs = await engine_core.get_output_async()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [async_llm.py:702]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [async_llm.py:702]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=285347) ERROR 04-11 18:51:00 [async_llm.py:702]     raise self._format_exception(outputs) from None
+(APIServer pid=285347) ERROR 04-11 18:51:00 [async_llm.py:702] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore_DP0 pid=285819)     self.run()
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/multiprocessing/process.py", line 108, in run
+(EngineCore_DP0 pid=285819)     self._target(*self._args, **self._kwargs)
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1160, in run_engine_core
+(EngineCore_DP0 pid=285819)     raise e
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1149, in run_engine_core
+(EngineCore_DP0 pid=285819)     engine_core.run_busy_loop()
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1184, in run_busy_loop
+(EngineCore_DP0 pid=285819)     self._process_engine_step()
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1215, in _process_engine_step
+(EngineCore_DP0 pid=285819)     outputs, model_executed = self.step_fn()
+(EngineCore_DP0 pid=285819)                               ^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 452, in step
+(EngineCore_DP0 pid=285819)     model_output = future.result()
+(EngineCore_DP0 pid=285819)                    ^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/concurrent/futures/_base.py", line 449, in result
+(EngineCore_DP0 pid=285819)     return self.__get_result()
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore_DP0 pid=285819)     raise self._exception
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/uniproc_executor.py", line 79, in collective_rpc
+(EngineCore_DP0 pid=285819)     result = run_method(self.driver_worker, method, args, kwargs)
+(EngineCore_DP0 pid=285819)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/serial_utils.py", line 459, in run_method
+(EngineCore_DP0 pid=285819)     return func(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/worker_base.py", line 377, in execute_model
+(EngineCore_DP0 pid=285819)     return self.worker.execute_model(scheduler_output)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore_DP0 pid=285819)     return func(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_worker.py", line 712, in execute_model
+(EngineCore_DP0 pid=285819)     output = self.model_runner.execute_model(
+(EngineCore_DP0 pid=285819)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(EngineCore_DP0 pid=285819)     return func(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3712, in execute_model
+(EngineCore_DP0 pid=285819)     model_output = self._model_forward(
+(EngineCore_DP0 pid=285819)                    ^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3208, in _model_forward
+(EngineCore_DP0 pid=285819)     return self.model(
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore_DP0 pid=285819)     return self._call_impl(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore_DP0 pid=285819)     return forward_call(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_5.py", line 735, in forward
+(EngineCore_DP0 pid=285819)     hidden_states = self.language_model.model(
+(EngineCore_DP0 pid=285819)                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/compilation/decorators.py", line 389, in __call__
+(EngineCore_DP0 pid=285819)     return self.forward(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 1209, in forward
+(EngineCore_DP0 pid=285819)     hidden_states, residual = layer(
+(EngineCore_DP0 pid=285819)                               ^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore_DP0 pid=285819)     return self._call_impl(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore_DP0 pid=285819)     return forward_call(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 1103, in forward
+(EngineCore_DP0 pid=285819)     self.linear_attn(
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore_DP0 pid=285819)     return self._call_impl(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore_DP0 pid=285819)     return forward_call(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_5.py", line 186, in forward
+(EngineCore_DP0 pid=285819)     torch.ops.vllm.gdn_attention_core(
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_ops.py", line 1209, in __call__
+(EngineCore_DP0 pid=285819)     return self._op(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 1507, in gdn_attention_core
+(EngineCore_DP0 pid=285819)     self._forward_core(
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 821, in _forward_core
+(EngineCore_DP0 pid=285819)     ) = self.chunk_gated_delta_rule(
+(EngineCore_DP0 pid=285819)         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(EngineCore_DP0 pid=285819)     return self._call_impl(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(EngineCore_DP0 pid=285819)     return forward_call(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(EngineCore_DP0 pid=285819)     return self._forward_method(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_next.py", line 201, in forward_native
+(EngineCore_DP0 pid=285819)     return fla_chunk_gated_delta_rule(
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 1181, in _fn
+(EngineCore_DP0 pid=285819)     return fn(*args, **kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/chunk.py", line 207, in chunk_gated_delta_rule
+(EngineCore_DP0 pid=285819)     o, final_state = ChunkGatedDeltaRuleFunction.apply(
+(EngineCore_DP0 pid=285819)                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/autograd/function.py", line 583, in apply
+(EngineCore_DP0 pid=285819)     return super().apply(*args, **kwargs)  # type: ignore[misc]
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/utils.py", line 113, in wrapper
+(EngineCore_DP0 pid=285819)     return fn(*contiguous_args, **contiguous_kwargs)
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/amp/autocast_mode.py", line 477, in decorate_fwd
+(EngineCore_DP0 pid=285819)     return fwd(*args, **kwargs)  # pyrefly: ignore [not-callable]
+(EngineCore_DP0 pid=285819)            ^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/chunk.py", line 94, in forward
+(EngineCore_DP0 pid=285819)     g, o, A, final_state, w, h, v_new = chunk_gated_delta_rule_fwd(
+(EngineCore_DP0 pid=285819)                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/chunk.py", line 49, in chunk_gated_delta_rule_fwd
+(EngineCore_DP0 pid=285819)     h, v_new, final_state = chunk_gated_delta_rule_fwd_h(
+(EngineCore_DP0 pid=285819)                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819)   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fla/ops/chunk_delta_h.py", line 317, in chunk_gated_delta_rule_fwd_h
+(EngineCore_DP0 pid=285819)     k.new_empty(N, H, V, K, dtype=torch.float32) if output_final_state else None
+(EngineCore_DP0 pid=285819)     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=285819) torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 344.00 MiB. GPU 0 has a total capacity of 31.36 GiB of which 317.06 MiB is free. Including non-PyTorch memory, this process has 30.92 GiB memory in use. Of the allocated memory 25.90 GiB is allocated by PyTorch, and 735.51 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Error in completion stream generator.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Error in completion stream generator.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Error in completion stream generator.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Error in completion stream generator.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Error in completion stream generator.
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise output
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=285347) ERROR 04-11 18:51:00 [serving.py:476]     raise self._format_exception(outputs) from None
+
+
+......
+
+删除约25w行重复报错数据

@@ -1,0 +1,5 @@
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-35b/20260414_164421_omoe-35b-bench/benchmark.log
+[INFO] Config saved to /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-35b/20260414_164421_omoe-35b-bench/config.json
+[INFO] Checking server availability...
+[ERROR] Server not available (HTTP 000000). Please start server first:
+  bash /root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_serving_qwen35_35.sh

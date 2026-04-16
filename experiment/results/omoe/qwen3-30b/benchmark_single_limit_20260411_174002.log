@@ -1,0 +1,14 @@
+=== run_benchmark_single_limit.sh started at Sat Apr 11 17:40:02 CST 2026 ===
+
+=== Configuration ===
+MODEL_PATH:       /root/autodl-tmp/models/Qwen3-30B-A3B
+TP_SIZE:          1
+PORT:             8000
+OFFLOAD_LIMIT:    100
+RR_START:         2.2
+RR_END:           2.2
+RR_STEP:          0.4
+===========================
+
+[INFO] Waiting for GPUs [0 ] to be free (memory.used < 50MB)...
+[2026-04-11 17:40:02] Max GPU used: 31835MB, next check in 10min...

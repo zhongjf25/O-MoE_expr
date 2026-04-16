@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "llama",
+    "model": "qwen3-30b-a3b-q4_km",
+    "results_dir": "/root/autodl-tmp/workspace/experiment/results/llama/qwen3-30b-a3b-q4_km/20260405_192412_llama"
+  },
+  "experiments": [
+    {
+      "rr": 1.0,
+      "throughput_req_s": 0.6614945922738418,
+      "output_throughput_tok_s": null,
+      "total_token_throughput": 530.6245021383849,
+      "completed": 100,
+      "failed": 0,
+      "duration_s": 151.17281557247043,
+      "ttft_ms": {
+        "mean": 10277.022748850286,
+        "median": 0.0,
+        "std": 16677.30297731481,
+        "p99": 50633.38289223611
+      },
+      "tpot_ms": {
+        "mean": 39.978855701371046,
+        "median": 22.590440812788597,
+        "std": 38.474135030287506,
+        "p99": 103.85984200583279
+      },
+      "itl_ms": {
+        "mean": 12.226581789625905,
+        "median": 8.979780599474907,
+        "std": 34.964724627029575,
+        "p99": 17.69004948437214
+      },
+      "e2el_ms": {
+        "mean": 30543.15248694271,
+        "median": 32954.63992841542,
+        "std": 16683.100115639623,
+        "p99": 53072.379264980555
+      },
+      "max_concurrent_requests": 40,
+      "max_output_tokens_per_s": null
+    }
+  ]
+}

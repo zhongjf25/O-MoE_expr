@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "ktransformers",
+    "model": "qwen3-30b",
+    "results_dir": "/root/autodl-tmp/workspace/experiment/results/ktransformers/qwen3-30b/20260413_210112_kt"
+  },
+  "experiments": [
+    {
+      "rr": 1.8,
+      "throughput_req_s": 0.5165766450791732,
+      "output_throughput_tok_s": 123.25002174943995,
+      "total_token_throughput": 309.1969509121392,
+      "completed": 100,
+      "failed": null,
+      "duration_s": 193.58211594074965,
+      "ttft_ms": {
+        "mean": 38409.17721107602,
+        "median": 41429.36160881072,
+        "std": 24924.763904421947,
+        "p99": 78397.51368567348
+      },
+      "tpot_ms": {
+        "mean": 109.69936627124099,
+        "median": 105.55308676213494,
+        "std": 38.15327408158184,
+        "p99": 153.98691143432788
+      },
+      "itl_ms": {
+        "mean": 107.32231790523579,
+        "median": 102.57685743272305,
+        "std": 305.77283977386475,
+        "p99": 144.157025963068
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 78,
+      "max_output_tokens_per_s": 260.0
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/fate/qwen35-35b/20260416_154119_util77_cache40/benchmark.log
+[INFO] Config saved to /root/autodl-tmp/workspace/experiment/results/fate/qwen35-35b/20260416_154119_util77_cache40/config.json
+[INFO] Checking server availability...
+[ERROR] Server not available (HTTP 000000). Please start server first:
+  bash /root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_serving_qwen35_35.sh

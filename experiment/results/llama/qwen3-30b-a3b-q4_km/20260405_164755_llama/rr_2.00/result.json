@@ -1,0 +1,28 @@
+{
+  "request_rate": 2.0,
+  "completed": 100,
+  "failed": 0,
+  "duration": 262.26577258110046,
+  "total_input_tokens": 33509,
+  "total_output_tokens": 0,
+  "request_throughput": 0.381292606411601,
+  "total_token_throughput": 127.76733948246338,
+  "ttft_ms": {
+    "mean": 2127.496657371521,
+    "median": 1981.3470840454102,
+    "std": 451.9042999852962,
+    "p99": 4299.487113952637
+  },
+  "tpot_ms": {
+    "mean": 0.0,
+    "median": 0,
+    "std": 0.0,
+    "p99": 0
+  },
+  "e2el_ms": {
+    "mean": 2127.496657371521,
+    "median": 1981.3470840454102,
+    "std": 451.9042999852962,
+    "p99": 4299.487113952637
+  }
+}

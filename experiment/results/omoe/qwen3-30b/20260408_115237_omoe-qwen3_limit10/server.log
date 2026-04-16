@@ -1,0 +1,896 @@
+============================================
+  O-MoE Qwen3 Serving Configuration
+============================================
+  Model:                  /root/autodl-tmp/models/Qwen3-30B-A3B
+  CUDA_VISIBLE_DEVICES:   0,1
+  GPU Memory Util:        0.8
+  Max Model Length:       16284
+  TP Size:                2
+  Offload Expert Limit:   10
+  Port:                   8000
+============================================
+[INFO] GPU Status:
+name, memory.total [MiB], memory.free [MiB]
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
+
+[INFO] Starting O-MoE Qwen3 service...
+[INFO] Press Ctrl+C to stop
+
+(APIServer pid=209483) INFO 04-08 11:52:44 [utils.py:293] 
+(APIServer pid=209483) INFO 04-08 11:52:44 [utils.py:293]        █     █     █▄   ▄█
+(APIServer pid=209483) INFO 04-08 11:52:44 [utils.py:293]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.16.1rc0
+(APIServer pid=209483) INFO 04-08 11:52:44 [utils.py:293]   █▄█▀ █     █     █     █  model   /root/autodl-tmp/models/Qwen3-30B-A3B
+(APIServer pid=209483) INFO 04-08 11:52:44 [utils.py:293]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=209483) INFO 04-08 11:52:44 [utils.py:293] 
+(APIServer pid=209483) INFO 04-08 11:52:44 [utils.py:229] non-default args: {'model_tag': '/root/autodl-tmp/models/Qwen3-30B-A3B', 'model': '/root/autodl-tmp/models/Qwen3-30B-A3B', 'max_model_len': 16284, 'enforce_eager': True, 'tensor_parallel_size': 2, 'gpu_memory_utilization': 0.8, 'enable_prefix_caching': False, 'offload_expert': True, 'offload_expert_limit': 10, 'dynamic_cache_enabled': True, 'expert_no_copy_compute': True, 'enable_chunked_prefill': False, 'async_scheduling': False}
+(APIServer pid=209483) INFO 04-08 11:52:44 [model.py:532] Resolved architecture: Qwen3MoeForCausalLM
+(APIServer pid=209483) INFO 04-08 11:52:44 [model.py:1556] Using max model len 16284
+(APIServer pid=209483) WARNING 04-08 11:52:44 [arg_utils.py:2088] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
+(APIServer pid=209483) INFO 04-08 11:52:44 [vllm.py:748] Asynchronous scheduling is disabled.
+(APIServer pid=209483) WARNING 04-08 11:52:44 [vllm.py:782] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=209483) WARNING 04-08 11:52:44 [vllm.py:793] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=209483) INFO 04-08 11:52:44 [vllm.py:933] Cudagraph is disabled under eager mode
+(EngineCore_DP0 pid=209781) INFO 04-08 11:52:50 [core.py:100] Initializing a V1 LLM engine (v0.16.1rc0) with config: model='/root/autodl-tmp/models/Qwen3-30B-A3B', speculative_config=None, tokenizer='/root/autodl-tmp/models/Qwen3-30B-A3B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=16284, download_dir=None, load_format=auto, tensor_parallel_size=2, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/root/autodl-tmp/models/Qwen3-30B-A3B, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [16284], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+INFO 04-08 11:52:57 [parallel_state.py:1307] world_size=2 rank=1 local_rank=1 distributed_init_method=tcp://127.0.0.1:43157 backend=nccl
+INFO 04-08 11:52:57 [parallel_state.py:1307] world_size=2 rank=0 local_rank=0 distributed_init_method=tcp://127.0.0.1:43157 backend=nccl
+<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+INFO 04-08 11:52:58 [pynccl.py:111] vLLM is using nccl==2.27.5
+WARNING 04-08 11:52:58 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
+WARNING 04-08 11:52:58 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
+WARNING 04-08 11:52:58 [custom_all_reduce.py:165] Custom allreduce is disabled because your platform lacks GPU P2P capability or P2P test failed. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+WARNING 04-08 11:52:58 [custom_all_reduce.py:165] Custom allreduce is disabled because your platform lacks GPU P2P capability or P2P test failed. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+INFO 04-08 11:52:58 [parallel_state.py:1535] rank 0 in world size 2 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0, EPLB rank N/A
+INFO 04-08 11:52:58 [parallel_state.py:1535] rank 1 in world size 2 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 1, EP rank 1, EPLB rank N/A
+INFO 04-08 11:52:59 [base.py:106] Offloader set to NoopOffloader
+(Worker_TP0 pid=210046) INFO 04-08 11:52:59 [gpu_model_runner.py:4310] Starting to load model /root/autodl-tmp/models/Qwen3-30B-A3B...
+INFO 04-08 11:52:59 [base.py:106] Offloader set to NoopOffloader
+(Worker_TP0 pid=210046) INFO 04-08 11:52:59 [cuda.py:402] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(Worker_TP0 pid=210046) INFO 04-08 11:52:59 [unquantized.py:186] Using TRITON backend for Unquantized MoE
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:   0% Completed | 0/16 [00:00<?, ?it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:   6% Completed | 1/16 [00:00<00:05,  2.83it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  12% Completed | 2/16 [00:00<00:04,  2.85it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  19% Completed | 3/16 [00:01<00:04,  2.74it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  25% Completed | 4/16 [00:01<00:04,  2.75it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  31% Completed | 5/16 [00:02<00:04,  2.25it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  38% Completed | 6/16 [00:02<00:04,  2.48it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  44% Completed | 7/16 [00:03<00:05,  1.75it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  50% Completed | 8/16 [00:03<00:03,  2.05it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  56% Completed | 9/16 [00:03<00:03,  2.27it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  62% Completed | 10/16 [00:04<00:02,  2.15it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  69% Completed | 11/16 [00:04<00:02,  2.47it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  75% Completed | 12/16 [00:04<00:01,  2.71it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  81% Completed | 13/16 [00:05<00:01,  2.87it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  88% Completed | 14/16 [00:05<00:00,  3.00it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards:  94% Completed | 15/16 [00:05<00:00,  2.92it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards: 100% Completed | 16/16 [00:06<00:00,  3.59it/s]
+(Worker_TP0 pid=210046) Loading safetensors checkpoint shards: 100% Completed | 16/16 [00:06<00:00,  2.63it/s]
+(Worker_TP0 pid=210046) 
+(Worker_TP0 pid=210046) INFO 04-08 11:53:22 [default_loader.py:293] Loading weights took 6.10 seconds
+(Worker_TP0 pid=210046) INFO 04-08 11:53:39 [gpu_model_runner.py:4407] Model loading took 1.54 GiB memory and 38.897354 seconds
+(Worker_TP0 pid=210046) INFO 04-08 11:53:41 [gpu_worker.py:412] Available KV cache memory: 23.42 GiB
+(EngineCore_DP0 pid=209781) `torch_dtype` is deprecated! Use `dtype` instead!
+(EngineCore_DP0 pid=209781) INFO 04-08 11:53:42 [block_utils.py:1148] [debug] available_memory: 25143322727,         num_blocks: 1534560, num_huge_blocks: 15985,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 1,         num_conv_in_huge_block: -1,         num_ssm_in_huge_block: -1
+(EngineCore_DP0 pid=209781) INFO 04-08 11:53:42 [block_utils.py:1148] [debug] available_memory: 25143322727,         num_blocks: 1534560, num_huge_blocks: 15985,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 1,         num_conv_in_huge_block: -1,         num_ssm_in_huge_block: -1
+(EngineCore_DP0 pid=209781) INFO 04-08 11:53:42 [block_utils.py:1619] GPU KV cache size: 24,552,960 tokens
+(EngineCore_DP0 pid=209781) INFO 04-08 11:53:42 [block_utils.py:1624] Maximum concurrency for 16,284 tokens per request: 1507.43x
+(Worker_TP1 pid=210047) 2026-04-08 11:53:42,042 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(Worker_TP0 pid=210046) 2026-04-08 11:53:42,042 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(Worker_TP1 pid=210047) 2026-04-08 11:53:42,157 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(Worker_TP0 pid=210046) 2026-04-08 11:53:42,158 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(Worker_TP0 pid=210046) WARNING 04-08 11:53:42 [fused_moe.py:1577] Using default MoE config. Performance might be sub-optimal! Config file not found at /root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/configs/E=128,N=384,device_name=NVIDIA_GeForce_RTX_5090.json
+(EngineCore_DP0 pid=209781) INFO 04-08 11:53:42 [core.py:291] init engine (profile, create kv cache, warmup model) took 2.37 seconds
+(EngineCore_DP0 pid=209781) WARNING 04-08 11:53:42 [expert_hotset.py:332] Loading non-converged expert hotset profile from /root/autodl-tmp/workspace/vllm-offloading/expert_hotset_profiles/Qwen3-30B-A3B.json (sampled_requests=500).
+(EngineCore_DP0 pid=209781) INFO 04-08 11:53:42 [expert_manager.py:184] Auto-initialized cached_num_experts=105 using total_expert_blocks=15985, reserved_first_layer_blocks=384, adjustable_layers=47, raw_per_layer=110.65.
+(EngineCore_DP0 pid=209781) INFO 04-08 11:53:43 [vllm.py:748] Asynchronous scheduling is disabled.
+(EngineCore_DP0 pid=209781) WARNING 04-08 11:53:43 [vllm.py:782] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore_DP0 pid=209781) WARNING 04-08 11:53:43 [vllm.py:793] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore_DP0 pid=209781) INFO 04-08 11:53:43 [vllm.py:933] Cudagraph is disabled under eager mode
+(APIServer pid=209483) INFO 04-08 11:53:43 [api_server.py:495] Supported tasks: ['generate']
+(APIServer pid=209483) WARNING 04-08 11:53:44 [model.py:1357] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=209483) INFO 04-08 11:53:44 [serving.py:185] Warming up chat template processing...
+(APIServer pid=209483) INFO 04-08 11:53:44 [hf.py:318] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=209483) INFO 04-08 11:53:44 [serving.py:210] Chat template warmup completed in 333.9ms
+(APIServer pid=209483) INFO 04-08 11:53:44 [api_server.py:500] Starting vLLM API server 0 on http://0.0.0.0:8000
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:38] Available routes are:
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /openapi.json, Methods: GET, HEAD
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /docs, Methods: GET, HEAD
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /redoc, Methods: GET, HEAD
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /tokenize, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /detokenize, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /load, Methods: GET
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /version, Methods: GET
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /health, Methods: GET
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /metrics, Methods: GET
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/models, Methods: GET
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /ping, Methods: GET
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /ping, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /invocations, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/responses, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/completions, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/completions/render, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /v1/messages, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=209483) INFO 04-08 11:53:44 [launcher.py:47] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=209483) INFO:     Started server process [209483]
+(APIServer pid=209483) INFO:     Waiting for application startup.
+(APIServer pid=209483) INFO:     Application startup complete.
+(APIServer pid=209483) INFO:     127.0.0.1:44906 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO:     127.0.0.1:44910 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO:     127.0.0.1:44924 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO:     127.0.0.1:44926 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO 04-08 11:53:54 [loggers.py:267] Engine 000: Avg prompt throughput: 0.1 tokens/s, Avg generation throughput: 0.4 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 95.4%, Expert cache: 5083 resident experts, Pool free huge/KV/expert: 736/0/0, Est. available KV blocks: 70656, Prefix cache hit rate: 0.0%
+(APIServer pid=209483) INFO:     127.0.0.1:60354 - "GET /metrics HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO:     127.0.0.1:60354 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO 04-08 11:54:04 [loggers.py:267] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 95.4%, Expert cache: 5083 resident experts, Pool free huge/KV/expert: 736/0/0, Est. available KV blocks: 70656, Prefix cache hit rate: 0.0%
+(APIServer pid=209483) INFO:     127.0.0.1:60368 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO:     127.0.0.1:60378 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO:     127.0.0.1:59292 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=209483) INFO:     127.0.0.1:59294 - "POST /v1/completions HTTP/1.1" 200 OK
+/root/autodl-tmp/workspace/vllm-offloading/csrc/offloaded_expert_copy.cu:237: void <unnamed>::assign_compact_slots_kernel(signed int *, signed int *, signed int *, const signed long *, signed long *, const signed int *, const signed int *, signed int, signed int): block: [0,0,0], thread: [0,0,0] Assertion `assigned == miss_total` failed.
+/root/autodl-tmp/workspace/vllm-offloading/csrc/offloaded_expert_copy.cu:237: void <unnamed>::assign_compact_slots_kernel(signed int *, signed int *, signed int *, const signed long *, signed long *, const signed int *, const signed int *, signed int, signed int): block: [0,0,0], thread: [0,0,0] Assertion `assigned == miss_total` failed.
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] WorkerProc hit an exception.
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Traceback (most recent call last):
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/multiproc_executor.py", line 858, in worker_busy_loop
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     output = func(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/worker_base.py", line 377, in execute_model
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.worker.execute_model(scheduler_output)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return func(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_worker.py", line 712, in execute_model
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     output = self.model_runner.execute_model(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return func(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3712, in execute_model
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     model_output = self._model_forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3208, in _model_forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.model(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 787, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states = self.model(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/compilation/decorators.py", line 389, in __call__
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 503, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states, residual = layer(positions, hidden_states, residual)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 429, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states = self.mlp(hidden_states)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 234, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     shared_out, fused_out = self.experts(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                             ^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/shared_fused_moe.py", line 41, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     fused_out = super().forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                 ^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._forward_method(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/layer.py", line 1490, in forward_cuda
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward_native(hidden_states, router_logits)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/layer.py", line 1474, in forward_native
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.runner.forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 407, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     fused_output = self.moe_forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_ops.py", line 1209, in __call__
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._op(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 69, in _moe_forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return layer.runner.forward_impl(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 720, in forward_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     final_hidden_states = self.quant_method.apply(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                           ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/unquantized_fused_moe_method.py", line 363, in apply
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._forward_method(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/unquantized_fused_moe_method.py", line 395, in forward_cuda
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     expert_inputs = manager.get_offloaded_compute_inputs(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 1244, in get_offloaded_compute_inputs
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     self._schedule_prefetch(layer_idx, topk_ids_pred)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 298, in _schedule_prefetch
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     self.prefetch_daemon.schedule_prefetch(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 1657, in schedule_prefetch
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     buffer_state = self.manager._reset_comp_buffer_state(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 274, in _reset_comp_buffer_state
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     if torch.any(valid_mask):
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] torch.AcceleratorError: CUDA error: device-side assert triggered
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Search for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] 
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Traceback (most recent call last):
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/multiproc_executor.py", line 858, in worker_busy_loop
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     output = func(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/worker_base.py", line 377, in execute_model
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.worker.execute_model(scheduler_output)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return func(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_worker.py", line 712, in execute_model
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     output = self.model_runner.execute_model(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return func(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3712, in execute_model
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     model_output = self._model_forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3208, in _model_forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.model(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 787, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states = self.model(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/compilation/decorators.py", line 389, in __call__
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 503, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states, residual = layer(positions, hidden_states, residual)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 429, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states = self.mlp(hidden_states)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 234, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     shared_out, fused_out = self.experts(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                             ^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/shared_fused_moe.py", line 41, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     fused_out = super().forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                 ^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._forward_method(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/layer.py", line 1490, in forward_cuda
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward_native(hidden_states, router_logits)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/layer.py", line 1474, in forward_native
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.runner.forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 407, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     fused_output = self.moe_forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_ops.py", line 1209, in __call__
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._op(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 69, in _moe_forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return layer.runner.forward_impl(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 720, in forward_impl
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     final_hidden_states = self.quant_method.apply(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                           ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/unquantized_fused_moe_method.py", line 363, in apply
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._forward_method(*args, **kwargs)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/unquantized_fused_moe_method.py", line 395, in forward_cuda
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     expert_inputs = manager.get_offloaded_compute_inputs(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 1244, in get_offloaded_compute_inputs
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     self._schedule_prefetch(layer_idx, topk_ids_pred)
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 298, in _schedule_prefetch
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     self.prefetch_daemon.schedule_prefetch(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 1657, in schedule_prefetch
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     buffer_state = self.manager._reset_comp_buffer_state(
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 274, in _reset_comp_buffer_state
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     if torch.any(valid_mask):
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] torch.AcceleratorError: CUDA error: device-side assert triggered
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Search for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] 
+(Worker_TP0 pid=210046) ERROR 04-08 11:54:08 [multiproc_executor.py:863] 
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [dump_input.py:72] Dumping input data for V1 LLM engine (v0.16.1rc0) with config: model='/root/autodl-tmp/models/Qwen3-30B-A3B', speculative_config=None, tokenizer='/root/autodl-tmp/models/Qwen3-30B-A3B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=16284, download_dir=None, load_format=auto, tensor_parallel_size=2, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/root/autodl-tmp/models/Qwen3-30B-A3B, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [16284], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}, 
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] WorkerProc hit an exception.
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Traceback (most recent call last):
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/multiproc_executor.py", line 858, in worker_busy_loop
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     output = func(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/worker_base.py", line 377, in execute_model
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.worker.execute_model(scheduler_output)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return func(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_worker.py", line 712, in execute_model
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     output = self.model_runner.execute_model(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return func(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3712, in execute_model
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     model_output = self._model_forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3208, in _model_forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.model(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 787, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states = self.model(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/compilation/decorators.py", line 389, in __call__
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 503, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states, residual = layer(positions, hidden_states, residual)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 429, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states = self.mlp(hidden_states)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 234, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     shared_out, fused_out = self.experts(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                             ^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/shared_fused_moe.py", line 41, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     fused_out = super().forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                 ^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._forward_method(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/layer.py", line 1490, in forward_cuda
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward_native(hidden_states, router_logits)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/layer.py", line 1474, in forward_native
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.runner.forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 407, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     fused_output = self.moe_forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_ops.py", line 1209, in __call__
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._op(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 69, in _moe_forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return layer.runner.forward_impl(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 720, in forward_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     final_hidden_states = self.quant_method.apply(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                           ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/unquantized_fused_moe_method.py", line 363, in apply
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._forward_method(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/unquantized_fused_moe_method.py", line 395, in forward_cuda
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     expert_inputs = manager.get_offloaded_compute_inputs(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 1244, in get_offloaded_compute_inputs
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     self._schedule_prefetch(layer_idx, topk_ids_pred)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 298, in _schedule_prefetch
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     self.prefetch_daemon.schedule_prefetch(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 1657, in schedule_prefetch
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     buffer_state = self.manager._reset_comp_buffer_state(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 274, in _reset_comp_buffer_state
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     if torch.any(valid_mask):
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] torch.AcceleratorError: CUDA error: device-side assert triggered
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Search for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] 
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Traceback (most recent call last):
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/multiproc_executor.py", line 858, in worker_busy_loop
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     output = func(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/worker_base.py", line 377, in execute_model
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.worker.execute_model(scheduler_output)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return func(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_worker.py", line 712, in execute_model
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     output = self.model_runner.execute_model(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return func(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3712, in execute_model
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     model_output = self._model_forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/worker/gpu_model_runner.py", line 3208, in _model_forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.model(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 787, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states = self.model(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/compilation/decorators.py", line 389, in __call__
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 503, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states, residual = layer(positions, hidden_states, residual)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 429, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     hidden_states = self.mlp(hidden_states)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/models/qwen3_moe.py", line 234, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     shared_out, fused_out = self.experts(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                             ^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._call_impl(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return forward_call(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/shared_fused_moe.py", line 41, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     fused_out = super().forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                 ^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._forward_method(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/layer.py", line 1490, in forward_cuda
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward_native(hidden_states, router_logits)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/layer.py", line 1474, in forward_native
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.runner.forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 407, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     fused_output = self.moe_forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/_ops.py", line 1209, in __call__
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._op(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 69, in _moe_forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return layer.runner.forward_impl(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/runner/default_moe_runner.py", line 720, in forward_impl
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     final_hidden_states = self.quant_method.apply(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                           ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/unquantized_fused_moe_method.py", line 363, in apply
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self.forward(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/custom_op.py", line 129, in forward
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     return self._forward_method(*args, **kwargs)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/unquantized_fused_moe_method.py", line 395, in forward_cuda
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     expert_inputs = manager.get_offloaded_compute_inputs(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 1244, in get_offloaded_compute_inputs
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     self._schedule_prefetch(layer_idx, topk_ids_pred)
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 298, in _schedule_prefetch
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     self.prefetch_daemon.schedule_prefetch(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 1657, in schedule_prefetch
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     buffer_state = self.manager._reset_comp_buffer_state(
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/backend_expert_manager.py", line 274, in _reset_comp_buffer_state
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863]     if torch.any(valid_mask):
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] torch.AcceleratorError: CUDA error: device-side assert triggered
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Search for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] 
+(Worker_TP1 pid=210047) ERROR 04-08 11:54:08 [multiproc_executor.py:863] 
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [dump_input.py:79] Dumping scheduler output for model execution: SchedulerOutput(scheduled_new_reqs=[NewRequestData(req_id=cmpl-bench-f96b16d4-4-0-8436a9b9,prompt_token_ids_len=328,prefill_token_ids_len=None,mm_features=[],sampling_params=SamplingParams(n=1, presence_penalty=0.0, frequency_penalty=0.0, repetition_penalty=1.0, temperature=0.6, top_p=0.95, top_k=20, min_p=0.0, seed=None, stop=[], stop_token_ids=[151643], bad_words=[], include_stop_str_in_output=False, ignore_eos=False, max_tokens=101, min_tokens=0, logprobs=None, prompt_logprobs=None, skip_special_tokens=True, spaces_between_special_tokens=True, truncate_prompt_tokens=None, structured_outputs=None, extra_args=None),block_ids=([[1510560, 1510561, 1510562, 1510563, 1510564, 1510565, 1510566, 1510567, 1510568, 1510569, 1510570, 1510571, 1510572, 1510573, 1510574, 1510575, 1510576, 1510577, 1510578, 1510579, 1510580], [1510581, 1510582, 1510583, 1510584, 1510585, 1510586, 1510587, 1510588, 1510589, 1510590, 1510591, 1510592, 1510593, 1510594, 1510595, 1510596, 1510597, 1510598, 1510599, 1510600, 1510601], [1510602, 1510603, 1510604, 1510605, 1510606, 1510607, 1510608, 1510609, 1510610, 1510611, 1510612, 1510613, 1510614, 1510615, 1510616, 1510617, 1510618, 1510619, 1510620, 1510621, 1510622], [1510623, 1510624, 1510625, 1510626, 1510627, 1510628, 1510629, 1510630, 1510631, 1510632, 1510633, 1510634, 1510635, 1510636, 1510637, 1510638, 1510639, 1510640, 1510641, 1510642, 1510643], [1510644, 1510645, 1510646, 1510647, 1510648, 1510649, 1510650, 1510651, 1510652, 1510653, 1510654, 1510655, 1510656, 1510657, 1510658, 1510659, 1510660, 1510661, 1510662, 1510663, 1510664], [1510665, 1510666, 1510667, 1510668, 1510669, 1510670, 1510671, 1510672, 1510673, 1510674, 1510675, 1510676, 1510677, 1510678, 1510679, 1510680, 1510681, 1510682, 1510683, 1510684, 1510685], [1510686, 1510687, 1510688, 1510689, 1510690, 1510691, 1510692, 1510693, 1510694, 1510695, 1510696, 1510697, 1510698, 1510699, 1510700, 1510701, 1510702, 1510703, 1510704, 1510705, 1510706], [1510707, 1510708, 1510709, 1510710, 1510711, 1510712, 1510713, 1510714, 1510715, 1510716, 1510717, 1510718, 1510719, 1510720, 1510721, 1510722, 1510723, 1510724, 1510725, 1510726, 1510727], [1510728, 1510729, 1510730, 1510731, 1510732, 1510733, 1510734, 1510735, 1510736, 1510737, 1510738, 1510739, 1510740, 1510741, 1510742, 1510743, 1510744, 1510745, 1510746, 1510747, 1510748], [1510749, 1510750, 1510751, 1510752, 1510753, 1510754, 1510755, 1510756, 1510757, 1510758, 1510759, 1510760, 1510761, 1510762, 1510763, 1510764, 1510765, 1510766, 1510767, 1510768, 1510769], [1510770, 1510771, 1510772, 1510773, 1510774, 1510775, 1510776, 1510777, 1510778, 1510779, 1510780, 1510781, 1510782, 1510783, 1510784, 1510785, 1510786, 1510787, 1510788, 1510789, 1510790], [1510791, 1510792, 1510793, 1510794, 1510795, 1510796, 1510797, 1510798, 1510799, 1510800, 1510801, 1510802, 1510803, 1510804, 1510805, 1510806, 1510807, 1510808, 1510809, 1510810, 1510811], [1510812, 1510813, 1510814, 1510815, 1510816, 1510817, 1510818, 1510819, 1510820, 1510821, 1510822, 1510823, 1510824, 1510825, 1510826, 1510827, 1510828, 1510829, 1510830, 1510831, 1510832], [1510833, 1510834, 1510835, 1510836, 1510837, 1510838, 1510839, 1510840, 1510841, 1510842, 1510843, 1510844, 1510845, 1510846, 1510847, 1510848, 1510849, 1510850, 1510851, 1510852, 1510853], [1510854, 1510855, 1510856, 1510857, 1510858, 1510859, 1510860, 1510861, 1510862, 1510863, 1510864, 1510865, 1510866, 1510867, 1510868, 1510869, 1510870, 1510871, 1510872, 1510873, 1510874], [1510875, 1510876, 1510877, 1510878, 1510879, 1510880, 1510881, 1510882, 1510883, 1510884, 1510885, 1510886, 1510887, 1510888, 1510889, 1510890, 1510891, 1510892, 1510893, 1510894, 1510895], [1510896, 1510897, 1510898, 1510899, 1510900, 1510901, 1510902, 1510903, 1510904, 1510905, 1510906, 1510907, 1510908, 1510909, 1510910, 1510911, 1510912, 1510913, 1510914, 1510915, 1510916], [1510917, 1510918, 1510919, 1510920, 1510921, 1510922, 1510923, 1510924, 1510925, 1510926, 1510927, 1510928, 1510929, 1510930, 1510931, 1510932, 1510933, 1510934, 1510935, 1510936, 1510937], [1510938, 1510939, 1510940, 1510941, 1510942, 1510943, 1510944, 1510945, 1510946, 1510947, 1510948, 1510949, 1510950, 1510951, 1510952, 1510953, 1510954, 1510955, 1510956, 1510957, 1510958], [1510959, 1510960, 1510961, 1510962, 1510963, 1510964, 1510965, 1510966, 1510967, 1510968, 1510969, 1510970, 1510971, 1510972, 1510973, 1510974, 1510975, 1510976, 1510977, 1510978, 1510979], [1510980, 1510981, 1510982, 1510983, 1510984, 1510985, 1510986, 1510987, 1510988, 1510989, 1510990, 1510991, 1510992, 1510993, 1510994, 1510995, 1510996, 1510997, 1510998, 1510999, 1511000], [1511001, 1511002, 1511003, 1511004, 1511005, 1511006, 1511007, 1511008, 1511009, 1511010, 1511011, 1511012, 1511013, 1511014, 1511015, 1511016, 1511017, 1511018, 1511019, 1511020, 1511021], [1511022, 1511023, 1511024, 1511025, 1511026, 1511027, 1511028, 1511029, 1511030, 1511031, 1511032, 1511033, 1511034, 1511035, 1511036, 1511037, 1511038, 1511039, 1511040, 1511041, 1511042], [1511043, 1511044, 1511045, 1511046, 1511047, 1511048, 1511049, 1511050, 1511051, 1511052, 1511053, 1511054, 1511055, 1511056, 1511057, 1511058, 1511059, 1511060, 1511061, 1511062, 1511063], [1511064, 1511065, 1511066, 1511067, 1511068, 1511069, 1511070, 1511071, 1511072, 1511073, 1511074, 1511075, 1511076, 1511077, 1511078, 1511079, 1511080, 1511081, 1511082, 1511083, 1511084], [1511085, 1511086, 1511087, 1511088, 1511089, 1511090, 1511091, 1511092, 1511093, 1511094, 1511095, 1511096, 1511097, 1511098, 1511099, 1511100, 1511101, 1511102, 1511103, 1511104, 1511105], [1511106, 1511107, 1511108, 1511109, 1511110, 1511111, 1511112, 1511113, 1511114, 1511115, 1511116, 1511117, 1511118, 1511119, 1511120, 1511121, 1511122, 1511123, 1511124, 1511125, 1511126], [1511127, 1511128, 1511129, 1511130, 1511131, 1511132, 1511133, 1511134, 1511135, 1511136, 1511137, 1511138, 1511139, 1511140, 1511141, 1511142, 1511143, 1511144, 1511145, 1511146, 1511147], [1511148, 1511149, 1511150, 1511151, 1511152, 1511153, 1511154, 1511155, 1511156, 1511157, 1511158, 1511159, 1511160, 1511161, 1511162, 1511163, 1511164, 1511165, 1511166, 1511167, 1511168], [1511169, 1511170, 1511171, 1511172, 1511173, 1511174, 1511175, 1511176, 1511177, 1511178, 1511179, 1511180, 1511181, 1511182, 1511183, 1511184, 1511185, 1511186, 1511187, 1511188, 1511189], [1511190, 1511191, 1511192, 1511193, 1511194, 1511195, 1511196, 1511197, 1511198, 1511199, 1511200, 1511201, 1511202, 1511203, 1511204, 1511205, 1511206, 1511207, 1511208, 1511209, 1511210], [1511211, 1511212, 1511213, 1511214, 1511215, 1511216, 1511217, 1511218, 1511219, 1511220, 1511221, 1511222, 1511223, 1511224, 1511225, 1511226, 1511227, 1511228, 1511229, 1511230, 1511231], [1511232, 1511233, 1511234, 1511235, 1511236, 1511237, 1511238, 1511239, 1511240, 1511241, 1511242, 1511243, 1511244, 1511245, 1511246, 1511247, 1511248, 1511249, 1511250, 1511251, 1511252], [1511253, 1511254, 1511255, 1511256, 1511257, 1511258, 1511259, 1511260, 1511261, 1511262, 1511263, 1511264, 1511265, 1511266, 1511267, 1511268, 1511269, 1511270, 1511271, 1511272, 1511273], [1511274, 1511275, 1511276, 1511277, 1511278, 1511279, 1511280, 1511281, 1511282, 1511283, 1511284, 1511285, 1511286, 1511287, 1511288, 1511289, 1511290, 1511291, 1511292, 1511293, 1511294], [1511295, 1511296, 1511297, 1511298, 1511299, 1511300, 1511301, 1511302, 1511303, 1511304, 1511305, 1511306, 1511307, 1511308, 1511309, 1511310, 1511311, 1511312, 1511313, 1511314, 1511315], [1511316, 1511317, 1511318, 1511319, 1511320, 1511321, 1511322, 1511323, 1511324, 1511325, 1511326, 1511327, 1511328, 1511329, 1511330, 1511331, 1511332, 1511333, 1511334, 1511335, 1511336], [1511337, 1511338, 1511339, 1511340, 1511341, 1511342, 1511343, 1511344, 1511345, 1511346, 1511347, 1511348, 1511349, 1511350, 1511351, 1511352, 1511353, 1511354, 1511355, 1511356, 1511357], [1511358, 1511359, 1511360, 1511361, 1511362, 1511363, 1511364, 1511365, 1511366, 1511367, 1511368, 1511369, 1511370, 1511371, 1511372, 1511373, 1511374, 1511375, 1511376, 1511377, 1511378], [1511379, 1511380, 1511381, 1511382, 1511383, 1511384, 1511385, 1511386, 1511387, 1511388, 1511389, 1511390, 1511391, 1511392, 1511393, 1511394, 1511395, 1511396, 1511397, 1511398, 1511399], [1511400, 1511401, 1511402, 1511403, 1511404, 1511405, 1511406, 1511407, 1511408, 1511409, 1511410, 1511411, 1511412, 1511413, 1511414, 1511415, 1511416, 1511417, 1511418, 1511419, 1511420], [1511421, 1511422, 1511423, 1511424, 1511425, 1511426, 1511427, 1511428, 1511429, 1511430, 1511431, 1511432, 1511433, 1511434, 1511435, 1511436, 1511437, 1511438, 1511439, 1511440, 1511441], [1511442, 1511443, 1511444, 1511445, 1511446, 1511447, 1511448, 1511449, 1511450, 1511451, 1511452, 1511453, 1511454, 1511455, 1511456, 1511457, 1511458, 1511459, 1511460, 1511461, 1511462], [1511463, 1511464, 1511465, 1511466, 1511467, 1511468, 1511469, 1511470, 1511471, 1511472, 1511473, 1511474, 1511475, 1511476, 1511477, 1511478, 1511479, 1511480, 1511481, 1511482, 1511483], [1511484, 1511485, 1511486, 1511487, 1511488, 1511489, 1511490, 1511491, 1511492, 1511493, 1511494, 1511495, 1511496, 1511497, 1511498, 1511499, 1511500, 1511501, 1511502, 1511503, 1511504], [1511505, 1511506, 1511507, 1511508, 1511509, 1511510, 1511511, 1511512, 1511513, 1511514, 1511515, 1511516, 1511517, 1511518, 1511519, 1511520, 1511521, 1511522, 1511523, 1511524, 1511525], [1511526, 1511527, 1511528, 1511529, 1511530, 1511531, 1511532, 1511533, 1511534, 1511535, 1511536, 1511537, 1511538, 1511539, 1511540, 1511541, 1511542, 1511543, 1511544, 1511545, 1511546], [1511547, 1511548, 1511549, 1511550, 1511551, 1511552, 1511553, 1511554, 1511555, 1511556, 1511557, 1511558, 1511559, 1511560, 1511561, 1511562, 1511563, 1511564, 1511565, 1511566, 1511567]],),num_computed_tokens=0,lora_request=None,prompt_embeds_shape=None)], scheduled_cached_reqs=CachedRequestData(req_ids=['cmpl-bench-f96b16d4-0-0-9b2f43aa', 'cmpl-bench-f96b16d4-1-0-b6587fb2', 'cmpl-bench-f96b16d4-2-0-b212ed4f', 'cmpl-bench-f96b16d4-3-0-a9e772c8'],resumed_req_ids=set(),new_token_ids_lens=[],all_token_ids_lens={},new_block_ids=[([[]],), ([[]],), ([[]],), ([[]],)],num_computed_tokens=[43, 43, 37, 13],num_output_tokens=[32, 20, 12, 5]), num_scheduled_tokens={cmpl-bench-f96b16d4-4-0-8436a9b9: 328, cmpl-bench-f96b16d4-0-0-9b2f43aa: 1, cmpl-bench-f96b16d4-3-0-a9e772c8: 1, cmpl-bench-f96b16d4-2-0-b212ed4f: 1, cmpl-bench-f96b16d4-1-0-b6587fb2: 1}, total_num_scheduled_tokens=332, scheduled_spec_decode_tokens={}, scheduled_encoder_inputs={}, num_common_prefix_blocks=[0], finished_req_ids=[], free_encoder_mm_hashes=[], preempted_req_ids=[], has_structured_output_requests=false, pending_structured_output_tokens=false, num_invalid_spec_tokens=null, kv_connector_metadata=null, ec_connector_metadata=null, required_expert_shrink_blocks=0, expert_cache_delta=ExpertCacheDelta(delta_id=37, experts_to_load=[[23, 106], [6, 114], [26, 13], [38, 108], [10, 60]], experts_to_evict=[], new_expert_to_block={(10, 60, 'w1'): 15758, (23, 106, 'w3'): 15748, (38, 108, 'w2'): 15756, (10, 60, 'w3'): 15760, (6, 114, 'w1'): 15749, (10, 60, 'w2'): 15759, (38, 108, 'w1'): 15755, (6, 114, 'w3'): 15751, (26, 13, 'w1'): 15752, (6, 114, 'w2'): 15750, (23, 106, 'w1'): 15746, (26, 13, 'w3'): 15754, (26, 13, 'w2'): 15753, (23, 106, 'w2'): 15747, (38, 108, 'w3'): 15757}, evict_commit_mode='row'))
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [dump_input.py:81] Dumping scheduler stats: SchedulerStats(num_running_reqs=5, num_waiting_reqs=0, step_counter=0, current_wave=0, kv_cache_usage=0.9859243040350328, encoder_cache_usage=0.0, num_cached_experts=5248, num_free_huge_blocks=225, num_free_kv_blocks=48, num_free_expert_blocks=0, estimated_available_kv_blocks=21648, prefix_cache_stats=PrefixCacheStats(reset=False, requests=0, queries=0, hits=0, preempted_requests=0, preempted_queries=0, preempted_hits=0), connector_prefix_cache_stats=None, kv_cache_eviction_events=[], spec_decoding_stats=None, kv_connector_stats=None, waiting_lora_adapters={}, running_lora_adapters={}, cudagraph_stats=None, perf_stats=None)
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158] EngineCore encountered a fatal error.
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158] Traceback (most recent call last):
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1149, in run_engine_core
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     engine_core.run_busy_loop()
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1184, in run_busy_loop
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     self._process_engine_step()
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 1215, in _process_engine_step
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     outputs, model_executed = self.step_fn()
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]                               ^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core.py", line 452, in step
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     model_output = future.result()
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]                    ^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/multiproc_executor.py", line 81, in result
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     return super().result()
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]            ^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/concurrent/futures/_base.py", line 449, in result
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     return self.__get_result()
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/miniconda3/envs/vllm-offload/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     raise self._exception
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/multiproc_executor.py", line 85, in wait_for_response
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     response = self.aggregate(get_response())
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]                               ^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/executor/multiproc_executor.py", line 358, in get_response
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158]     raise RuntimeError(
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158] RuntimeError: Worker failed with error 'CUDA error: device-side assert triggered
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158] Search for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158] CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158] For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158] Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+(EngineCore_DP0 pid=209781) ERROR 04-08 11:54:08 [core.py:1158] ', please check the stack trace above for the root cause
+(Worker_TP0 pid=210046) INFO 04-08 11:54:08 [multiproc_executor.py:732] Parent process exited, terminating worker
+(Worker_TP1 pid=210047) INFO 04-08 11:54:08 [multiproc_executor.py:732] Parent process exited, terminating worker
+(Worker_TP0 pid=210046) INFO 04-08 11:54:08 [multiproc_executor.py:785] WorkerProc shutting down.
+(Worker_TP1 pid=210047) INFO 04-08 11:54:08 [multiproc_executor.py:785] WorkerProc shutting down.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [async_llm.py:702] AsyncLLM output_handler failed.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [async_llm.py:702] Traceback (most recent call last):
+(APIServer pid=209483) ERROR 04-08 11:54:08 [async_llm.py:702]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=209483) ERROR 04-08 11:54:08 [async_llm.py:702]     outputs = await engine_core.get_output_async()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [async_llm.py:702]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [async_llm.py:702]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=209483) ERROR 04-08 11:54:08 [async_llm.py:702]     raise self._format_exception(outputs) from None
+(APIServer pid=209483) ERROR 04-08 11:54:08 [async_llm.py:702] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Error in completion stream generator.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Error in completion stream generator.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Error in completion stream generator.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Error in completion stream generator.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Error in completion stream generator.
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] Traceback (most recent call last):
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/entrypoints/openai/completion/serving.py", line 320, in completion_stream_generator
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for prompt_idx, res in result_generator:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/utils/async_utils.py", line 281, in merge_async_iterators
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     async for item in iterators[0]:
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 581, in generate
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     out = q.get_nowait() or await q.get()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]                             ^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/output_processor.py", line 85, in get
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise output
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/async_llm.py", line 658, in output_handler
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     outputs = await engine_core.get_output_async()
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]   File "/root/autodl-tmp/workspace/vllm-offloading/vllm/v1/engine/core_client.py", line 917, in get_output_async
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476]     raise self._format_exception(outputs) from None
+(APIServer pid=209483) ERROR 04-08 11:54:08 [serving.py:476] vllm.v1.engine.exceptions.EngineDeadError: EngineCore encountered an issue. See stack trace (above) for the root cause.
+terminate called after throwing an instance of 'c10::AcceleratorError'
+terminate called after throwing an instance of 'c10::AcceleratorError'
+  what():  CUDA error: device-side assert triggered
+Search for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from createEvent at /pytorch/aten/src/ATen/cuda/CUDAEvent.h:232 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x7fb2b4172fdd in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xc0e0 (0x7fb2b45400e0 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #2: <unknown function> + 0xf2ada7 (0x7fb196697da7 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: <unknown function> + 0x7e9d4 (0x7fb2b41549d4 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #4: c10::TensorImpl::~TensorImpl() + 0x9 (0x7fb2b414e369 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #5: <unknown function> + 0x84aacd (0x7fb1e8a5bacd in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libtorch_python.so)
+frame #6: <unknown function> + 0x84ab61 (0x7fb1e8a5bb61 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libtorch_python.so)
+frame #7: <unknown function> + 0x235ec6 (0x5619d26e7ec6 in VLLM::Worker_TP0)
+frame #8: <unknown function> + 0x128c15 (0x7fb1945f1c15 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/numpy/_core/_multiarray_umath.cpython-311-x86_64-linux-gnu.so)
+frame #9: <unknown function> + 0x1d7b5a (0x5619d2689b5a in VLLM::Worker_TP0)
+frame #10: <unknown function> + 0x23623f (0x5619d26e823f in VLLM::Worker_TP0)
+frame #11: <unknown function> + 0x1d7b5a (0x5619d2689b5a in VLLM::Worker_TP0)
+frame #12: <unknown function> + 0x23623f (0x5619d26e823f in VLLM::Worker_TP0)
+frame #13: <unknown function> + 0x1d7b5a (0x5619d2689b5a in VLLM::Worker_TP0)
+frame #14: <unknown function> + 0x23623f (0x5619d26e823f in VLLM::Worker_TP0)
+frame #15: <unknown function> + 0x235f84 (0x5619d26e7f84 in VLLM::Worker_TP0)
+frame #16: <unknown function> + 0x235fd9 (0x5619d26e7fd9 in VLLM::Worker_TP0)
+frame #17: _PyFunction_Vectorcall + 0x2ab (0x5619d26bf5ab in VLLM::Worker_TP0)
+frame #18: PyObject_Call + 0x136 (0x5619d26c98a6 in VLLM::Worker_TP0)
+frame #19: _PyEval_EvalFrameDefault + 0x478f (0x5619d269d6ef in VLLM::Worker_TP0)
+frame #20: <unknown function> + 0x2a3935 (0x5619d2755935 in VLLM::Worker_TP0)
+frame #21: PyEval_EvalCode + 0x9d (0x5619d275507d in VLLM::Worker_TP0)
+frame #22: <unknown function> + 0x2c098a (0x5619d277298a in VLLM::Worker_TP0)
+frame #23: <unknown function> + 0x2bc6a3 (0x5619d276e6a3 in VLLM::Worker_TP0)
+frame #24: PyRun_StringFlags + 0x62 (0x5619d2763f92 in VLLM::Worker_TP0)
+frame #25: PyRun_SimpleStringFlags + 0x3c (0x5619d2763d4c in VLLM::Worker_TP0)
+frame #26: Py_RunMain + 0x30f (0x5619d277da1f in VLLM::Worker_TP0)
+frame #27: Py_BytesMain + 0x37 (0x5619d2744ea7 in VLLM::Worker_TP0)
+frame #28: <unknown function> + 0x29d90 (0x7fb2b5068d90 in /usr/lib/x86_64-linux-gnu/libc.so.6)
+frame #29: __libc_start_main + 0x80 (0x7fb2b5068e40 in /usr/lib/x86_64-linux-gnu/libc.so.6)
+frame #30: _start + 0x2e (0x5619d2744d2e in VLLM::Worker_TP0)
+
+  what():  CUDA error: device-side assert triggered
+Search for `cudaErrorAssert' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from createEvent at /pytorch/aten/src/ATen/cuda/CUDAEvent.h:232 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x7f04c7772fdd in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xc0e0 (0x7f0506cd20e0 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #2: <unknown function> + 0xf2ada7 (0x7f03e9297da7 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: <unknown function> + 0x7e9d4 (0x7f04c77549d4 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #4: c10::TensorImpl::~TensorImpl() + 0x9 (0x7f04c774e369 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #5: <unknown function> + 0x84aacd (0x7f043b65bacd in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libtorch_python.so)
+frame #6: <unknown function> + 0x84ab61 (0x7f043b65bb61 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/torch/lib/libtorch_python.so)
+frame #7: <unknown function> + 0x235ec6 (0x564cfeb5bec6 in VLLM::Worker_TP1)
+frame #8: <unknown function> + 0x128c15 (0x7f03e71f1c15 in /root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/numpy/_core/_multiarray_umath.cpython-311-x86_64-linux-gnu.so)
+frame #9: <unknown function> + 0x1d7b5a (0x564cfeafdb5a in VLLM::Worker_TP1)
+frame #10: <unknown function> + 0x23623f (0x564cfeb5c23f in VLLM::Worker_TP1)
+frame #11: <unknown function> + 0x1d7b5a (0x564cfeafdb5a in VLLM::Worker_TP1)
+frame #12: <unknown function> + 0x23623f (0x564cfeb5c23f in VLLM::Worker_TP1)
+frame #13: <unknown function> + 0x1d7b5a (0x564cfeafdb5a in VLLM::Worker_TP1)
+frame #14: <unknown function> + 0x23623f (0x564cfeb5c23f in VLLM::Worker_TP1)
+frame #15: <unknown function> + 0x235f84 (0x564cfeb5bf84 in VLLM::Worker_TP1)
+frame #16: <unknown function> + 0x235fd9 (0x564cfeb5bfd9 in VLLM::Worker_TP1)
+frame #17: _PyFunction_Vectorcall + 0x2ab (0x564cfeb335ab in VLLM::Worker_TP1)
+frame #18: PyObject_Call + 0x136 (0x564cfeb3d8a6 in VLLM::Worker_TP1)
+frame #19: _PyEval_EvalFrameDefault + 0x478f (0x564cfeb116ef in VLLM::Worker_TP1)
+frame #20: <unknown function> + 0x2a3935 (0x564cfebc9935 in VLLM::Worker_TP1)
+frame #21: PyEval_EvalCode + 0x9d (0x564cfebc907d in VLLM::Worker_TP1)
+frame #22: <unknown function> + 0x2c098a (0x564cfebe698a in VLLM::Worker_TP1)
+frame #23: <unknown function> + 0x2bc6a3 (0x564cfebe26a3 in VLLM::Worker_TP1)
+frame #24: PyRun_StringFlags + 0x62 (0x564cfebd7f92 in VLLM::Worker_TP1)
+frame #25: PyRun_SimpleStringFlags + 0x3c (0x564cfebd7d4c in VLLM::Worker_TP1)
+frame #26: Py_RunMain + 0x30f (0x564cfebf1a1f in VLLM::Worker_TP1)
+frame #27: Py_BytesMain + 0x37 (0x564cfebb8ea7 in VLLM::Worker_TP1)
+frame #28: <unknown function> + 0x29d90 (0x7f0507abcd90 in /usr/lib/x86_64-linux-gnu/libc.so.6)
+frame #29: __libc_start_main + 0x80 (0x7f0507abce40 in /usr/lib/x86_64-linux-gnu/libc.so.6)
+frame #30: _start + 0x2e (0x564cfebb8d2e in VLLM::Worker_TP1)
+
+(APIServer pid=209483) INFO:     127.0.0.1:60354 - "POST /v1/completions HTTP/1.1" 500 Internal Server Error
+(APIServer pid=209483) INFO:     Shutting down
+(APIServer pid=209483) INFO:     Waiting for application shutdown.
+(APIServer pid=209483) INFO:     Application shutdown complete.
+(APIServer pid=209483) INFO:     Finished server process [209483]
+/root/miniconda3/envs/vllm-offload/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 2 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/root/miniconda3/envs/vllm-offload/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

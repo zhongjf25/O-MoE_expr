@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "ktransformers",
+    "model": "qwen3-30b",
+    "results_dir": "/root/autodl-tmp/workspace/experiment/results/ktransformers/qwen3-30b/20260412_131612_kt_OA_gpu_cache60"
+  },
+  "experiments": [
+    {
+      "rr": 1.8,
+      "throughput_req_s": 0.2204959888908887,
+      "output_throughput_tok_s": 52.608137989477136,
+      "total_token_throughput": 131.97787415064144,
+      "completed": 100,
+      "failed": null,
+      "duration_s": 453.5229892525822,
+      "ttft_ms": {
+        "mean": 93599.64246548712,
+        "median": 75106.18919506669,
+        "std": 87723.41396144562,
+        "p99": 269819.94582822546
+      },
+      "tpot_ms": {
+        "mean": 324.2740692654631,
+        "median": 384.89032414294,
+        "std": 207.4541156522241,
+        "p99": 592.1942811927339
+      },
+      "itl_ms": {
+        "mean": 303.14659132976186,
+        "median": 299.742266535759,
+        "std": 1177.372709975011,
+        "p99": 739.0371778607368
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 78,
+      "max_output_tokens_per_s": 170.0
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+=== run_benchmark_loop_qwen35_35b.sh started at Sun Apr 12 20:19:04 CST 2026 ===
+
+=== Configuration ===
+MODEL_PATH:       /root/autodl-tmp/models/Qwen3.5-35B-A3B
+TP_SIZE:          2
+PORT:             8028
+GPU_USED_THRESHOLD: 50 MB
+MONITOR_GPU:     0,1
+OFFLOAD_LIMITS:   100 140 180 220
+SERVING_SCRIPT:   /root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_serving_qwen35_35.sh
+BENCHMARK_SCRIPT: /root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_benchmark_qwen35_35.sh
+===========================
+
+[INFO] Waiting for GPUs [0 1 ] to be free (memory.used < 50MB)...
+[INFO] GPUs free at 2026-04-12 20:19:05 (max used: 0MB)
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=100
+============================================
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=100...
+[INFO] Results will be saved to: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-35b/20260412_201906_omoe-qwen35-35b_limit100
+[INFO] Service started in screen 'omoe_35b_100'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-35b/20260412_201906_omoe-qwen35-35b_limit100/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 15s / 300s

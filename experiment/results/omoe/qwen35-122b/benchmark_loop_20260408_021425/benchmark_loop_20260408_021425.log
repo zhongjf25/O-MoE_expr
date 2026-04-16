@@ -1,0 +1,664 @@
+=== run_benchmark_loop.sh started at Wed Apr  8 02:14:25 CST 2026 ===
+
+=== Script Content ===
+#!/bin/bash
+#
+# O-MoE 多OFFLOAD_EXPERT_LIMIT循环Benchmark脚本
+#
+
+set -e
+
+# === 配置 ===
+MODEL_PATH=/root/autodl-tmp/models/qwen35_122b
+TP_SIZE=8
+PORT=8000
+SERVING_SCRIPT=/root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_serving_qwen35-122.sh
+BENCHMARK_SCRIPT=/root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_benchmark_qwen35_122.sh
+
+# GPU空闲阈值 (MB)
+GPU_USED_THRESHOLD=50
+
+# 服务就绪检查配置
+MAX_WAIT=3600
+CHECK_INTERVAL=90
+
+# OFFLOAD_EXPERT_LIMIT 列表 (70-160, 步长10)
+OFFLOAD_LIMITS="70 80 90 100 110 120 130 140 150 160"
+
+# === 辅助函数 ===
+
+check_gpu_free() {
+    local ALL_FREE=true
+    for USED in $(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}'); do
+        if [ "$USED" -gt "$GPU_USED_THRESHOLD" ]; then
+            ALL_FREE=false
+            break
+        fi
+    done
+    $ALL_FREE
+}
+
+wait_gpu_free() {
+    echo "[INFO] Waiting for all GPUs to be free (memory.used < ${GPU_USED_THRESHOLD}MB)..."
+    while true; do
+        if check_gpu_free; then
+            MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+            TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+            echo "[INFO] All GPUs free at $TIMESTAMP (max used: ${MAX_USED}MB)"
+            return 0
+        fi
+        MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+        TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+        echo "[$TIMESTAMP] Max GPU used: ${MAX_USED}MB, next check in 10min..."
+        sleep 600
+    done
+}
+
+wait_service_ready() {
+    local BASE_URL="http://127.0.0.1:${PORT}"
+    local WAIT_COUNT=0
+
+    echo "[INFO] Waiting for service to be ready..."
+
+    while true; do
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/v1/models" --max-time 5 || echo "000")
+
+        if [ "$HTTP_CODE" = "200" ]; then
+            # 发送测试请求验证服务正常 (使用vllm的/v1/completions端点)
+            TEST_RESP=$(curl -s -X POST "$BASE_URL/v1/completions" \
+                -H "Content-Type: application/json" \
+                -d '{"model": "qwen35-122b", "prompt": "Hello", "max_tokens": 4, "temperature": 0}' \
+                --max-time 30 2>&1 || echo "FAILED")
+
+            if echo "$TEST_RESP" | grep -q "choices\|text\|content"; then
+                echo "[INFO] Service is ready"
+                return 0
+            fi
+        fi
+
+        WAIT_COUNT=$((WAIT_COUNT + CHECK_INTERVAL))
+        if [ $WAIT_COUNT -ge $MAX_WAIT ]; then
+            echo "[ERROR] Timeout waiting for service after ${MAX_WAIT}s"
+            return 1
+        fi
+
+        echo "  Waiting... ${WAIT_COUNT}s / ${MAX_WAIT}s"
+        sleep $CHECK_INTERVAL
+    done
+}
+
+stop_service() {
+    echo "[INFO] Stopping vllm service..."
+    pkill -f "vllm serve" 2>/dev/null || true
+    sleep 5
+    if pgrep -f "vllm serve" > /dev/null; then
+        echo "[WARN] Force killing vllm..."
+        pkill -9 -f "vllm serve" 2>/dev/null || true
+        sleep 3
+    fi
+    echo "[INFO] Service stopped"
+}
+
+wait_gpu_release() {
+    # 停止服务后等待GPU显存释放
+    local WAIT_COUNT=0
+    local MAX_RELEASE_WAIT=120
+    echo "[INFO] Waiting for GPU memory to be released..."
+
+    while true; do
+        if check_gpu_free; then
+            MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+            TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+            echo "[INFO] GPU memory released at $TIMESTAMP (max used: ${MAX_USED}MB)"
+            return 0
+        fi
+
+        WAIT_COUNT=$((WAIT_COUNT + 10))
+        if [ $WAIT_COUNT -ge $MAX_RELEASE_WAIT ]; then
+            MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+            echo "[WARN] GPU memory not fully released after ${MAX_RELEASE_WAIT}s (max used: ${MAX_USED}MB)"
+            echo "[WARN] Proceeding anyway..."
+            return 0
+        fi
+
+        MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+        echo "  GPU not free yet (max used: ${MAX_USED}MB), waiting... ${WAIT_COUNT}s / ${MAX_RELEASE_WAIT}s"
+        sleep 10
+    done
+}
+
+# === 主流程 ===
+
+# 记录脚本配置到日志
+LOG_DIR="/root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b"
+mkdir -p "$LOG_DIR"
+SCRIPT_LOG="$LOG_DIR/benchmark_loop_$(date +%Y%m%d_%H%M%S).log"
+
+# 重定向所有输出到日志文件
+exec > >(tee -a "$SCRIPT_LOG") 2>&1
+
+echo "=== run_benchmark_loop.sh started at $(date) ==="
+echo ""
+echo "=== Script Content ==="
+cat "$0"
+echo ""
+echo "=== Configuration ==="
+echo "MODEL_PATH: $MODEL_PATH"
+echo "TP_SIZE: $TP_SIZE"
+echo "PORT: $PORT"
+echo "GPU_USED_THRESHOLD: $GPU_USED_THRESHOLD MB"
+echo "OFFLOAD_LIMITS: $OFFLOAD_LIMITS"
+echo "SERVING_SCRIPT: $SERVING_SCRIPT"
+echo "BENCHMARK_SCRIPT: $BENCHMARK_SCRIPT"
+echo "==========================="
+echo ""
+
+wait_gpu_free
+
+for LIMIT in $OFFLOAD_LIMITS; do
+    echo ""
+    echo "============================================"
+    echo "  Starting benchmark with OFFLOAD_EXPERT_LIMIT=$LIMIT"
+    echo "============================================"
+
+    if ! check_gpu_free; then
+        echo "[WARN] GPU not free before starting, waiting..."
+        wait_gpu_free
+    fi
+
+    # 构建与benchmark脚本相同的结果目录路径
+    EXP_LABEL="omoe-112b_limit${LIMIT}"
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    RESULTS_DIR="/root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/${TIMESTAMP}_${EXP_LABEL}"
+    mkdir -p "$RESULTS_DIR"
+    SERVER_LOG="$RESULTS_DIR/server.log"
+
+    echo "[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=$LIMIT..."
+
+    export MODEL_PATH
+    export TP_SIZE
+    export PORT
+    export OFFLOAD_EXPERT_LIMIT=$LIMIT
+    export GPU_MEMORY_UTIL=0.8
+
+    # 启动服务，输出同时到screen和日志文件
+    screen -dm -S omoe_server_${LIMIT} bash -c "bash $SERVING_SCRIPT 2>&1 | tee -a '$SERVER_LOG'"
+
+    echo "[INFO] Service started in screen 'omoe_server_${LIMIT}'"
+    echo "[INFO] Log file: $SERVER_LOG"
+
+    if ! wait_service_ready; then
+        echo "[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=$LIMIT"
+        screen -S omoe_server_${LIMIT} -X quit 2>/dev/null || true
+        stop_service
+        continue
+    fi
+
+    echo "[INFO] Running benchmark..."
+
+    export MODEL_PATH
+    export EXP_LABEL="omoe-112b_limit${LIMIT}"
+    export RR_START=1
+    export RR_END=1
+    export RR_STEP=1
+    export NUM_PROMPTS=1000
+    export BASE_URL="http://localhost:${PORT}"
+
+    bash $BENCHMARK_SCRIPT
+    BENCHMARK_EXIT=$?
+
+    echo "[INFO] Benchmark completed (exit code: $BENCHMARK_EXIT)"
+    screen -S omoe_server_${LIMIT} -X quit 2>/dev/null || true
+    kill $SERVER_PID 2>/dev/null || true
+    stop_service
+
+    # 等待GPU显存释放（最多等待2分钟）
+    wait_gpu_release
+
+    if [ $BENCHMARK_EXIT -ne 0 ]; then
+        echo "[WARN] Benchmark failed for OFFLOAD_EXPERT_LIMIT=$LIMIT"
+    fi
+
+done
+
+echo ""
+echo "============================================"
+echo "  All benchmarks completed!"
+echo "============================================"
+=== Configuration ===
+MODEL_PATH: /root/autodl-tmp/models/qwen35_122b
+TP_SIZE: 8
+PORT: 8000
+GPU_USED_THRESHOLD: 50 MB
+OFFLOAD_LIMITS: 70 80 90 100 110 120 130 140 150 160
+SERVING_SCRIPT: /root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_serving_qwen35-122.sh
+BENCHMARK_SCRIPT: /root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_benchmark_qwen35_122.sh
+===========================
+
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 02:14:26 (max used: 0MB)
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=70
+============================================
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=70...
+[INFO] Service started in screen 'omoe_server_70'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_021426_omoe-112b_limit70/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+  Waiting... 1710s / 3600s
+  Waiting... 1800s / 3600s
+  Waiting... 1890s / 3600s
+  Waiting... 1980s / 3600s
+  Waiting... 2070s / 3600s
+  Waiting... 2160s / 3600s
+  Waiting... 2250s / 3600s
+  Waiting... 2340s / 3600s
+  Waiting... 2430s / 3600s
+  Waiting... 2520s / 3600s
+  Waiting... 2610s / 3600s
+  Waiting... 2700s / 3600s
+  Waiting... 2790s / 3600s
+  Waiting... 2880s / 3600s
+  Waiting... 2970s / 3600s
+  Waiting... 3060s / 3600s
+  Waiting... 3150s / 3600s
+  Waiting... 3240s / 3600s
+  Waiting... 3330s / 3600s
+  Waiting... 3420s / 3600s
+  Waiting... 3510s / 3600s
+[ERROR] Timeout waiting for service after 3600s
+[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=70
+[INFO] Stopping vllm service...
+[INFO] Service stopped
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=80
+============================================
+[WARN] GPU not free before starting, waiting...
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 03:13:20 (max used: 0MB)
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=80...
+[INFO] Service started in screen 'omoe_server_80'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_031320_omoe-112b_limit80/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+  Waiting... 1710s / 3600s
+  Waiting... 1800s / 3600s
+  Waiting... 1890s / 3600s
+  Waiting... 1980s / 3600s
+  Waiting... 2070s / 3600s
+  Waiting... 2160s / 3600s
+  Waiting... 2250s / 3600s
+  Waiting... 2340s / 3600s
+  Waiting... 2430s / 3600s
+  Waiting... 2520s / 3600s
+  Waiting... 2610s / 3600s
+  Waiting... 2700s / 3600s
+  Waiting... 2790s / 3600s
+  Waiting... 2880s / 3600s
+  Waiting... 2970s / 3600s
+  Waiting... 3060s / 3600s
+  Waiting... 3150s / 3600s
+  Waiting... 3240s / 3600s
+  Waiting... 3330s / 3600s
+  Waiting... 3420s / 3600s
+  Waiting... 3510s / 3600s
+[ERROR] Timeout waiting for service after 3600s
+[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=80
+[INFO] Stopping vllm service...
+[INFO] Service stopped
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=90
+============================================
+[WARN] GPU not free before starting, waiting...
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 04:12:13 (max used: 0MB)
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=90...
+[INFO] Service started in screen 'omoe_server_90'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_041213_omoe-112b_limit90/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+  Waiting... 1710s / 3600s
+  Waiting... 1800s / 3600s
+  Waiting... 1890s / 3600s
+  Waiting... 1980s / 3600s
+  Waiting... 2070s / 3600s
+  Waiting... 2160s / 3600s
+  Waiting... 2250s / 3600s
+  Waiting... 2340s / 3600s
+  Waiting... 2430s / 3600s
+  Waiting... 2520s / 3600s
+  Waiting... 2610s / 3600s
+  Waiting... 2700s / 3600s
+  Waiting... 2790s / 3600s
+  Waiting... 2880s / 3600s
+  Waiting... 2970s / 3600s
+  Waiting... 3060s / 3600s
+  Waiting... 3150s / 3600s
+  Waiting... 3240s / 3600s
+  Waiting... 3330s / 3600s
+  Waiting... 3420s / 3600s
+  Waiting... 3510s / 3600s
+[ERROR] Timeout waiting for service after 3600s
+[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=90
+[INFO] Stopping vllm service...
+[INFO] Service stopped
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=100
+============================================
+[WARN] GPU not free before starting, waiting...
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 05:11:07 (max used: 0MB)
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=100...
+[INFO] Service started in screen 'omoe_server_100'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_051107_omoe-112b_limit100/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+  Waiting... 1710s / 3600s
+  Waiting... 1800s / 3600s
+  Waiting... 1890s / 3600s
+  Waiting... 1980s / 3600s
+  Waiting... 2070s / 3600s
+  Waiting... 2160s / 3600s
+  Waiting... 2250s / 3600s
+  Waiting... 2340s / 3600s
+  Waiting... 2430s / 3600s
+  Waiting... 2520s / 3600s
+  Waiting... 2610s / 3600s
+  Waiting... 2700s / 3600s
+  Waiting... 2790s / 3600s
+  Waiting... 2880s / 3600s
+  Waiting... 2970s / 3600s
+  Waiting... 3060s / 3600s
+  Waiting... 3150s / 3600s
+  Waiting... 3240s / 3600s
+  Waiting... 3330s / 3600s
+  Waiting... 3420s / 3600s
+  Waiting... 3510s / 3600s
+[ERROR] Timeout waiting for service after 3600s
+[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=100
+[INFO] Stopping vllm service...
+[INFO] Service stopped
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=110
+============================================
+[WARN] GPU not free before starting, waiting...
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 06:10:00 (max used: 0MB)
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=110...
+[INFO] Service started in screen 'omoe_server_110'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_061000_omoe-112b_limit110/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+  Waiting... 1710s / 3600s
+  Waiting... 1800s / 3600s
+  Waiting... 1890s / 3600s
+  Waiting... 1980s / 3600s
+  Waiting... 2070s / 3600s
+  Waiting... 2160s / 3600s
+  Waiting... 2250s / 3600s
+  Waiting... 2340s / 3600s
+  Waiting... 2430s / 3600s
+  Waiting... 2520s / 3600s
+  Waiting... 2610s / 3600s
+  Waiting... 2700s / 3600s
+  Waiting... 2790s / 3600s
+  Waiting... 2880s / 3600s
+  Waiting... 2970s / 3600s
+  Waiting... 3060s / 3600s
+  Waiting... 3150s / 3600s
+  Waiting... 3240s / 3600s
+  Waiting... 3330s / 3600s
+  Waiting... 3420s / 3600s
+  Waiting... 3510s / 3600s
+[ERROR] Timeout waiting for service after 3600s
+[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=110
+[INFO] Stopping vllm service...
+[INFO] Service stopped
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=120
+============================================
+[WARN] GPU not free before starting, waiting...
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 07:08:52 (max used: 0MB)
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=120...
+[INFO] Service started in screen 'omoe_server_120'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_070852_omoe-112b_limit120/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+  Waiting... 1710s / 3600s
+  Waiting... 1800s / 3600s
+  Waiting... 1890s / 3600s
+  Waiting... 1980s / 3600s
+  Waiting... 2070s / 3600s
+  Waiting... 2160s / 3600s
+  Waiting... 2250s / 3600s
+  Waiting... 2340s / 3600s
+  Waiting... 2430s / 3600s
+  Waiting... 2520s / 3600s
+  Waiting... 2610s / 3600s
+  Waiting... 2700s / 3600s
+  Waiting... 2790s / 3600s
+  Waiting... 2880s / 3600s
+  Waiting... 2970s / 3600s
+  Waiting... 3060s / 3600s
+  Waiting... 3150s / 3600s
+  Waiting... 3240s / 3600s
+  Waiting... 3330s / 3600s
+  Waiting... 3420s / 3600s
+  Waiting... 3510s / 3600s
+[ERROR] Timeout waiting for service after 3600s
+[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=120
+[INFO] Stopping vllm service...
+[INFO] Service stopped
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=130
+============================================
+[WARN] GPU not free before starting, waiting...
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 08:07:45 (max used: 0MB)
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=130...
+[INFO] Service started in screen 'omoe_server_130'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_080745_omoe-112b_limit130/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+  Waiting... 1710s / 3600s
+  Waiting... 1800s / 3600s
+  Waiting... 1890s / 3600s
+  Waiting... 1980s / 3600s
+  Waiting... 2070s / 3600s
+  Waiting... 2160s / 3600s
+  Waiting... 2250s / 3600s
+  Waiting... 2340s / 3600s
+  Waiting... 2430s / 3600s
+  Waiting... 2520s / 3600s
+  Waiting... 2610s / 3600s
+  Waiting... 2700s / 3600s
+  Waiting... 2790s / 3600s
+  Waiting... 2880s / 3600s
+  Waiting... 2970s / 3600s
+  Waiting... 3060s / 3600s
+  Waiting... 3150s / 3600s
+  Waiting... 3240s / 3600s
+  Waiting... 3330s / 3600s
+  Waiting... 3420s / 3600s
+  Waiting... 3510s / 3600s
+[ERROR] Timeout waiting for service after 3600s
+[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=130
+[INFO] Stopping vllm service...
+[INFO] Service stopped
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=140
+============================================
+[WARN] GPU not free before starting, waiting...
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 09:06:38 (max used: 0MB)
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=140...
+[INFO] Service started in screen 'omoe_server_140'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_090638_omoe-112b_limit140/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+  Waiting... 1710s / 3600s
+  Waiting... 1800s / 3600s
+  Waiting... 1890s / 3600s
+  Waiting... 1980s / 3600s
+  Waiting... 2070s / 3600s
+  Waiting... 2160s / 3600s
+  Waiting... 2250s / 3600s
+  Waiting... 2340s / 3600s
+  Waiting... 2430s / 3600s
+  Waiting... 2520s / 3600s
+  Waiting... 2610s / 3600s
+  Waiting... 2700s / 3600s
+  Waiting... 2790s / 3600s
+  Waiting... 2880s / 3600s
+  Waiting... 2970s / 3600s
+  Waiting... 3060s / 3600s
+  Waiting... 3150s / 3600s
+  Waiting... 3240s / 3600s
+  Waiting... 3330s / 3600s
+  Waiting... 3420s / 3600s
+  Waiting... 3510s / 3600s

@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "framework": "fate",
+    "model": "qwen3-30b-a3b",
+    "results_dir": "/root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_191443_fate-qwen3-30b"
+  },
+  "experiments": [
+    {
+      "rr": 0.2,
+      "throughput_req_s": 0.18404079647423457,
+      "output_throughput_tok_s": 40.00163519526784,
+      "total_token_throughput": 79.63077181847181,
+      "completed": 250,
+      "failed": 0,
+      "duration_s": 1358.3944689948112,
+      "ttft_ms": {
+        "mean": 1133.411433301866,
+        "median": 1145.5803327262402,
+        "std": 259.78631254829145,
+        "p99": 1676.3544917851686
+      },
+      "tpot_ms": {
+        "mean": 347.70743812486984,
+        "median": 372.77259730002555,
+        "std": 89.32661526545243,
+        "p99": 476.98738492493106
+      },
+      "itl_ms": {
+        "mean": 343.16381084184235,
+        "median": 357.4117962270975,
+        "std": 113.98086416620788,
+        "p99": 701.720000617203
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 26,
+      "max_output_tokens_per_s": 76.0
+    },
+    {
+      "rr": 0.6,
+      "throughput_req_s": 0.34432943008281963,
+      "output_throughput_tok_s": 74.84069028736101,
+      "total_token_throughput": 148.9844578082344,
+      "completed": 250,
+      "failed": 0,
+      "duration_s": 726.0488885305822,
+      "ttft_ms": {
+        "mean": 15441.716917417943,
+        "median": 1717.9133240133524,
+        "std": 25654.148194812653,
+        "p99": 70186.10907167195
+      },
+      "tpot_ms": {
+        "mean": 663.1688454441334,
+        "median": 653.0219315181654,
+        "std": 481.424584244077,
+        "p99": 1912.2351188782998
+      },
+      "itl_ms": {
+        "mean": 616.6489077832869,
+        "median": 645.752776414156,
+        "std": 375.89664869084396,
+        "p99": 836.1241429299116
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 107,
+      "max_output_tokens_per_s": 154.0
+    }
+  ]
+}

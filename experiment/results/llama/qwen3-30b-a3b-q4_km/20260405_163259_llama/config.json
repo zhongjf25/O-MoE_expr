@@ -1,0 +1,20 @@
+{
+  "framework": "llama",
+  "model": "/root/autodl-tmp/models/Qwen3-30B-A3B-GGUF/Qwen3-30B-A3B-Q4_K_M.gguf",
+  "model_name": "qwen3-30b-a3b-q4_km",
+  "base_url": "http://localhost:8080",
+  "dataset_name": "sharegpt",
+  "dataset_path": "/root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "random_input": 2048,
+  "random_output": 512,
+  "min_input_len": 0,
+  "max_input_len": 0,
+  "num_prompts": 100,
+  "rr_range": {
+    "start": 1,
+    "end": 10,
+    "step": 1
+  },
+  "timestamp": "20260405_163259",
+  "exp_label": "llama"
+}

@@ -1,0 +1,20 @@
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_181533_fate-qwen3-30b/benchmark_RR2.6.log
+[INFO] Config saved to /root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_181533_fate-qwen3-30b/config.json
+[INFO] Checking server availability...
+[INFO] Server is ready
+[INFO] Model ID: /root/autodl-tmp/models/Qwen3-30B-A3B
+
+>>> ============================================
+>>> Generating summary report...
+>>> ============================================
+
+[OK] Summary saved: /root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_181533_fate-qwen3-30b/summary.json
+[OK] Summary MD saved: /root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_181533_fate-qwen3-30b/summary.md
+
+============================================
+  All Benchmarks Complete!
+============================================
+  Results:      /root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_181533_fate-qwen3-30b
+  Summary:      /root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_181533_fate-qwen3-30b/summary.json
+  Summary MD:   /root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_181533_fate-qwen3-30b/summary.md
+============================================

@@ -1,0 +1,222 @@
+#!/bin/bash
+#
+# O-MoE 多OFFLOAD_EXPERT_LIMIT循环Benchmark脚本 (Qwen3-30B)
+#
+
+set -e
+
+# === 配置 ===
+MODEL_PATH=/root/autodl-tmp/models/Qwen3-30B-A3B
+MAX_MODEL_LEN=8192
+TP_SIZE=1
+PORT=8000
+SERVING_SCRIPT=/root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_serving_qwen3.sh
+BENCHMARK_SCRIPT=/root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_benchmark_qwen3.sh
+
+# GPU空闲阈值 (MB)
+GPU_USED_THRESHOLD=50
+
+# 服务就绪检查配置
+MAX_WAIT=300
+CHECK_INTERVAL=15
+
+# OFFLOAD_EXPERT_LIMIT 列表
+# OFFLOAD_LIMITS="80 90 100 110 120"
+# OFFLOAD_LIMITS="85 95 105 115 125"
+OFFLOAD_LIMITS="125"
+
+# === 辅助函数 ===
+
+check_gpu_free() {
+    GPU0_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' 'NR==1 {print $2}')
+    [ "$GPU0_USED" -lt "$GPU_USED_THRESHOLD" ]
+}
+
+wait_gpu_free() {
+    echo "[INFO] Waiting for GPU0 to be free (memory.used < ${GPU_USED_THRESHOLD}MB)..."
+    while true; do
+        if check_gpu_free; then
+            GPU0_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' 'NR==1 {print $2}')
+            TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+            echo "[INFO] GPU0 free at $TIMESTAMP (used: ${GPU0_USED}MB)"
+            return 0
+        fi
+        GPU0_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' 'NR==1 {print $2}')
+        TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+        echo "[$TIMESTAMP] GPU0 used: ${GPU0_USED}MB, waiting..."
+        sleep 60
+    done
+}
+
+wait_service_ready() {
+    local BASE_URL="http://127.0.0.1:${PORT}"
+    local WAIT_COUNT=0
+
+    echo "[INFO] Waiting for service to be ready..."
+
+    while true; do
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/v1/models" --max-time 5 || echo "000")
+
+        if [ "$HTTP_CODE" = "200" ]; then
+            # 发送测试请求验证服务正常 (使用vllm的/v1/completions端点)
+            TEST_RESP=$(curl -s -X POST "$BASE_URL/v1/completions" \
+                -H "Content-Type: application/json" \
+                -d '{"model": "/root/autodl-tmp/models/Qwen3-30B-A3B", "prompt": "Hello", "max_tokens": 4, "temperature": 0}' \
+                --max-time 30 2>&1 || echo "FAILED")
+
+            if echo "$TEST_RESP" | grep -q "choices\|text\|content"; then
+                echo "[INFO] Service is ready"
+                return 0
+            fi
+        fi
+
+        WAIT_COUNT=$((WAIT_COUNT + CHECK_INTERVAL))
+        if [ $WAIT_COUNT -ge $MAX_WAIT ]; then
+            echo "[ERROR] Timeout waiting for service after ${MAX_WAIT}s"
+            return 1
+        fi
+
+        echo "  Waiting... ${WAIT_COUNT}s / ${MAX_WAIT}s"
+        sleep $CHECK_INTERVAL
+    done
+}
+
+stop_service() {
+    echo "[INFO] Stopping vllm service..."
+    pkill -f "vllm serve" 2>/dev/null || true
+    sleep 5
+    if pgrep -f "vllm serve" > /dev/null; then
+        echo "[WARN] Force killing vllm..."
+        pkill -9 -f "vllm serve" 2>/dev/null || true
+        sleep 3
+    fi
+    echo "[INFO] Service stopped"
+}
+
+wait_gpu_release() {
+    # 停止服务后等待GPU0显存释放
+    local WAIT_COUNT=0
+    local MAX_RELEASE_WAIT=120
+    echo "[INFO] Waiting for GPU0 memory to be released..."
+
+    while true; do
+        if check_gpu_free; then
+            GPU0_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' 'NR==1 {print $2}')
+            TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+            echo "[INFO] GPU0 memory released at $TIMESTAMP (used: ${GPU0_USED}MB)"
+            return 0
+        fi
+
+        WAIT_COUNT=$((WAIT_COUNT + 10))
+        if [ $WAIT_COUNT -ge $MAX_RELEASE_WAIT ]; then
+            GPU0_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' 'NR==1 {print $2}')
+            echo "[WARN] GPU0 memory not fully released after ${MAX_RELEASE_WAIT}s (used: ${GPU0_USED}MB)"
+            echo "[WARN] Proceeding anyway..."
+            return 0
+        fi
+
+        GPU0_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' 'NR==1 {print $2}')
+        echo "  GPU0 not free yet (used: ${GPU0_USED}MB), waiting... ${WAIT_COUNT}s / ${MAX_RELEASE_WAIT}s"
+        sleep 10
+    done
+}
+
+# === 主流程 ===
+
+# 记录脚本配置到日志
+LOG_DIR="/root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b"
+mkdir -p "$LOG_DIR"
+SCRIPT_LOG="$LOG_DIR/benchmark_loop_$(date +%Y%m%d_%H%M%S).log"
+
+# 重定向所有输出到日志文件
+exec > >(tee -a "$SCRIPT_LOG") 2>&1
+
+echo "=== run_benchmark_loop_qwen3.sh started at $(date) ==="
+echo ""
+echo "=== Script Content ==="
+cat "$0"
+echo ""
+echo "=== Configuration ==="
+echo "MODEL_PATH: $MODEL_PATH"
+echo "TP_SIZE: $TP_SIZE"
+echo "PORT: $PORT"
+echo "GPU_USED_THRESHOLD: $GPU_USED_THRESHOLD MB"
+echo "OFFLOAD_LIMITS: $OFFLOAD_LIMITS"
+echo "SERVING_SCRIPT: $SERVING_SCRIPT"
+echo "BENCHMARK_SCRIPT: $BENCHMARK_SCRIPT"
+echo "==========================="
+echo ""
+
+wait_gpu_free
+
+for LIMIT in $OFFLOAD_LIMITS; do
+    echo ""
+    echo "============================================"
+    echo "  Starting benchmark with OFFLOAD_EXPERT_LIMIT=$LIMIT"
+    echo "============================================"
+
+    if ! check_gpu_free; then
+        echo "[WARN] GPU not free before starting, waiting..."
+        wait_gpu_free
+    fi
+
+    # 构建与benchmark脚本相同的结果目录路径
+    EXP_LABEL="omoe-qwen3_limit${LIMIT}"
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    RESULTS_DIR="/root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b/${TIMESTAMP}_${EXP_LABEL}"
+    mkdir -p "$RESULTS_DIR"
+    SERVER_LOG="$RESULTS_DIR/server.log"
+
+    echo "[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=$LIMIT..."
+
+    export MODEL_PATH
+    export MAX_MODEL_LEN
+    export TP_SIZE
+    export PORT
+    export OFFLOAD_EXPERT_LIMIT=$LIMIT
+    export GPU_MEMORY_UTIL=0.94
+
+    # 启动服务，输出同时到screen和日志文件
+    screen -dm -S omoe_server_${LIMIT} bash -c "bash $SERVING_SCRIPT 2>&1 | tee -a '$SERVER_LOG'"
+
+    echo "[INFO] Service started in screen 'omoe_server_${LIMIT}'"
+    echo "[INFO] Log file: $SERVER_LOG"
+
+    if ! wait_service_ready; then
+        echo "[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=$LIMIT"
+        screen -S omoe_server_${LIMIT} -X quit 2>/dev/null || true
+        stop_service
+        continue
+    fi
+
+    echo "[INFO] Running benchmark..."
+
+    export MODEL_PATH
+    export EXP_LABEL="tp1_limit${LIMIT}"
+    export RR_START=6
+    export RR_END=6
+    export RR_STEP=1
+    export NUM_PROMPTS=1000
+    export BASE_URL="http://localhost:${PORT}"
+
+    bash $BENCHMARK_SCRIPT
+    BENCHMARK_EXIT=$?
+
+    echo "[INFO] Benchmark completed (exit code: $BENCHMARK_EXIT)"
+    screen -S omoe_server_${LIMIT} -X quit 2>/dev/null || true
+    kill $SERVER_PID 2>/dev/null || true
+    stop_service
+
+    # 等待GPU显存释放（最多等待2分钟）
+    wait_gpu_release
+
+    if [ $BENCHMARK_EXIT -ne 0 ]; then
+        echo "[WARN] Benchmark failed for OFFLOAD_EXPERT_LIMIT=$LIMIT"
+    fi
+
+done
+
+echo ""
+echo "============================================"
+echo "  All benchmarks completed!"
+echo "============================================"

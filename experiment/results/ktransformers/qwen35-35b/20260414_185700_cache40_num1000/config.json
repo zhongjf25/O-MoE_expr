@@ -1,0 +1,20 @@
+{
+  "framework": "ktransformers",
+  "model": "/root/autodl-tmp/models/Qwen3.5-35B-A3B",
+  "model_name": "qwen35-35b",
+  "base_url": "http://localhost:8036",
+  "dataset_name": "sharegpt",
+  "dataset_path": "/root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "random_input": 2048,
+  "random_output": 512,
+  "min_input_len": 0,
+  "max_input_len": 0,
+  "num_prompts": 1000,
+  "rr_range": {
+    "start": 3.5,
+    "end": 3.5,
+    "step": 1.5
+  },
+  "timestamp": "20260414_185700",
+  "exp_label": "cache40_num1000"
+}

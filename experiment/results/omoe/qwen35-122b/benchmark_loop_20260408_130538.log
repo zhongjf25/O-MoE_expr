@@ -1,0 +1,295 @@
+=== run_benchmark_loop.sh started at Wed Apr  8 13:05:38 CST 2026 ===
+
+=== Script Content ===
+#!/bin/bash
+#
+# O-MoE 多OFFLOAD_EXPERT_LIMIT循环Benchmark脚本
+#
+
+set -e
+
+# === 配置 ===
+MODEL_PATH=/root/autodl-tmp/models/qwen35_122b
+TP_SIZE=8
+PORT=8000
+SERVING_SCRIPT=/root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_serving_qwen35-122.sh
+BENCHMARK_SCRIPT=/root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_benchmark_qwen35_122.sh
+
+# GPU空闲阈值 (MB)
+GPU_USED_THRESHOLD=50
+
+# 服务就绪检查配置
+MAX_WAIT=3600
+CHECK_INTERVAL=90
+
+# OFFLOAD_EXPERT_LIMIT 列表 (70-160, 步长10)
+OFFLOAD_LIMITS="20 30 40 50 60 70 80 90 100 110 120 130 140 150 160"
+
+# === 辅助函数 ===
+
+check_gpu_free() {
+    local ALL_FREE=true
+    for USED in $(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}'); do
+        if [ "$USED" -gt "$GPU_USED_THRESHOLD" ]; then
+            ALL_FREE=false
+            break
+        fi
+    done
+    $ALL_FREE
+}
+
+wait_gpu_free() {
+    echo "[INFO] Waiting for all GPUs to be free (memory.used < ${GPU_USED_THRESHOLD}MB)..."
+    while true; do
+        if check_gpu_free; then
+            MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+            TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+            echo "[INFO] All GPUs free at $TIMESTAMP (max used: ${MAX_USED}MB)"
+            return 0
+        fi
+        MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+        TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+        echo "[$TIMESTAMP] Max GPU used: ${MAX_USED}MB, next check in 10min..."
+        sleep 600
+    done
+}
+
+wait_service_ready() {
+    local BASE_URL="http://127.0.0.1:${PORT}"
+    local WAIT_COUNT=0
+
+    echo "[INFO] Waiting for service to be ready..."
+
+    while true; do
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/v1/models" --max-time 5 || echo "000")
+
+        if [ "$HTTP_CODE" = "200" ]; then
+            # 发送测试请求验证服务正常 (使用vllm的/v1/completions端点)
+            TEST_RESP=$(curl -s -X POST "$BASE_URL/v1/completions" \
+                -H "Content-Type: application/json" \
+                -d '{"model": "/root/autodl-tmp/models/qwen35_122b", "prompt": "Hello", "max_tokens": 4, "temperature": 0}' \
+                --max-time 30 2>&1 || echo "FAILED")
+
+            if echo "$TEST_RESP" | grep -q "choices\|text\|content"; then
+                echo "[INFO] Service is ready"
+                return 0
+            fi
+        fi
+
+        WAIT_COUNT=$((WAIT_COUNT + CHECK_INTERVAL))
+        if [ $WAIT_COUNT -ge $MAX_WAIT ]; then
+            echo "[ERROR] Timeout waiting for service after ${MAX_WAIT}s"
+            return 1
+        fi
+
+        echo "  Waiting... ${WAIT_COUNT}s / ${MAX_WAIT}s"
+        sleep $CHECK_INTERVAL
+    done
+}
+
+stop_service() {
+    echo "[INFO] Stopping vllm service..."
+    pkill -f "vllm serve" 2>/dev/null || true
+    sleep 5
+    if pgrep -f "vllm serve" > /dev/null; then
+        echo "[WARN] Force killing vllm..."
+        pkill -9 -f "vllm serve" 2>/dev/null || true
+        sleep 3
+    fi
+    echo "[INFO] Service stopped"
+}
+
+wait_gpu_release() {
+    # 停止服务后等待GPU显存释放
+    local WAIT_COUNT=0
+    local MAX_RELEASE_WAIT=120
+    echo "[INFO] Waiting for GPU memory to be released..."
+
+    while true; do
+        if check_gpu_free; then
+            MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+            TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+            echo "[INFO] GPU memory released at $TIMESTAMP (max used: ${MAX_USED}MB)"
+            return 0
+        fi
+
+        WAIT_COUNT=$((WAIT_COUNT + 10))
+        if [ $WAIT_COUNT -ge $MAX_RELEASE_WAIT ]; then
+            MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+            echo "[WARN] GPU memory not fully released after ${MAX_RELEASE_WAIT}s (max used: ${MAX_USED}MB)"
+            echo "[WARN] Proceeding anyway..."
+            return 0
+        fi
+
+        MAX_USED=$(nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits | awk -F', ' '{print $2}' | sort -n | tail -1)
+        echo "  GPU not free yet (max used: ${MAX_USED}MB), waiting... ${WAIT_COUNT}s / ${MAX_RELEASE_WAIT}s"
+        sleep 10
+    done
+}
+
+# === 主流程 ===
+
+# 记录脚本配置到日志
+LOG_DIR="/root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b"
+mkdir -p "$LOG_DIR"
+SCRIPT_LOG="$LOG_DIR/benchmark_loop_$(date +%Y%m%d_%H%M%S).log"
+
+# 重定向所有输出到日志文件
+exec > >(tee -a "$SCRIPT_LOG") 2>&1
+
+echo "=== run_benchmark_loop.sh started at $(date) ==="
+echo ""
+echo "=== Script Content ==="
+cat "$0"
+echo ""
+echo "=== Configuration ==="
+echo "MODEL_PATH: $MODEL_PATH"
+echo "TP_SIZE: $TP_SIZE"
+echo "PORT: $PORT"
+echo "GPU_USED_THRESHOLD: $GPU_USED_THRESHOLD MB"
+echo "OFFLOAD_LIMITS: $OFFLOAD_LIMITS"
+echo "SERVING_SCRIPT: $SERVING_SCRIPT"
+echo "BENCHMARK_SCRIPT: $BENCHMARK_SCRIPT"
+echo "==========================="
+echo ""
+
+wait_gpu_free
+
+for LIMIT in $OFFLOAD_LIMITS; do
+    echo ""
+    echo "============================================"
+    echo "  Starting benchmark with OFFLOAD_EXPERT_LIMIT=$LIMIT"
+    echo "============================================"
+
+    if ! check_gpu_free; then
+        echo "[WARN] GPU not free before starting, waiting..."
+        wait_gpu_free
+    fi
+
+    # 构建与benchmark脚本相同的结果目录路径
+    EXP_LABEL="omoe-112b_limit${LIMIT}"
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    RESULTS_DIR="/root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/${TIMESTAMP}_${EXP_LABEL}"
+    mkdir -p "$RESULTS_DIR"
+    SERVER_LOG="$RESULTS_DIR/server.log"
+
+    echo "[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=$LIMIT..."
+
+    export MODEL_PATH
+    export TP_SIZE
+    export PORT
+    export OFFLOAD_EXPERT_LIMIT=$LIMIT
+    export GPU_MEMORY_UTIL=0.82
+
+    # 启动服务，输出同时到screen和日志文件
+    screen -dm -S omoe_server_${LIMIT} bash -c "bash $SERVING_SCRIPT 2>&1 | tee -a '$SERVER_LOG'"
+
+    echo "[INFO] Service started in screen 'omoe_server_${LIMIT}'"
+    echo "[INFO] Log file: $SERVER_LOG"
+
+    if ! wait_service_ready; then
+        echo "[ERROR] Service failed to start with OFFLOAD_EXPERT_LIMIT=$LIMIT"
+        screen -S omoe_server_${LIMIT} -X quit 2>/dev/null || true
+        stop_service
+        continue
+    fi
+
+    echo "[INFO] Running benchmark..."
+
+    export MODEL_PATH
+    export EXP_LABEL="omoe-112b_limit${LIMIT}"
+    export RR_START=1
+    export RR_END=1
+    export RR_STEP=1
+    export NUM_PROMPTS=100
+    export BASE_URL="http://localhost:${PORT}"
+
+    bash $BENCHMARK_SCRIPT
+    BENCHMARK_EXIT=$?
+
+    echo "[INFO] Benchmark completed (exit code: $BENCHMARK_EXIT)"
+    screen -S omoe_server_${LIMIT} -X quit 2>/dev/null || true
+    kill $SERVER_PID 2>/dev/null || true
+    stop_service
+
+    # 等待GPU显存释放（最多等待2分钟）
+    wait_gpu_release
+
+    if [ $BENCHMARK_EXIT -ne 0 ]; then
+        echo "[WARN] Benchmark failed for OFFLOAD_EXPERT_LIMIT=$LIMIT"
+    fi
+
+done
+
+echo ""
+echo "============================================"
+echo "  All benchmarks completed!"
+echo "============================================"
+=== Configuration ===
+MODEL_PATH: /root/autodl-tmp/models/qwen35_122b
+TP_SIZE: 8
+PORT: 8000
+GPU_USED_THRESHOLD: 50 MB
+OFFLOAD_LIMITS: 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160
+SERVING_SCRIPT: /root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_serving_qwen35-122.sh
+BENCHMARK_SCRIPT: /root/autodl-tmp/workspace/experiment/scripts/O-MoE/simple_benchmark_qwen35_122.sh
+===========================
+
+[INFO] Waiting for all GPUs to be free (memory.used < 50MB)...
+[INFO] All GPUs free at 2026-04-08 13:05:38 (max used: 0MB)
+
+============================================
+  Starting benchmark with OFFLOAD_EXPERT_LIMIT=20
+============================================
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=20...
+[INFO] Service started in screen 'omoe_server_20'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_130538_omoe-112b_limit20/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 90s / 3600s
+  Waiting... 180s / 3600s
+  Waiting... 270s / 3600s
+  Waiting... 360s / 3600s
+  Waiting... 450s / 3600s
+  Waiting... 540s / 3600s
+  Waiting... 630s / 3600s
+  Waiting... 720s / 3600s
+  Waiting... 810s / 3600s
+  Waiting... 900s / 3600s
+  Waiting... 990s / 3600s
+  Waiting... 1080s / 3600s
+  Waiting... 1170s / 3600s
+  Waiting... 1260s / 3600s
+  Waiting... 1350s / 3600s
+  Waiting... 1440s / 3600s
+  Waiting... 1530s / 3600s
+  Waiting... 1620s / 3600s
+[INFO] Service is ready
+[INFO] Running benchmark...
+============================================
+  O-MoE Qwen3.5-122B Benchmark Config
+============================================
+  Model:        /root/autodl-tmp/models/qwen35_122b
+  Base URL:     http://localhost:8000
+  Dataset:      /root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json
+  Num Prompts:  100
+  RR Range:     1 ~ 1 (step 1)
+  Results:      /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_133240_omoe-112b_limit20
+============================================
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_133240_omoe-112b_limit20/benchmark.log
+[INFO] Config saved to /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_133240_omoe-112b_limit20/config.json
+[INFO] Checking server availability...
+[INFO] Server is ready
+[INFO] Model ID: /root/autodl-tmp/models/qwen35_122b
+
+>>> ============================================
+>>> Benchmark RR=1 req/s
+>>> ============================================
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x7fbd30b239c0>, trust_remote_code=False, seed=0, num_prompts=100, dataset_name='sharegpt', no_stream=False, dataset_path='/root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://localhost:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='/root/autodl-tmp/models/qwen35_122b', input_len=None, output_len=None, tokenizer=None, tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=1.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=omoe,model=qwen35-122b,request_rate=1'], result_dir='/root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260408_133240_omoe-112b_limit20/rr_1', result_filename=None, ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-c9297048-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False)
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 1.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/100 [00:00<?, ?it/s]  1%|          | 1/100 [00:13<22:44, 13.78s/it] 11%|█         | 11/100 [00:14<01:28,  1.01it/s] 13%|█▎        | 13/100 [00:16<01:23,  1.04it/s] 14%|█▍        | 14/100 [00:19<01:43,  1.21s/it] 16%|█▌        | 16/100 [00:19<01:15,  1.11it/s] 18%|█▊        | 18/100 [00:21<01:15,  1.08it/s] 19%|█▉        | 19/100 [00:23<01:24,  1.04s/it] 20%|██        | 20/100 [00:25<01:41,  1.27s/it] 21%|██        | 21/100 [00:29<02:30,  1.90s/it]

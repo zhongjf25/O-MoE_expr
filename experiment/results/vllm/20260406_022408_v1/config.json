@@ -1,0 +1,17 @@
+{
+  "framework": "vllm",
+  "model": "/root/autodl-tmp/models/qwen35_122b",
+  "model_name": "",
+  "base_url": "http://localhost:8000",
+  "dataset_path": "/root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "num_prompts": 5,
+  "min_input_len": 0,
+  "max_input_len": 1000,
+  "rr_range": {
+    "start": 1,
+    "end": 2,
+    "step": 1
+  },
+  "timestamp": "20260406_022408",
+  "exp_label": "v1"
+}

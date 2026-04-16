@@ -1,0 +1,15 @@
+{
+  "framework": "omoe",
+  "model": "/root/autodl-tmp/models/Qwen3.5-35B-A3B",
+  "model_name": "qwen35-35b",
+  "base_url": "http://localhost:8028",
+  "dataset_path": "/root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "num_prompts": 100,
+  "rr_range": {
+    "start": 10,
+    "end": 10,
+    "step": 1
+  },
+  "timestamp": "20260412_181958",
+  "exp_label": "tp2_test"
+}

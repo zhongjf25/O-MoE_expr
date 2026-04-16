@@ -1,0 +1,22 @@
+# Serving Benchmark Result Summary
+
+## Experiment Config
+- **Framework:** omoe
+- **Model:** /root/autodl-tmp/models/Qwen3-30B-A3B
+- **Dataset:** /root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json
+- **Num Prompts:** 1000
+- **RR Range:** 6 ~ 6 (step 1)
+- **Timestamp:** 20260416_024655
+- **Label:** omoe-qwen3-30b
+
+## Benchmark Results
+
+| RR | Throughput (req/s) | TTFT Mean (ms) | TTFT P99 (ms) | TPOT Mean (ms) | TPOT P99 (ms) | ITL Mean (ms) | Completed | Failed |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 6.0 | 1.53 | 70479.92 | 194806.09 | 546.27 | 577.44 | 540.17 | 1000 | 0 |
+
+## Detailed Metrics
+
+| RR | TPOT Median (ms) | ITL Median (ms) | E2EL Mean (ms) | E2EL P99 (ms) | Output Throughput (tok/s) | Peak Concurrent |
+|---|---:|---:|---:|---:|---:|---:|
+| 6.0 | 546.10 | 538.24 | 0.00 | 0.00 | 308.53 | 718 |

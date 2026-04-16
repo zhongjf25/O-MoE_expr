@@ -1,0 +1,379 @@
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    1.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  107.68    
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23828     
+Request throughput (req/s):              0.93      
+Input token throughput (tok/s):          334.29    
+Output token throughput (tok/s):         221.57    
+Peak output token throughput (tok/s):    354.00    
+Peak concurrent requests:                19        
+Total token throughput (tok/s):          555.86    
+Concurrency:                             9.30      
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   10012.20  
+Median E2E Latency (ms):                 7371.74   
+P90 E2E Latency (ms):                    22377.32  
+P99 E2E Latency (ms):                    33428.81  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          206.33    
+Median TTFT (ms):                        192.63    
+P99 TTFT (ms):                           338.60    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          42.16     
+Median TPOT (ms):                        43.14     
+P99 TPOT (ms):                           55.17     
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           41.27     
+Median ITL (ms):                         37.85     
+P95 ITL (ms):                            51.59     
+P99 ITL (ms):                            159.81    
+Max ITL (ms):                            177.66    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    2.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  83.95     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23751     
+Request throughput (req/s):              1.19      
+Input token throughput (tok/s):          428.76    
+Output token throughput (tok/s):         284.19    
+Peak output token throughput (tok/s):    455.00    
+Peak concurrent requests:                45        
+Total token throughput (tok/s):          712.95    
+Concurrency:                             25.40     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   21326.94  
+Median E2E Latency (ms):                 17855.74  
+P90 E2E Latency (ms):                    47617.79  
+P99 E2E Latency (ms):                    67847.39  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          286.06    
+Median TTFT (ms):                        281.05    
+P99 TTFT (ms):                           449.11    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          92.52     
+Median TPOT (ms):                        96.21     
+P99 TPOT (ms):                           121.07    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           88.56     
+Median ITL (ms):                         106.97    
+P95 ITL (ms):                            125.33    
+P99 ITL (ms):                            181.11    
+Max ITL (ms):                            219.28    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    3.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  71.31     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23766     
+Request throughput (req/s):              1.40      
+Input token throughput (tok/s):          504.76    
+Output token throughput (tok/s):         334.56    
+Peak output token throughput (tok/s):    515.00    
+Peak concurrent requests:                58        
+Total token throughput (tok/s):          839.32    
+Concurrency:                             30.27     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   21589.68  
+Median E2E Latency (ms):                 17698.58  
+P90 E2E Latency (ms):                    45095.91  
+P99 E2E Latency (ms):                    63442.92  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          272.07    
+Median TTFT (ms):                        282.65    
+P99 TTFT (ms):                           347.85    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          96.59     
+Median TPOT (ms):                        104.89    
+P99 TPOT (ms):                           111.30    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           89.72     
+Median ITL (ms):                         102.99    
+P95 ITL (ms):                            116.71    
+P99 ITL (ms):                            129.00    
+Max ITL (ms):                            169.16    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    4.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  66.64     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23784     
+Request throughput (req/s):              1.50      
+Input token throughput (tok/s):          540.14    
+Output token throughput (tok/s):         358.02    
+Peak output token throughput (tok/s):    608.00    
+Peak concurrent requests:                62        
+Total token throughput (tok/s):          898.16    
+Concurrency:                             33.28     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   22177.72  
+Median E2E Latency (ms):                 18275.18  
+P90 E2E Latency (ms):                    45703.64  
+P99 E2E Latency (ms):                    61706.73  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          276.99    
+Median TTFT (ms):                        281.36    
+P99 TTFT (ms):                           372.70    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          100.53    
+Median TPOT (ms):                        107.49    
+P99 TPOT (ms):                           112.84    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           92.18     
+Median ITL (ms):                         104.53    
+P95 ITL (ms):                            117.68    
+P99 ITL (ms):                            127.04    
+Max ITL (ms):                            167.67    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    5.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  63.28     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23754     
+Request throughput (req/s):              1.58      
+Input token throughput (tok/s):          568.88    
+Output token throughput (tok/s):         377.07    
+Peak output token throughput (tok/s):    590.00    
+Peak concurrent requests:                67        
+Total token throughput (tok/s):          945.94    
+Concurrency:                             35.00     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   22143.32  
+Median E2E Latency (ms):                 18306.85  
+P90 E2E Latency (ms):                    46098.85  
+P99 E2E Latency (ms):                    59412.44  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          278.84    
+Median TTFT (ms):                        280.93    
+P99 TTFT (ms):                           371.26    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          100.47    
+Median TPOT (ms):                        106.99    
+P99 TPOT (ms):                           111.54    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           92.03     
+Median ITL (ms):                         104.41    
+P95 ITL (ms):                            117.44    
+P99 ITL (ms):                            124.70    
+Max ITL (ms):                            176.01    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    6.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  62.03     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23761     
+Request throughput (req/s):              1.61      
+Input token throughput (tok/s):          580.26    
+Output token throughput (tok/s):         384.61    
+Peak output token throughput (tok/s):    590.00    
+Peak concurrent requests:                72        
+Total token throughput (tok/s):          964.87    
+Concurrency:                             36.19     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   22447.92  
+Median E2E Latency (ms):                 19462.27  
+P90 E2E Latency (ms):                    46926.79  
+P99 E2E Latency (ms):                    59012.66  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          287.19    
+Median TTFT (ms):                        295.33    
+P99 TTFT (ms):                           368.42    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          102.40    
+Median TPOT (ms):                        107.50    
+P99 TPOT (ms):                           117.02    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           93.27     
+Median ITL (ms):                         104.58    
+P95 ITL (ms):                            119.93    
+P99 ITL (ms):                            126.48    
+Max ITL (ms):                            163.31    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    7.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  60.49     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23731     
+Request throughput (req/s):              1.65      
+Input token throughput (tok/s):          595.08    
+Output token throughput (tok/s):         394.44    
+Peak output token throughput (tok/s):    646.00    
+Peak concurrent requests:                75        
+Total token throughput (tok/s):          989.52    
+Concurrency:                             37.11     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   22445.47  
+Median E2E Latency (ms):                 19630.57  
+P90 E2E Latency (ms):                    46864.28  
+P99 E2E Latency (ms):                    57975.78  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          277.43    
+Median TTFT (ms):                        281.17    
+P99 TTFT (ms):                           362.86    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          102.50    
+Median TPOT (ms):                        107.12    
+P99 TPOT (ms):                           119.86    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           93.30     
+Median ITL (ms):                         104.82    
+P95 ITL (ms):                            119.75    
+P99 ITL (ms):                            129.28    
+Max ITL (ms):                            158.32    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    8.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  60.66     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23790     
+Request throughput (req/s):              1.65      
+Input token throughput (tok/s):          593.44    
+Output token throughput (tok/s):         393.35    
+Peak output token throughput (tok/s):    647.00    
+Peak concurrent requests:                77        
+Total token throughput (tok/s):          986.79    
+Concurrency:                             37.49     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   22737.68  
+Median E2E Latency (ms):                 19793.58  
+P90 E2E Latency (ms):                    48176.46  
+P99 E2E Latency (ms):                    58582.55  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          280.85    
+Median TTFT (ms):                        283.34    
+P99 TTFT (ms):                           378.77    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          103.08    
+Median TPOT (ms):                        107.93    
+P99 TPOT (ms):                           117.29    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           94.52     
+Median ITL (ms):                         104.98    
+P95 ITL (ms):                            119.26    
+P99 ITL (ms):                            123.68    
+Max ITL (ms):                            162.91    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    9.0       
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  58.87     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23790     
+Request throughput (req/s):              1.70      
+Input token throughput (tok/s):          611.47    
+Output token throughput (tok/s):         405.29    
+Peak output token throughput (tok/s):    681.00    
+Peak concurrent requests:                79        
+Total token throughput (tok/s):          1016.76   
+Concurrency:                             38.23     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   22506.34  
+Median E2E Latency (ms):                 19618.84  
+P90 E2E Latency (ms):                    47286.87  
+P99 E2E Latency (ms):                    57047.58  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          280.79    
+Median TTFT (ms):                        282.78    
+P99 TTFT (ms):                           367.59    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          103.23    
+Median TPOT (ms):                        107.33    
+P99 TPOT (ms):                           121.79    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           93.55     
+Median ITL (ms):                         104.25    
+P95 ITL (ms):                            118.89    
+P99 ITL (ms):                            125.11    
+Max ITL (ms):                            167.77    
+==================================================
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang    
+Traffic request rate:                    10.0      
+Max request concurrency:                 not set   
+Successful requests:                     100       
+Benchmark duration (s):                  59.68     
+Total input tokens:                      35996     
+Total input text tokens:                 35996     
+Total generated tokens:                  23859     
+Total generated tokens (retokenized):    23749     
+Request throughput (req/s):              1.68      
+Input token throughput (tok/s):          603.16    
+Output token throughput (tok/s):         399.79    
+Peak output token throughput (tok/s):    690.00    
+Peak concurrent requests:                80        
+Total token throughput (tok/s):          1002.95   
+Concurrency:                             38.61     
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   23044.47  
+Median E2E Latency (ms):                 20149.77  
+P90 E2E Latency (ms):                    48771.37  
+P99 E2E Latency (ms):                    58029.55  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          286.99    
+Median TTFT (ms):                        292.37    
+P99 TTFT (ms):                           381.80    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          105.02    
+Median TPOT (ms):                        108.59    
+P99 TPOT (ms):                           123.82    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           95.78     
+Median ITL (ms):                         106.47    
+P95 ITL (ms):                            120.64    
+P99 ITL (ms):                            129.60    
+Max ITL (ms):                            158.46    
+==================================================

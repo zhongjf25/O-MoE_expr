@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "sglang",
+    "model": "qwen3.5-122b",
+    "results_dir": "/root/autodl-tmp/workspace/experiment/results/sglang/qwen3.5-122b/20260405_144930_sglang"
+  },
+  "experiments": [
+    {
+      "rr": 0.3,
+      "throughput_req_s": 0.12240831890105949,
+      "output_throughput_tok_s": 26.44484839874709,
+      "total_token_throughput": null,
+      "completed": 500,
+      "failed": null,
+      "duration_s": 4084.689704824239,
+      "ttft_ms": {
+        "mean": 1299711.7144935727,
+        "median": 1275453.2187972218,
+        "std": 689184.588859148,
+        "p99": 2411171.2856098823
+      },
+      "tpot_ms": {
+        "mean": 75.12629729199321,
+        "median": 74.78104958935691,
+        "std": 1.6187949798688248,
+        "p99": 79.83452977240086
+      },
+      "itl_ms": {
+        "mean": 75.16639638358102,
+        "median": 73.51721823215485,
+        "std": 7.404775609820517,
+        "p99": 89.61084775626638
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 305,
+      "max_output_tokens_per_s": 28.0
+    }
+  ]
+}

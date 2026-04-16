@@ -1,0 +1,49 @@
+=== run_benchmark_single_limit.sh started at Fri Apr 10 20:23:55 CST 2026 ===
+
+=== Configuration ===
+MODEL_PATH:       /root/autodl-tmp/models/Qwen3-30B-A3B
+TP_SIZE:          1
+PORT:             8000
+OFFLOAD_LIMIT:    90
+RR_START:         1
+RR_END:           10
+RR_STEP:          1
+===========================
+
+[INFO] Waiting for GPUs [0 1 2 3 4 5 6 7 ] to be free (memory.used < 50MB)...
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 49: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 49: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 49: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 49: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 49: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 49: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 49: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 49: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 65: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 65: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 65: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 65: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 65: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 65: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 65: [: : integer expression expected
+/root/autodl-tmp/workspace/experiment/scripts/O-MoE/run_benchmark_single_limit_qwen3_tp1.sh: line 65: [: : integer expression expected
+[INFO] GPUs free at 2026-04-10 20:23:58 (max used: 0MB)
+[INFO] Results will be saved to: /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b/20260410_202358_omoe-qwen3_limit90
+
+[INFO] Will run 10 RR values: 1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+7.0
+8.0
+9.0
+10.0
+[INFO] Last RR value: 10.0
+
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=90...
+[INFO] Service started in screen 'omoe_server'
+[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b/20260410_202358_omoe-qwen3_limit90/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 15s / 300s

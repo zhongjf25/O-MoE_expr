@@ -1,0 +1,13 @@
+# Large binary operators (.so files)
+**/*.so
+**/*.so.*
+
+# Git pack files (automatically managed by Git)
+**/.git/objects/pack/*.pack
+
+# Build artifacts
+**/build/
+
+# PyTorch trace profile files
+**/*.pt.trace.json.gz
+**/*.pt.trace.json

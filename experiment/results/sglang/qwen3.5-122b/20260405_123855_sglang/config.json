@@ -1,0 +1,20 @@
+{
+  "framework": "sglang",
+  "model": "/root/autodl-tmp/models/qwen35_122b",
+  "model_name": "qwen3.5-122b",
+  "base_url": "http://localhost:8000",
+  "dataset_name": "sharegpt",
+  "dataset_path": "/root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "random_input": 2048,
+  "random_output": 512,
+  "min_input_len": 0,
+  "max_input_len": 4096,
+  "num_prompts": 100,
+  "rr_range": {
+    "start": 0.05,
+    "end": 0.2,
+    "step": 0.01
+  },
+  "timestamp": "20260405_123855",
+  "exp_label": "sglang"
+}
