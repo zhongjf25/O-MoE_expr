@@ -1,0 +1,11 @@
+vllm bench serve \
+    --host 127.0.0.1 \
+    --port 8000 \
+    --model /root/autodl-tmp/models/Qwen3.5-35B-A3B \
+    --dataset-name sharegpt \
+    --dataset-path /root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json \
+    --request-rate 2 \
+    --num-prompts 10 \
+    --save-result \
+    --save-detailed \
+    --result-dir /root/autodl-tmp/workspace/vllm-offloading/benchmark_results
