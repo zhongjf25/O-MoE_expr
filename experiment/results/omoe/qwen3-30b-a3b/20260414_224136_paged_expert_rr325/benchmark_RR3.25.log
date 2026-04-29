@@ -1,282 +1,0 @@
-[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325/benchmark_RR3.25.log
-[INFO] Config saved to /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325/config.json
-[INFO] Checking server availability...
-[INFO] Server is ready
-[INFO] Model ID: /root/autodl-tmp/models/Qwen3-30B-A3B
-
->>> ============================================
->>> Benchmark RR=3.25 req/s
->>> ============================================
-Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x7f56f1a339c0>, trust_remote_code=False, seed=0, num_prompts=1000, dataset_name='sharegpt', no_stream=False, dataset_path='/root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://localhost:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='/root/autodl-tmp/models/Qwen3-30B-A3B', input_len=None, output_len=None, tokenizer=None, tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=3.25, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=omoe,model=qwen3-30b-a3b,request_rate=3.25'], result_dir='/root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325/rr_3.25', result_filename=None, ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-0142c8c2-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False)
-WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
-Starting initial single prompt test run...
-Skipping endpoint ready check.
-Starting main benchmark run...
-Traffic request rate: 3.25
-Burstiness factor: 1.0 (Poisson process)
-Maximum request concurrency: None
-  0%|          | 0/1000 [00:00<?, ?it/s]  0%|          | 1/1000 [00:05<1:28:48,  5.33s/it]  0%|          | 2/1000 [00:09<1:16:47,  4.62s/it]  0%|          | 3/1000 [00:13<1:11:39,  4.31s/it]  0%|          | 4/1000 [00:13<46:23,  2.79s/it]    0%|          | 5/1000 [00:17<49:51,  3.01s/it]  1%|          | 6/1000 [00:19<45:41,  2.76s/it]  1%|          | 7/1000 [00:21<40:27,  2.44s/it]  1%|          | 8/1000 [00:21<30:08,  1.82s/it]  1%|          | 10/1000 [00:22<20:18,  1.23s/it]  1%|          | 12/1000 [00:25<20:21,  1.24s/it]  1%|▏         | 13/1000 [00:28<26:55,  1.64s/it]  1%|▏         | 14/1000 [00:29<23:10,  1.41s/it]  2%|▏         | 15/1000 [00:29<20:17,  1.24s/it]  2%|▏         | 16/1000 [00:30<17:16,  1.05s/it]  2%|▏         | 19/1000 [00:31<09:52,  1.65it/s]  2%|▏         | 20/1000 [00:32<11:29,  1.42it/s]  2%|▏         | 21/1000 [00:32<10:59,  1.48it/s]  2%|▏         | 23/1000 [00:33<10:14,  1.59it/s]  3%|▎         | 26/1000 [00:34<06:57,  2.33it/s]  3%|▎         | 27/1000 [00:35<07:22,  2.20it/s]  3%|▎         | 28/1000 [00:35<07:46,  2.08it/s]  3%|▎         | 29/1000 [00:36<10:25,  1.55it/s]  3%|▎         | 31/1000 [00:37<08:04,  2.00it/s]  3%|▎         | 32/1000 [00:37<08:23,  1.92it/s]  3%|▎         | 34/1000 [00:39<10:37,  1.51it/s]  4%|▎         | 35/1000 [00:40<10:28,  1.54it/s]  4%|▎         | 36/1000 [00:42<17:28,  1.09s/it]  4%|▎         | 37/1000 [00:43<15:45,  1.02it/s]  4%|▍         | 38/1000 [00:44<14:49,  1.08it/s]  4%|▍         | 39/1000 [00:46<18:45,  1.17s/it]  4%|▍         | 41/1000 [00:48<20:32,  1.28s/it]  4%|▍         | 42/1000 [00:51<26:17,  1.65s/it]  4%|▍         | 43/1000 [00:53<24:33,  1.54s/it]  4%|▍         | 44/1000 [00:54<22:43,  1.43s/it]  5%|▍         | 46/1000 [00:54<14:49,  1.07it/s]  5%|▍         | 47/1000 [00:55<13:44,  1.16it/s]  5%|▍         | 49/1000 [00:56<12:07,  1.31it/s]  5%|▌         | 50/1000 [00:58<15:44,  1.01it/s]  5%|▌         | 52/1000 [01:00<16:55,  1.07s/it]  5%|▌         | 53/1000 [01:02<19:22,  1.23s/it]  6%|▌         | 55/1000 [01:03<13:45,  1.15it/s]  6%|▌         | 56/1000 [01:03<12:49,  1.23it/s]  6%|▌         | 57/1000 [01:05<14:37,  1.07it/s]  6%|▌         | 58/1000 [01:07<18:46,  1.20s/it]  6%|▌         | 59/1000 [01:07<16:22,  1.04s/it]  6%|▌         | 60/1000 [01:11<27:05,  1.73s/it]  6%|▌         | 61/1000 [01:16<44:36,  2.85s/it]  6%|▌         | 62/1000 [01:22<55:09,  3.53s/it]  6%|▋         | 63/1000 [01:28<1:07:44,  4.34s/it]  6%|▋         | 64/1000 [01:29<53:08,  3.41s/it]    6%|▋         | 65/1000 [01:30<40:38,  2.61s/it]  7%|▋         | 66/1000 [01:30<31:19,  2.01s/it]  7%|▋         | 67/1000 [01:32<27:23,  1.76s/it]  7%|▋         | 68/1000 [01:40<55:55,  3.60s/it]  7%|▋         | 69/1000 [01:42<50:36,  3.26s/it]  7%|▋         | 70/1000 [01:43<40:48,  2.63s/it]  7%|▋         | 71/1000 [01:44<34:26,  2.22s/it]  7%|▋         | 72/1000 [01:46<30:10,  1.95s/it]  7%|▋         | 73/1000 [01:48<30:14,  1.96s/it]  7%|▋         | 74/1000 [01:50<32:01,  2.07s/it]  8%|▊         | 75/1000 [01:51<28:21,  1.84s/it]  8%|▊         | 76/1000 [01:53<28:48,  1.87s/it]  8%|▊         | 77/1000 [01:55<28:15,  1.84s/it]  8%|▊         | 78/1000 [02:01<47:43,  3.11s/it]  8%|▊         | 79/1000 [02:02<39:12,  2.55s/it]  8%|▊         | 80/1000 [02:04<36:06,  2.35s/it]  8%|▊         | 81/1000 [02:07<39:29,  2.58s/it]  8%|▊         | 82/1000 [02:09<32:59,  2.16s/it]  8%|▊         | 83/1000 [02:09<25:55,  1.70s/it]  8%|▊         | 84/1000 [02:11<26:42,  1.75s/it]  8%|▊         | 85/1000 [02:15<37:38,  2.47s/it]  9%|▊         | 86/1000 [02:16<29:08,  1.91s/it]  9%|▊         | 87/1000 [02:16<23:21,  1.54s/it]  9%|▉         | 88/1000 [02:18<21:48,  1.43s/it]  9%|▉         | 89/1000 [02:19<20:39,  1.36s/it]  9%|▉         | 90/1000 [02:20<19:43,  1.30s/it]  9%|▉         | 91/1000 [02:25<38:45,  2.56s/it]  9%|▉         | 93/1000 [02:33<47:09,  3.12s/it]  9%|▉         | 94/1000 [02:36<47:14,  3.13s/it] 10%|▉         | 95/1000 [02:39<44:07,  2.93s/it] 10%|▉         | 96/1000 [02:40<37:19,  2.48s/it] 10%|▉         | 97/1000 [02:48<1:01:08,  4.06s/it] 10%|▉         | 99/1000 [02:49<38:40,  2.58s/it]   10%|█         | 101/1000 [02:51<27:19,  1.82s/it] 10%|█         | 102/1000 [02:51<23:31,  1.57s/it] 10%|█         | 103/1000 [02:53<24:36,  1.65s/it] 10%|█         | 104/1000 [02:55<23:32,  1.58s/it] 10%|█         | 105/1000 [03:00<37:03,  2.48s/it] 11%|█         | 106/1000 [03:02<37:30,  2.52s/it] 11%|█         | 107/1000 [03:04<32:42,  2.20s/it] 11%|█         | 108/1000 [03:05<29:12,  1.96s/it] 11%|█         | 109/1000 [03:10<40:35,  2.73s/it] 11%|█         | 110/1000 [03:12<37:06,  2.50s/it] 11%|█         | 111/1000 [03:15<42:52,  2.89s/it] 11%|█         | 112/1000 [03:17<39:10,  2.65s/it] 11%|█▏        | 113/1000 [03:21<42:30,  2.87s/it] 11%|█▏        | 114/1000 [03:24<44:04,  2.98s/it] 12%|█▏        | 115/1000 [03:26<38:26,  2.61s/it] 12%|█▏        | 116/1000 [03:28<36:37,  2.49s/it] 12%|█▏        | 117/1000 [03:29<31:04,  2.11s/it] 12%|█▏        | 118/1000 [03:30<26:44,  1.82s/it] 12%|█▏        | 119/1000 [03:33<31:32,  2.15s/it] 12%|█▏        | 121/1000 [03:36<26:46,  1.83s/it] 12%|█▏        | 122/1000 [03:37<24:27,  1.67s/it] 12%|█▏        | 123/1000 [03:38<20:05,  1.37s/it] 12%|█▏        | 124/1000 [03:39<17:01,  1.17s/it] 12%|█▎        | 125/1000 [03:44<35:20,  2.42s/it] 13%|█▎        | 126/1000 [03:51<55:39,  3.82s/it] 13%|█▎        | 127/1000 [03:56<59:05,  4.06s/it] 13%|█▎        | 128/1000 [03:59<53:48,  3.70s/it] 13%|█▎        | 129/1000 [04:00<40:30,  2.79s/it] 13%|█▎        | 130/1000 [04:00<30:54,  2.13s/it] 13%|█▎        | 131/1000 [04:01<24:18,  1.68s/it] 13%|█▎        | 132/1000 [04:06<40:39,  2.81s/it] 13%|█▎        | 133/1000 [04:08<35:58,  2.49s/it] 13%|█▎        | 134/1000 [04:13<47:15,  3.27s/it] 14%|█▎        | 135/1000 [04:21<1:08:15,  4.74s/it] 14%|█▎        | 136/1000 [04:26<1:09:25,  4.82s/it] 14%|█▎        | 137/1000 [04:27<53:32,  3.72s/it]   14%|█▍        | 138/1000 [04:29<44:59,  3.13s/it] 14%|█▍        | 139/1000 [04:30<34:11,  2.38s/it] 14%|█▍        | 140/1000 [04:32<33:40,  2.35s/it] 14%|█▍        | 141/1000 [04:33<28:13,  1.97s/it] 14%|█▍        | 142/1000 [04:35<29:00,  2.03s/it] 14%|█▍        | 143/1000 [04:38<33:11,  2.32s/it] 14%|█▍        | 144/1000 [04:50<1:13:27,  5.15s/it] 14%|█▍        | 145/1000 [04:52<58:24,  4.10s/it]   15%|█▍        | 146/1000 [04:58<1:06:39,  4.68s/it] 15%|█▍        | 147/1000 [05:02<1:05:08,  4.58s/it] 15%|█▍        | 148/1000 [05:06<1:02:50,  4.43s/it] 15%|█▍        | 149/1000 [05:15<1:20:16,  5.66s/it] 15%|█▌        | 150/1000 [05:16<1:01:16,  4.32s/it] 15%|█▌        | 152/1000 [05:18<38:21,  2.71s/it]   15%|█▌        | 153/1000 [05:19<33:04,  2.34s/it] 15%|█▌        | 154/1000 [05:20<28:33,  2.03s/it] 16%|█▌        | 156/1000 [05:22<23:10,  1.65s/it] 16%|█▌        | 157/1000 [05:26<30:20,  2.16s/it] 16%|█▌        | 159/1000 [05:28<24:23,  1.74s/it] 16%|█▌        | 160/1000 [05:29<20:40,  1.48s/it] 16%|█▌        | 161/1000 [05:32<26:31,  1.90s/it] 16%|█▋        | 163/1000 [05:33<17:11,  1.23s/it] 16%|█▋        | 164/1000 [05:36<24:57,  1.79s/it] 16%|█▋        | 165/1000 [05:37<20:41,  1.49s/it] 17%|█▋        | 166/1000 [05:38<20:05,  1.45s/it] 17%|█▋        | 167/1000 [05:42<30:18,  2.18s/it] 17%|█▋        | 168/1000 [05:43<24:09,  1.74s/it] 17%|█▋        | 169/1000 [05:45<23:37,  1.71s/it] 17%|█▋        | 170/1000 [05:46<22:52,  1.65s/it] 17%|█▋        | 171/1000 [05:47<20:52,  1.51s/it] 17%|█▋        | 172/1000 [05:48<18:51,  1.37s/it] 17%|█▋        | 173/1000 [05:50<21:57,  1.59s/it] 18%|█▊        | 175/1000 [06:01<46:16,  3.37s/it] 18%|█▊        | 176/1000 [06:06<51:07,  3.72s/it] 18%|█▊        | 177/1000 [06:10<52:43,  3.84s/it] 18%|█▊        | 178/1000 [06:12<45:59,  3.36s/it] 18%|█▊        | 179/1000 [06:13<35:09,  2.57s/it] 18%|█▊        | 180/1000 [06:14<29:47,  2.18s/it] 18%|█▊        | 181/1000 [06:15<25:46,  1.89s/it] 18%|█▊        | 182/1000 [06:21<42:27,  3.11s/it] 18%|█▊        | 183/1000 [06:22<34:05,  2.50s/it] 18%|█▊        | 185/1000 [06:23<21:35,  1.59s/it] 19%|█▊        | 186/1000 [06:25<21:23,  1.58s/it] 19%|█▊        | 187/1000 [06:26<19:11,  1.42s/it] 19%|█▉        | 189/1000 [06:31<25:50,  1.91s/it] 61%|██████    | 609/1000 [06:31<00:05, 66.37it/s]100%|██████████| 1000/1000 [06:31<00:00,  2.55it/s]
-Failed requests during benchmark run detected (capping to 10):
-Error 0: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 1: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 2: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 3: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 4: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 5: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 6: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 7: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 8: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-Error 9: Traceback (most recent call last):
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/client_proto.py", line 144, in connection_lost
-    uncompleted = self._parser.feed_eof()
-                  ^^^^^^^^^^^^^^^^^^^^^^^
-  File "aiohttp/_http_parser.pyx", line 543, in aiohttp._http_parser.HttpParser.feed_eof
-aiohttp.http_exceptions.TransferEncodingError: 400, message:
-  Not enough data to satisfy transfer length header.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/root/autodl-tmp/workspace/vllm/vllm/benchmarks/lib/endpoint_request_func.py", line 200, in async_request_openai_completions
-    async for chunk_bytes in response.content.iter_any():
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 53, in __anext__
-    rv = await self.read_func()
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 468, in readany
-    await self._wait("readany")
-  File "/root/miniconda3/envs/vllm-offload/lib/python3.11/site-packages/aiohttp/streams.py", line 372, in _wait
-    await waiter
-aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
-
-tip: install termplotlib and gnuplot to plot the metrics
-============ Serving Benchmark Result ============
-Successful requests:                     188       
-Failed requests:                         812       
-Request rate configured (RPS):           3.25      
-Benchmark duration (s):                  391.76    
-Total input tokens:                      41690     
-Total generated tokens:                  29960     
-Request throughput (req/s):              0.48      
-Output token throughput (tok/s):         76.48     
-Peak output token throughput (tok/s):    206.00    
-Peak concurrent requests:                129.00    
-Total token throughput (tok/s):          182.89    
----------------Time to First Token----------------
-Mean TTFT (ms):                          42013.48  
-Median TTFT (ms):                        1018.60   
-P99 TTFT (ms):                           285266.93 
------Time per Output Token (excl. 1st token)------
-Mean TPOT (ms):                          783.46    
-Median TPOT (ms):                        598.24    
-P99 TPOT (ms):                           3505.63   
----------------Inter-token Latency----------------
-Mean ITL (ms):                           624.11    
-Median ITL (ms):                         593.44    
-P99 ITL (ms):                            742.37    
-==================================================
-[OK] RR=3.25 done -> /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325/rr_3.25/result.json
-
->>> ============================================
->>> Generating summary report...
->>> ============================================
-  RR=3.25: throughput=0.48 req/s, TTFT_mean=42013.5ms, TPOT_mean=783.46ms
-
-[OK] Summary saved: /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325/summary.json
-[OK] Summary MD saved: /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325/summary.md
-
-============================================
-  All Benchmarks Complete!
-============================================
-  Results:      /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325
-  Summary:      /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325/summary.json
-  Summary MD:   /root/autodl-tmp/workspace/experiment/results/omoe/qwen3-30b-a3b/20260414_224136_paged_expert_rr325/summary.md
-============================================

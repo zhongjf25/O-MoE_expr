@@ -1,4 +1,0 @@
-[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/llama/qwen35-35b/20260416_031948_llama35/benchmark_RR0.5.log
-[INFO] Config saved to /root/autodl-tmp/workspace/experiment/results/llama/qwen35-35b/20260416_031948_llama35/config.json
-[INFO] Checking server availability...
-[ERROR] Server not available (HTTP 000000). Please start server first.

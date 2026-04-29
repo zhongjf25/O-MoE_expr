@@ -1,293 +1,0 @@
-============================================
-  O-MoE Qwen3.5-122B Serving Configuration
-============================================
-  Model:                  /root/autodl-tmp/models/qwen35_122b
-  CUDA_VISIBLE_DEVICES:   0,1,2,3,4,5,6,7
-  GPU Memory Util:        0.8
-  Max Model Length:       8192
-  TP Size:                8
-  Offload Expert Limit:   70
-  Port:                   8000
-============================================
-[INFO] GPU Status:
-name, memory.total [MiB], memory.free [MiB]
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-
-[INFO] Starting O-MoE Qwen3.5-122B service...
-[INFO] Press Ctrl+C to stop
-
-(APIServer pid=3108) INFO 04-08 02:14:33 [utils.py:293] 
-(APIServer pid=3108) INFO 04-08 02:14:33 [utils.py:293]        █     █     █▄   ▄█
-(APIServer pid=3108) INFO 04-08 02:14:33 [utils.py:293]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.16.1rc0
-(APIServer pid=3108) INFO 04-08 02:14:33 [utils.py:293]   █▄█▀ █     █     █     █  model   /root/autodl-tmp/models/qwen35_122b
-(APIServer pid=3108) INFO 04-08 02:14:33 [utils.py:293]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
-(APIServer pid=3108) INFO 04-08 02:14:33 [utils.py:293] 
-(APIServer pid=3108) INFO 04-08 02:14:33 [utils.py:229] non-default args: {'model_tag': '/root/autodl-tmp/models/qwen35_122b', 'model': '/root/autodl-tmp/models/qwen35_122b', 'max_model_len': 8192, 'enforce_eager': True, 'tensor_parallel_size': 8, 'gpu_memory_utilization': 0.8, 'enable_prefix_caching': False, 'offload_expert': True, 'offload_expert_limit': 70, 'dynamic_cache_enabled': True, 'expert_no_copy_compute': True, 'enable_chunked_prefill': False, 'async_scheduling': False}
-(APIServer pid=3108) INFO 04-08 02:14:33 [model.py:532] Resolved architecture: Qwen3_5MoeForConditionalGeneration
-(APIServer pid=3108) INFO 04-08 02:14:33 [model.py:1556] Using max model len 8192
-(APIServer pid=3108) WARNING 04-08 02:14:33 [arg_utils.py:2088] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
-(APIServer pid=3108) INFO 04-08 02:14:33 [vllm.py:748] Asynchronous scheduling is disabled.
-(APIServer pid=3108) WARNING 04-08 02:14:33 [vllm.py:782] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
-(APIServer pid=3108) WARNING 04-08 02:14:33 [vllm.py:793] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
-(APIServer pid=3108) INFO 04-08 02:14:33 [vllm.py:933] Cudagraph is disabled under eager mode
-(EngineCore_DP0 pid=3619) INFO 04-08 02:14:45 [core.py:100] Initializing a V1 LLM engine (v0.16.1rc0) with config: model='/root/autodl-tmp/models/qwen35_122b', speculative_config=None, tokenizer='/root/autodl-tmp/models/qwen35_122b', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=8, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/root/autodl-tmp/models/qwen35_122b, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
-INFO 04-08 02:14:56 [parallel_state.py:1307] world_size=8 rank=4 local_rank=4 distributed_init_method=tcp://127.0.0.1:43929 backend=nccl
-INFO 04-08 02:14:59 [parallel_state.py:1307] world_size=8 rank=5 local_rank=5 distributed_init_method=tcp://127.0.0.1:43929 backend=nccl
-INFO 04-08 02:14:59 [parallel_state.py:1307] world_size=8 rank=1 local_rank=1 distributed_init_method=tcp://127.0.0.1:43929 backend=nccl
-INFO 04-08 02:14:59 [parallel_state.py:1307] world_size=8 rank=0 local_rank=0 distributed_init_method=tcp://127.0.0.1:43929 backend=nccl
-INFO 04-08 02:14:59 [parallel_state.py:1307] world_size=8 rank=7 local_rank=7 distributed_init_method=tcp://127.0.0.1:43929 backend=nccl
-INFO 04-08 02:15:00 [parallel_state.py:1307] world_size=8 rank=2 local_rank=2 distributed_init_method=tcp://127.0.0.1:43929 backend=nccl
-INFO 04-08 02:15:00 [parallel_state.py:1307] world_size=8 rank=3 local_rank=3 distributed_init_method=tcp://127.0.0.1:43929 backend=nccl
-INFO 04-08 02:15:00 [parallel_state.py:1307] world_size=8 rank=6 local_rank=6 distributed_init_method=tcp://127.0.0.1:43929 backend=nccl
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-INFO 04-08 02:15:00 [pynccl.py:111] vLLM is using nccl==2.27.5
-WARNING 04-08 02:15:01 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-08 02:15:01 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-08 02:15:01 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-08 02:15:01 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-08 02:15:01 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-08 02:15:01 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-08 02:15:01 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-08 02:15:01 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-08 02:15:01 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-08 02:15:01 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-08 02:15:01 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-08 02:15:01 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-08 02:15:01 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-08 02:15:01 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-08 02:15:01 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-08 02:15:01 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-INFO 04-08 02:15:01 [parallel_state.py:1535] rank 1 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 1, EP rank 1, EPLB rank N/A
-INFO 04-08 02:15:01 [parallel_state.py:1535] rank 5 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 5, EP rank 5, EPLB rank N/A
-INFO 04-08 02:15:01 [parallel_state.py:1535] rank 2 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 2, EP rank 2, EPLB rank N/A
-INFO 04-08 02:15:01 [parallel_state.py:1535] rank 6 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 6, EP rank 6, EPLB rank N/A
-INFO 04-08 02:15:01 [parallel_state.py:1535] rank 0 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0, EPLB rank N/A
-INFO 04-08 02:15:01 [parallel_state.py:1535] rank 3 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 3, EP rank 3, EPLB rank N/A
-INFO 04-08 02:15:01 [parallel_state.py:1535] rank 4 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 4, EP rank 4, EPLB rank N/A
-INFO 04-08 02:15:01 [parallel_state.py:1535] rank 7 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 7, EP rank 7, EPLB rank N/A
-INFO 04-08 02:15:06 [base.py:106] Offloader set to NoopOffloader
-INFO 04-08 02:15:07 [base.py:106] Offloader set to NoopOffloader
-INFO 04-08 02:15:07 [base.py:106] Offloader set to NoopOffloader
-INFO 04-08 02:15:07 [base.py:106] Offloader set to NoopOffloader
-(Worker_TP1 pid=3921) INFO 04-08 02:15:07 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP1 pid=3921) INFO 04-08 02:15:07 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-INFO 04-08 02:15:07 [base.py:106] Offloader set to NoopOffloader
-INFO 04-08 02:15:07 [base.py:106] Offloader set to NoopOffloader
-(Worker_TP7 pid=3927) INFO 04-08 02:15:07 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP7 pid=3927) INFO 04-08 02:15:07 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP2 pid=3922) INFO 04-08 02:15:07 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP2 pid=3922) INFO 04-08 02:15:07 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP4 pid=3924) INFO 04-08 02:15:07 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP4 pid=3924) INFO 04-08 02:15:07 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-INFO 04-08 02:15:07 [base.py:106] Offloader set to NoopOffloader
-(Worker_TP6 pid=3926) INFO 04-08 02:15:07 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP6 pid=3926) INFO 04-08 02:15:07 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-INFO 04-08 02:15:07 [base.py:106] Offloader set to NoopOffloader
-(Worker_TP0 pid=3920) INFO 04-08 02:15:07 [gpu_model_runner.py:4310] Starting to load model /root/autodl-tmp/models/qwen35_122b...
-(Worker_TP3 pid=3923) INFO 04-08 02:15:07 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP3 pid=3923) INFO 04-08 02:15:07 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP5 pid=3925) INFO 04-08 02:15:08 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP5 pid=3925) INFO 04-08 02:15:08 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP0 pid=3920) INFO 04-08 02:15:08 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP0 pid=3920) INFO 04-08 02:15:08 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP0 pid=3920) INFO 04-08 02:15:08 [unquantized.py:186] Using TRITON backend for Unquantized MoE
-(Worker_TP0 pid=3920) INFO 04-08 02:15:09 [cuda.py:402] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:   0% Completed | 0/39 [00:00<?, ?it/s]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:   3% Completed | 1/39 [00:44<27:58, 44.18s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:   5% Completed | 2/39 [01:28<27:06, 43.97s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:   8% Completed | 3/39 [02:12<26:27, 44.11s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  10% Completed | 4/39 [02:57<25:55, 44.43s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  13% Completed | 5/39 [03:42<25:21, 44.74s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  15% Completed | 6/39 [04:29<25:01, 45.50s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  18% Completed | 7/39 [05:15<24:24, 45.77s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  21% Completed | 8/39 [06:01<23:43, 45.90s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  23% Completed | 9/39 [06:48<23:00, 46.02s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  26% Completed | 10/39 [07:35<22:25, 46.40s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  28% Completed | 11/39 [08:22<21:47, 46.69s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  31% Completed | 12/39 [09:09<20:58, 46.60s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  33% Completed | 13/39 [09:56<20:16, 46.78s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  36% Completed | 14/39 [10:43<19:28, 46.74s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  38% Completed | 15/39 [11:31<18:50, 47.10s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  41% Completed | 16/39 [12:17<17:59, 46.94s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  44% Completed | 17/39 [13:03<17:08, 46.76s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  46% Completed | 18/39 [13:47<16:02, 45.81s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  49% Completed | 19/39 [14:28<14:45, 44.27s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  51% Completed | 20/39 [15:10<13:47, 43.56s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  54% Completed | 21/39 [15:49<12:42, 42.36s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  56% Completed | 22/39 [16:21<11:04, 39.08s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  59% Completed | 23/39 [16:52<09:46, 36.64s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  62% Completed | 24/39 [17:22<08:42, 34.84s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  64% Completed | 25/39 [17:53<07:52, 33.73s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  67% Completed | 26/39 [18:24<07:07, 32.91s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  69% Completed | 27/39 [18:55<06:26, 32.22s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  72% Completed | 28/39 [19:26<05:51, 31.95s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  74% Completed | 29/39 [19:57<05:15, 31.54s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  77% Completed | 30/39 [20:28<04:41, 31.30s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  79% Completed | 31/39 [20:58<04:08, 31.06s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  82% Completed | 32/39 [21:29<03:36, 30.87s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  85% Completed | 33/39 [22:00<03:05, 30.93s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  87% Completed | 34/39 [22:30<02:34, 30.87s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  90% Completed | 35/39 [23:01<02:03, 30.93s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  92% Completed | 36/39 [23:29<01:29, 29.85s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  95% Completed | 37/39 [23:29<00:42, 21.01s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards:  97% Completed | 38/39 [23:31<00:15, 15.21s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards: 100% Completed | 39/39 [23:31<00:00, 10.77s/it]
-(Worker_TP0 pid=3920) Loading safetensors checkpoint shards: 100% Completed | 39/39 [23:31<00:00, 36.20s/it]
-(Worker_TP0 pid=3920) 
-(Worker_TP0 pid=3920) INFO 04-08 02:38:57 [default_loader.py:293] Loading weights took 1411.70 seconds
-(Worker_TP0 pid=3920) INFO 04-08 02:39:21 [gpu_model_runner.py:4407] Model loading took 2.07 GiB memory and 1452.932753 seconds
-(Worker_TP3 pid=3923) INFO 04-08 02:39:23 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(Worker_TP2 pid=3922) INFO 04-08 02:39:23 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(Worker_TP4 pid=3924) INFO 04-08 02:39:23 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(Worker_TP5 pid=3925) INFO 04-08 02:39:23 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(Worker_TP1 pid=3921) INFO 04-08 02:39:23 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(Worker_TP0 pid=3920) INFO 04-08 02:39:23 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(Worker_TP7 pid=3927) INFO 04-08 02:39:23 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(Worker_TP6 pid=3926) INFO 04-08 02:39:23 [gpu_model_runner.py:5339] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(Worker_TP0 pid=3920) INFO 04-08 02:39:29 [gpu_worker.py:412] Available KV cache memory: 21.73 GiB
-(EngineCore_DP0 pid=3619) `torch_dtype` is deprecated! Use `dtype` instead!
-(EngineCore_DP0 pid=3619) [debug] size 9216 524288 1572864
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1148] [debug] available_memory: 23329060967,         num_blocks: 1423872, num_huge_blocks: 14832,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 2,         num_conv_in_huge_block: 170,         num_ssm_in_huge_block: 3
-(EngineCore_DP0 pid=3619) [debug] size 9216 524288 1572864
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1148] [debug] available_memory: 23329060967,         num_blocks: 1423872, num_huge_blocks: 14832,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 2,         num_conv_in_huge_block: 170,         num_ssm_in_huge_block: 3
-(EngineCore_DP0 pid=3619) [debug] size 9216 524288 1572864
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1148] [debug] available_memory: 23329060967,         num_blocks: 1423872, num_huge_blocks: 14832,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 2,         num_conv_in_huge_block: 170,         num_ssm_in_huge_block: 3
-(EngineCore_DP0 pid=3619) [debug] size 9216 524288 1572864
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1148] [debug] available_memory: 23329060967,         num_blocks: 1423872, num_huge_blocks: 14832,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 2,         num_conv_in_huge_block: 170,         num_ssm_in_huge_block: 3
-(EngineCore_DP0 pid=3619) [debug] size 9216 524288 1572864
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1148] [debug] available_memory: 23329060967,         num_blocks: 1423872, num_huge_blocks: 14832,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 2,         num_conv_in_huge_block: 170,         num_ssm_in_huge_block: 3
-(EngineCore_DP0 pid=3619) [debug] size 9216 524288 1572864
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1148] [debug] available_memory: 23329060967,         num_blocks: 1423872, num_huge_blocks: 14832,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 2,         num_conv_in_huge_block: 170,         num_ssm_in_huge_block: 3
-(EngineCore_DP0 pid=3619) [debug] size 9216 524288 1572864
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1148] [debug] available_memory: 23329060967,         num_blocks: 1423872, num_huge_blocks: 14832,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 2,         num_conv_in_huge_block: 170,         num_ssm_in_huge_block: 3
-(EngineCore_DP0 pid=3619) [debug] size 9216 524288 1572864
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1148] [debug] available_memory: 23329060967,         num_blocks: 1423872, num_huge_blocks: 14832,         kv_page_size: 16384, huge_page_size: 1572864,         num_expert_in_huge_block: 2,         num_conv_in_huge_block: 170,         num_ssm_in_huge_block: 3
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1619] GPU KV cache size: 5,695,488 tokens
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:29 [block_utils.py:1624] Maximum concurrency for 8,192 tokens per request: 74940.63x
-(Worker_TP0 pid=3920) 2026-04-08 02:39:29,386 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(Worker_TP3 pid=3923) 2026-04-08 02:39:29,386 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(Worker_TP5 pid=3925) 2026-04-08 02:39:29,386 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(Worker_TP2 pid=3922) 2026-04-08 02:39:29,386 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(Worker_TP4 pid=3924) 2026-04-08 02:39:29,386 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(Worker_TP1 pid=3921) 2026-04-08 02:39:29,386 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(Worker_TP7 pid=3927) 2026-04-08 02:39:29,386 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(Worker_TP6 pid=3926) 2026-04-08 02:39:29,386 - INFO - autotuner.py:256 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(Worker_TP4 pid=3924) 2026-04-08 02:39:29,928 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(Worker_TP5 pid=3925) 2026-04-08 02:39:29,949 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(Worker_TP0 pid=3920) 2026-04-08 02:39:29,987 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(Worker_TP1 pid=3921) 2026-04-08 02:39:29,989 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(Worker_TP7 pid=3927) 2026-04-08 02:39:30,004 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(Worker_TP2 pid=3922) 2026-04-08 02:39:30,022 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(Worker_TP3 pid=3923) 2026-04-08 02:39:30,023 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(Worker_TP6 pid=3926) 2026-04-08 02:39:30,077 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(Worker_TP0 pid=3920) WARNING 04-08 02:39:30 [fused_moe.py:1577] Using default MoE config. Performance might be sub-optimal! Config file not found at /root/autodl-tmp/workspace/vllm-offloading/vllm/model_executor/layers/fused_moe/configs/E=256,N=128,device_name=NVIDIA_GeForce_RTX_5090.json
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:30 [core.py:291] init engine (profile, create kv cache, warmup model) took 7.42 seconds
-(EngineCore_DP0 pid=3619) WARNING 04-08 02:39:30 [expert_hotset.py:332] Loading non-converged expert hotset profile from /root/autodl-tmp/workspace/vllm-offloading/expert_hotset_profiles/qwen35_122b.json (sampled_requests=500).
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:30 [expert_manager.py:184] Auto-initialized cached_num_experts=200 using total_expert_blocks=29664, reserved_first_layer_blocks=768, adjustable_layers=47, raw_per_layer=204.94.
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:36 [vllm.py:748] Asynchronous scheduling is disabled.
-(EngineCore_DP0 pid=3619) WARNING 04-08 02:39:36 [vllm.py:782] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
-(EngineCore_DP0 pid=3619) WARNING 04-08 02:39:36 [vllm.py:793] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
-(EngineCore_DP0 pid=3619) INFO 04-08 02:39:36 [vllm.py:933] Cudagraph is disabled under eager mode
-(APIServer pid=3108) INFO 04-08 02:39:36 [api_server.py:495] Supported tasks: ['generate']
-(APIServer pid=3108) WARNING 04-08 02:39:37 [model.py:1357] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
-(APIServer pid=3108) INFO 04-08 02:39:37 [serving.py:185] Warming up chat template processing...
-(APIServer pid=3108) INFO 04-08 02:39:38 [hf.py:318] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
-(APIServer pid=3108) INFO 04-08 02:39:38 [serving.py:210] Chat template warmup completed in 1025.8ms
-(APIServer pid=3108) INFO 04-08 02:39:38 [api_server.py:500] Starting vLLM API server 0 on http://0.0.0.0:8000
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:38] Available routes are:
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /openapi.json, Methods: HEAD, GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /docs, Methods: HEAD, GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /docs/oauth2-redirect, Methods: HEAD, GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /redoc, Methods: HEAD, GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /tokenize, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /detokenize, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /load, Methods: GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /version, Methods: GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /health, Methods: GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /metrics, Methods: GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/models, Methods: GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /ping, Methods: GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /ping, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /invocations, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/chat/completions, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/chat/completions/render, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/responses, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/responses/{response_id}, Methods: GET
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/responses/{response_id}/cancel, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/completions, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/completions/render, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /v1/messages, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /inference/v1/generate, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /scale_elastic_ep, Methods: POST
-(APIServer pid=3108) INFO 04-08 02:39:38 [launcher.py:47] Route: /is_scaling_elastic_ep, Methods: POST
-(APIServer pid=3108) INFO:     Started server process [3108]
-(APIServer pid=3108) INFO:     Waiting for application startup.
-(APIServer pid=3108) INFO:     Application startup complete.
-(APIServer pid=3108) INFO:     127.0.0.1:47302 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:47304 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:51414 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:51422 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:43606 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:43608 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:40158 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:40172 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:39134 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:39148 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:54640 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:54646 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:49230 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:49232 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:50894 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:50906 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:50176 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:50178 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:59264 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:59276 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:59286 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:59298 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:53540 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:53554 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:59032 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:59048 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:38536 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:38544 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:49586 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:49594 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:43604 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:43620 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:36762 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:36768 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:34032 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:34036 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:55108 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:55122 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:51692 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:51704 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:39734 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:39742 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:41994 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:41998 - "POST /v1/completions HTTP/1.1" 404 Not Found
-(APIServer pid=3108) INFO:     127.0.0.1:38878 - "GET /v1/models HTTP/1.1" 200 OK
-(APIServer pid=3108) INFO:     127.0.0.1:38892 - "POST /v1/completions HTTP/1.1" 404 Not Found

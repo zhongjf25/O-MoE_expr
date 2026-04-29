@@ -1,0 +1,6 @@
+# Build the matching hotset profile first:
+# python simple_build_expert_hotset_profile.py
+
+python simple_build_expert_hotset_profile_qwen3.py
+python simple_build_expert_hotset_profile_qwen35_35.py
+python simple_build_expert_hotset_profile_qwen35_122.py

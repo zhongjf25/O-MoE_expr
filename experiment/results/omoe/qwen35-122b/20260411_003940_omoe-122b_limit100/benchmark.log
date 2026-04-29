@@ -1,61 +1,0 @@
-[INFO] Log file: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b/benchmark.log
-[INFO] Config saved to /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b/config.json
-[INFO] Checking server availability...
-[INFO] Server is ready
-[INFO] Model ID: /root/autodl-tmp/models/qwen35_122b
-
->>> ============================================
->>> Benchmark RR=0.5 req/s
->>> ============================================
-Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x7f022102f880>, trust_remote_code=False, seed=0, num_prompts=100, dataset_name='sharegpt', no_stream=False, dataset_path='/root/autodl-tmp/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://localhost:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='/root/autodl-tmp/models/qwen35_122b', input_len=None, output_len=None, tokenizer=None, tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=0.5, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=omoe,model=qwen35-122b,request_rate=0.5'], result_dir='/root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b/rr_0.5', result_filename=None, ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-f23f9f0b-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False)
-WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
-Starting initial single prompt test run...
-Skipping endpoint ready check.
-Starting main benchmark run...
-Traffic request rate: 0.5
-Burstiness factor: 1.0 (Poisson process)
-Maximum request concurrency: None
-  0%|          | 0/100 [00:00<?, ?it/s]  1%|          | 1/100 [00:17<28:13, 17.11s/it]  2%|▏         | 2/100 [00:24<18:08, 11.10s/it]  3%|▎         | 3/100 [00:40<21:41, 13.42s/it]  4%|▍         | 4/100 [00:44<15:27,  9.67s/it]  5%|▌         | 5/100 [01:01<19:41, 12.43s/it]  6%|▌         | 6/100 [01:04<14:44,  9.41s/it]  7%|▋         | 7/100 [01:16<15:41, 10.13s/it]  8%|▊         | 8/100 [01:22<13:26,  8.77s/it]  9%|▉         | 9/100 [01:27<11:35,  7.65s/it] 10%|█         | 10/100 [01:29<08:49,  5.89s/it] 11%|█         | 11/100 [02:07<23:27, 15.81s/it] 12%|█▏        | 12/100 [02:22<22:52, 15.60s/it] 13%|█▎        | 13/100 [02:28<18:07, 12.51s/it] 14%|█▍        | 14/100 [02:34<15:19, 10.69s/it] 15%|█▌        | 15/100 [02:37<11:29,  8.11s/it] 16%|█▌        | 16/100 [03:09<21:43, 15.52s/it] 17%|█▋        | 17/100 [03:23<20:40, 14.94s/it] 18%|█▊        | 18/100 [03:24<14:39, 10.73s/it] 19%|█▉        | 19/100 [03:31<13:02,  9.66s/it] 20%|██        | 20/100 [03:36<11:11,  8.40s/it] 21%|██        | 21/100 [03:41<09:26,  7.18s/it] 22%|██▏       | 22/100 [03:45<08:08,  6.27s/it] 23%|██▎       | 23/100 [03:53<08:50,  6.88s/it] 24%|██▍       | 24/100 [03:54<06:26,  5.09s/it] 25%|██▌       | 25/100 [03:59<06:26,  5.16s/it] 26%|██▌       | 26/100 [04:02<05:13,  4.24s/it] 27%|██▋       | 27/100 [04:06<05:22,  4.42s/it] 28%|██▊       | 28/100 [04:08<04:08,  3.45s/it] 29%|██▉       | 29/100 [04:34<12:16, 10.37s/it] 30%|███       | 30/100 [04:49<13:34, 11.64s/it] 31%|███       | 31/100 [04:51<10:15,  8.92s/it] 32%|███▏      | 32/100 [05:02<10:40,  9.42s/it] 33%|███▎      | 33/100 [05:02<07:31,  6.73s/it] 34%|███▍      | 34/100 [05:06<06:15,  5.69s/it] 35%|███▌      | 35/100 [05:13<06:46,  6.26s/it] 36%|███▌      | 36/100 [05:23<07:56,  7.44s/it] 37%|███▋      | 37/100 [05:44<11:56, 11.38s/it] 38%|███▊      | 38/100 [05:45<08:39,  8.38s/it] 39%|███▉      | 39/100 [06:07<12:43, 12.51s/it] 40%|████      | 40/100 [06:08<09:03,  9.06s/it] 41%|████      | 41/100 [06:14<07:52,  8.01s/it] 42%|████▏     | 42/100 [06:14<05:30,  5.70s/it] 43%|████▎     | 43/100 [06:16<04:14,  4.47s/it] 44%|████▍     | 44/100 [06:18<03:28,  3.73s/it] 45%|████▌     | 45/100 [06:20<03:00,  3.29s/it] 46%|████▌     | 46/100 [06:32<05:11,  5.77s/it] 47%|████▋     | 47/100 [06:39<05:33,  6.29s/it] 48%|████▊     | 48/100 [06:48<06:12,  7.16s/it] 49%|████▉     | 49/100 [07:00<07:20,  8.63s/it] 50%|█████     | 50/100 [07:02<05:26,  6.53s/it] 51%|█████     | 51/100 [07:05<04:27,  5.45s/it] 52%|█████▏    | 52/100 [07:06<03:17,  4.12s/it] 53%|█████▎    | 53/100 [07:07<02:33,  3.27s/it] 54%|█████▍    | 54/100 [07:08<01:57,  2.55s/it] 55%|█████▌    | 55/100 [07:26<05:23,  7.18s/it] 56%|█████▌    | 56/100 [07:29<04:20,  5.92s/it] 57%|█████▋    | 57/100 [07:31<03:20,  4.66s/it] 58%|█████▊    | 58/100 [07:49<06:00,  8.57s/it] 59%|█████▉    | 59/100 [08:09<08:13, 12.03s/it] 60%|██████    | 60/100 [08:14<06:40, 10.02s/it] 61%|██████    | 61/100 [08:17<05:02,  7.76s/it] 62%|██████▏   | 62/100 [08:17<03:35,  5.68s/it] 63%|██████▎   | 63/100 [08:19<02:42,  4.40s/it] 64%|██████▍   | 64/100 [08:20<01:59,  3.31s/it] 65%|██████▌   | 65/100 [08:22<01:50,  3.15s/it] 66%|██████▌   | 66/100 [08:24<01:32,  2.72s/it] 67%|██████▋   | 67/100 [08:50<05:19,  9.69s/it] 68%|██████▊   | 68/100 [08:51<03:44,  7.01s/it] 69%|██████▉   | 69/100 [08:52<02:39,  5.16s/it] 70%|███████   | 70/100 [08:52<01:53,  3.79s/it] 71%|███████   | 71/100 [08:57<02:01,  4.18s/it] 72%|███████▏  | 72/100 [08:59<01:39,  3.55s/it] 73%|███████▎  | 73/100 [09:04<01:47,  3.98s/it] 74%|███████▍  | 74/100 [09:15<02:32,  5.87s/it] 75%|███████▌  | 75/100 [09:18<02:04,  4.98s/it] 76%|███████▌  | 76/100 [09:43<04:25, 11.07s/it] 77%|███████▋  | 77/100 [09:46<03:19,  8.66s/it] 78%|███████▊  | 78/100 [09:50<02:40,  7.30s/it] 79%|███████▉  | 79/100 [09:55<02:18,  6.61s/it] 80%|████████  | 80/100 [10:02<02:15,  6.77s/it] 81%|████████  | 81/100 [10:09<02:07,  6.69s/it] 82%|████████▏ | 82/100 [10:11<01:36,  5.38s/it] 83%|████████▎ | 83/100 [10:41<03:36, 12.72s/it] 84%|████████▍ | 84/100 [10:53<03:18, 12.43s/it] 85%|████████▌ | 85/100 [10:54<02:17,  9.17s/it] 86%|████████▌ | 86/100 [10:59<01:52,  8.01s/it] 87%|████████▋ | 87/100 [11:03<01:28,  6.79s/it] 88%|████████▊ | 88/100 [11:09<01:18,  6.56s/it] 89%|████████▉ | 89/100 [11:28<01:50, 10.03s/it] 90%|█████████ | 90/100 [11:31<01:19,  7.96s/it] 91%|█████████ | 91/100 [11:45<01:28,  9.86s/it] 92%|█████████▏| 92/100 [11:59<01:28, 11.05s/it] 93%|█████████▎| 93/100 [12:24<01:47, 15.30s/it] 94%|█████████▍| 94/100 [12:27<01:09, 11.63s/it] 95%|█████████▌| 95/100 [12:40<00:59, 11.99s/it] 96%|█████████▌| 96/100 [12:47<00:42, 10.60s/it] 97%|█████████▋| 97/100 [12:49<00:23,  7.98s/it] 98%|█████████▊| 98/100 [13:01<00:18,  9.26s/it] 99%|█████████▉| 99/100 [13:15<00:10, 10.50s/it]100%|██████████| 100/100 [13:47<00:00, 16.95s/it]100%|██████████| 100/100 [13:47<00:00,  8.27s/it]
-tip: install termplotlib and gnuplot to plot the metrics
-============ Serving Benchmark Result ============
-Successful requests:                     100       
-Failed requests:                         0         
-Request rate configured (RPS):           0.50      
-Benchmark duration (s):                  827.22    
-Total input tokens:                      24128     
-Total generated tokens:                  22749     
-Request throughput (req/s):              0.12      
-Output token throughput (tok/s):         27.50     
-Peak output token throughput (tok/s):    40.00     
-Peak concurrent requests:                84.00     
-Total token throughput (tok/s):          56.67     
----------------Time to First Token----------------
-Mean TTFT (ms):                          257109.85 
-Median TTFT (ms):                        265420.27 
-P99 TTFT (ms):                           544764.99 
------Time per Output Token (excl. 1st token)------
-Mean TPOT (ms):                          206.50    
-Median TPOT (ms):                        209.42    
-P99 TPOT (ms):                           268.03    
----------------Inter-token Latency----------------
-Mean ITL (ms):                           202.84    
-Median ITL (ms):                         201.15    
-P99 ITL (ms):                            296.17    
-==================================================
-[OK] RR=0.5 done -> /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b/rr_0.5/result.json
-
->>> ============================================
->>> Generating summary report...
->>> ============================================
-  RR= 0.5: throughput=0.12 req/s, TTFT_mean=257109.9ms, TPOT_mean=206.50ms
-
-[OK] Summary saved: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b/summary.json
-[OK] Summary MD saved: /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b/summary.md
-
-============================================
-  All Benchmarks Complete!
-============================================
-  Results:      /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b
-  Summary:      /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b/summary.json
-  Summary MD:   /root/autodl-tmp/workspace/experiment/results/omoe/qwen35-122b/20260411_003940_omoe-122b/summary.md
-============================================

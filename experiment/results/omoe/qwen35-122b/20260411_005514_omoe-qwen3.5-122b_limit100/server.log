@@ -1,145 +1,0 @@
-============================================
-  O-MoE Qwen3.5-122B Serving Configuration
-============================================
-  Model:                  /root/autodl-tmp/models/qwen35_122b
-  CUDA_VISIBLE_DEVICES:   0,1,2,3,4,5,6,7
-  GPU Memory Util:        0.82
-  Max Model Length:       8192
-  TP Size:                8
-  Offload Expert Limit:   100
-  Port:                   8000
-============================================
-[INFO] GPU Status:
-name, memory.total [MiB], memory.free [MiB]
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-NVIDIA GeForce RTX 5090, 32607 MiB, 32110 MiB
-
-[INFO] Starting O-MoE Qwen3.5-122B service...
-[INFO] Press Ctrl+C to stop
-
-(APIServer pid=723685) INFO 04-11 00:55:22 [utils.py:293] 
-(APIServer pid=723685) INFO 04-11 00:55:22 [utils.py:293]        █     █     █▄   ▄█
-(APIServer pid=723685) INFO 04-11 00:55:22 [utils.py:293]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.16.1rc0
-(APIServer pid=723685) INFO 04-11 00:55:22 [utils.py:293]   █▄█▀ █     █     █     █  model   /root/autodl-tmp/models/qwen35_122b
-(APIServer pid=723685) INFO 04-11 00:55:22 [utils.py:293]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
-(APIServer pid=723685) INFO 04-11 00:55:22 [utils.py:293] 
-(APIServer pid=723685) INFO 04-11 00:55:22 [utils.py:229] non-default args: {'model_tag': '/root/autodl-tmp/models/qwen35_122b', 'model': '/root/autodl-tmp/models/qwen35_122b', 'max_model_len': 8192, 'enforce_eager': True, 'tensor_parallel_size': 8, 'gpu_memory_utilization': 0.82, 'enable_prefix_caching': False, 'offload_expert': True, 'offload_expert_limit': 100, 'dynamic_cache_enabled': True, 'expert_no_copy_compute': True, 'enable_chunked_prefill': False, 'async_scheduling': False}
-(APIServer pid=723685) INFO 04-11 00:55:22 [model.py:532] Resolved architecture: Qwen3_5MoeForConditionalGeneration
-(APIServer pid=723685) INFO 04-11 00:55:22 [model.py:1556] Using max model len 8192
-(APIServer pid=723685) WARNING 04-11 00:55:22 [arg_utils.py:2088] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
-(APIServer pid=723685) INFO 04-11 00:55:22 [vllm.py:748] Asynchronous scheduling is disabled.
-(APIServer pid=723685) WARNING 04-11 00:55:22 [vllm.py:782] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
-(APIServer pid=723685) WARNING 04-11 00:55:22 [vllm.py:793] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
-(APIServer pid=723685) INFO 04-11 00:55:22 [vllm.py:933] Cudagraph is disabled under eager mode
-(EngineCore_DP0 pid=724286) INFO 04-11 00:55:34 [core.py:100] Initializing a V1 LLM engine (v0.16.1rc0) with config: model='/root/autodl-tmp/models/qwen35_122b', speculative_config=None, tokenizer='/root/autodl-tmp/models/qwen35_122b', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=8, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/root/autodl-tmp/models/qwen35_122b, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
-INFO 04-11 00:55:45 [parallel_state.py:1307] world_size=8 rank=6 local_rank=6 distributed_init_method=tcp://127.0.0.1:53281 backend=nccl
-INFO 04-11 00:55:46 [parallel_state.py:1307] world_size=8 rank=2 local_rank=2 distributed_init_method=tcp://127.0.0.1:53281 backend=nccl
-INFO 04-11 00:55:47 [parallel_state.py:1307] world_size=8 rank=4 local_rank=4 distributed_init_method=tcp://127.0.0.1:53281 backend=nccl
-INFO 04-11 00:55:47 [parallel_state.py:1307] world_size=8 rank=5 local_rank=5 distributed_init_method=tcp://127.0.0.1:53281 backend=nccl
-INFO 04-11 00:55:47 [parallel_state.py:1307] world_size=8 rank=3 local_rank=3 distributed_init_method=tcp://127.0.0.1:53281 backend=nccl
-INFO 04-11 00:55:48 [parallel_state.py:1307] world_size=8 rank=7 local_rank=7 distributed_init_method=tcp://127.0.0.1:53281 backend=nccl
-INFO 04-11 00:55:48 [parallel_state.py:1307] world_size=8 rank=1 local_rank=1 distributed_init_method=tcp://127.0.0.1:53281 backend=nccl
-INFO 04-11 00:55:48 [parallel_state.py:1307] world_size=8 rank=0 local_rank=0 distributed_init_method=tcp://127.0.0.1:53281 backend=nccl
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-<frozen importlib._bootstrap_external>:1241: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-INFO 04-11 00:55:50 [pynccl.py:111] vLLM is using nccl==2.27.5
-WARNING 04-11 00:55:51 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-11 00:55:51 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-11 00:55:51 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-11 00:55:51 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-11 00:55:51 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-11 00:55:51 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-11 00:55:51 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-11 00:55:51 [symm_mem.py:67] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
-WARNING 04-11 00:55:51 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-11 00:55:51 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-11 00:55:51 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-11 00:55:51 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-11 00:55:51 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-11 00:55:51 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-11 00:55:51 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-WARNING 04-11 00:55:51 [custom_all_reduce.py:154] Custom allreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
-INFO 04-11 00:55:51 [parallel_state.py:1535] rank 6 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 6, EP rank 6, EPLB rank N/A
-INFO 04-11 00:55:51 [parallel_state.py:1535] rank 7 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 7, EP rank 7, EPLB rank N/A
-INFO 04-11 00:55:51 [parallel_state.py:1535] rank 3 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 3, EP rank 3, EPLB rank N/A
-INFO 04-11 00:55:51 [parallel_state.py:1535] rank 0 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0, EPLB rank N/A
-INFO 04-11 00:55:51 [parallel_state.py:1535] rank 4 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 4, EP rank 4, EPLB rank N/A
-INFO 04-11 00:55:51 [parallel_state.py:1535] rank 5 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 5, EP rank 5, EPLB rank N/A
-INFO 04-11 00:55:51 [parallel_state.py:1535] rank 1 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 1, EP rank 1, EPLB rank N/A
-INFO 04-11 00:55:51 [parallel_state.py:1535] rank 2 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 2, EP rank 2, EPLB rank N/A
-INFO 04-11 00:55:56 [base.py:106] Offloader set to NoopOffloader
-INFO 04-11 00:55:57 [base.py:106] Offloader set to NoopOffloader
-(Worker_TP0 pid=724521) INFO 04-11 00:55:57 [gpu_model_runner.py:4310] Starting to load model /root/autodl-tmp/models/qwen35_122b...
-INFO 04-11 00:55:57 [base.py:106] Offloader set to NoopOffloader
-INFO 04-11 00:55:57 [base.py:106] Offloader set to NoopOffloader
-INFO 04-11 00:55:57 [base.py:106] Offloader set to NoopOffloader
-INFO 04-11 00:55:57 [base.py:106] Offloader set to NoopOffloader
-INFO 04-11 00:55:57 [base.py:106] Offloader set to NoopOffloader
-(Worker_TP7 pid=724528) INFO 04-11 00:55:57 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP7 pid=724528) INFO 04-11 00:55:57 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-INFO 04-11 00:55:57 [base.py:106] Offloader set to NoopOffloader
-(Worker_TP0 pid=724521) INFO 04-11 00:55:57 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP0 pid=724521) INFO 04-11 00:55:57 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP0 pid=724521) INFO 04-11 00:55:57 [unquantized.py:186] Using TRITON backend for Unquantized MoE
-(Worker_TP1 pid=724522) INFO 04-11 00:55:57 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP1 pid=724522) INFO 04-11 00:55:57 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP5 pid=724526) INFO 04-11 00:55:57 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP5 pid=724526) INFO 04-11 00:55:57 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP4 pid=724525) INFO 04-11 00:55:57 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP4 pid=724525) INFO 04-11 00:55:57 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP3 pid=724524) INFO 04-11 00:55:57 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP3 pid=724524) INFO 04-11 00:55:57 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP2 pid=724523) INFO 04-11 00:55:57 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP2 pid=724523) INFO 04-11 00:55:57 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP6 pid=724527) INFO 04-11 00:55:58 [cuda.py:449] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(Worker_TP6 pid=724527) INFO 04-11 00:55:58 [mm_encoder_attention.py:78] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(Worker_TP0 pid=724521) INFO 04-11 00:55:58 [cuda.py:402] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:   0% Completed | 0/39 [00:00<?, ?it/s]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:   3% Completed | 1/39 [00:32<20:49, 32.87s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:   5% Completed | 2/39 [01:09<21:47, 35.34s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:   8% Completed | 3/39 [01:47<21:41, 36.17s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  10% Completed | 4/39 [02:22<20:59, 36.00s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  13% Completed | 5/39 [02:59<20:30, 36.19s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  15% Completed | 6/39 [03:34<19:44, 35.88s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  18% Completed | 7/39 [04:10<19:04, 35.75s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  21% Completed | 8/39 [04:46<18:36, 36.03s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  23% Completed | 9/39 [05:23<18:07, 36.24s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  26% Completed | 10/39 [06:00<17:38, 36.52s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  28% Completed | 11/39 [06:38<17:11, 36.83s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  31% Completed | 12/39 [07:14<16:27, 36.56s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  33% Completed | 13/39 [07:49<15:41, 36.20s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  36% Completed | 14/39 [08:24<14:58, 35.93s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  38% Completed | 15/39 [08:59<14:12, 35.52s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  41% Completed | 16/39 [09:30<13:09, 34.31s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  44% Completed | 17/39 [10:04<12:33, 34.26s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  46% Completed | 18/39 [10:39<12:04, 34.49s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  49% Completed | 19/39 [11:15<11:38, 34.90s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  51% Completed | 20/39 [11:52<11:11, 35.32s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  54% Completed | 21/39 [12:27<10:38, 35.46s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  56% Completed | 22/39 [13:03<10:05, 35.64s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  59% Completed | 23/39 [13:39<09:28, 35.52s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  62% Completed | 24/39 [14:11<08:39, 34.60s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  64% Completed | 25/39 [14:45<07:59, 34.26s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  67% Completed | 26/39 [15:17<07:19, 33.77s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  69% Completed | 27/39 [15:49<06:37, 33.12s/it]
-(Worker_TP0 pid=724521) Loading safetensors checkpoint shards:  72% Completed | 28/39 [16:22<06:04, 33.15s/it]

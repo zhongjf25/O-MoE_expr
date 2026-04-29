@@ -1,0 +1,20 @@
+{
+  "framework": "ktransformers",
+  "model": "/data/share/models/Qwen3-30B-A3B",
+  "model_name": "qwen3-30b",
+  "base_url": "http://localhost:8000",
+  "dataset_name": "sharegpt",
+  "dataset_path": "/data/share/dataset/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "random_input": 2048,
+  "random_output": 512,
+  "min_input_len": 0,
+  "max_input_len": 0,
+  "num_prompts": 10,
+  "rr_range": {
+    "start": 2,
+    "end": 2,
+    "step": 0.4
+  },
+  "timestamp": "20260412_151541",
+  "exp_label": "kt"
+}

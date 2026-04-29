@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "framework": "fate",
+    "model": "qwen3-30b-a3b",
+    "results_dir": "/root/autodl-tmp/workspace/experiment/results/fate/qwen3-30b-a3b/20260416_181533_fate-qwen3-30b"
+  },
+  "experiments": []
+}
