@@ -1,0 +1,289 @@
+{
+  "metadata": {
+    "framework": "fate",
+    "model": "qwen35-35b",
+    "results_dir": "/root/workspace/expr/results/fate/qwen35-35b/20260605_080559_util92_cache50"
+  },
+  "experiments": [
+    {
+      "rr": 1.0,
+      "throughput_req_s": 0.13999756448685158,
+      "output_throughput_tok_s": 5.407905919606382,
+      "total_token_throughput": 37.5513467257875,
+      "completed": 140,
+      "failed": 860,
+      "duration_s": 1000.0173968251329,
+      "ttft_ms": {
+        "mean": 3398.555774286589,
+        "median": 3491.676784469746,
+        "std": 795.2637398705036,
+        "p99": 4670.436850634868
+      },
+      "tpot_ms": {
+        "mean": 1358.487843147863,
+        "median": 1397.623072541948,
+        "std": 140.3283725732481,
+        "p99": 1522.944678302322
+      },
+      "itl_ms": {
+        "mean": 1315.3601830190362,
+        "median": 1385.899523505941,
+        "std": 304.9185629616143,
+        "p99": 1719.8944751312956
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 97,
+      "max_output_tokens_per_s": 97.0
+    },
+    {
+      "rr": 2.0,
+      "throughput_req_s": 0.0,
+      "output_throughput_tok_s": 0.0,
+      "total_token_throughput": 0.0,
+      "completed": 0,
+      "failed": 1000,
+      "duration_s": 500.01493334793486,
+      "ttft_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "tpot_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "itl_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 0,
+      "max_output_tokens_per_s": 0.0
+    },
+    {
+      "rr": 3.0,
+      "throughput_req_s": 0.0,
+      "output_throughput_tok_s": 0.0,
+      "total_token_throughput": 0.0,
+      "completed": 0,
+      "failed": 1000,
+      "duration_s": 333.3478897479363,
+      "ttft_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "tpot_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "itl_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 0,
+      "max_output_tokens_per_s": 0.0
+    },
+    {
+      "rr": 4.0,
+      "throughput_req_s": 0.0,
+      "output_throughput_tok_s": 0.0,
+      "total_token_throughput": 0.0,
+      "completed": 0,
+      "failed": 1000,
+      "duration_s": 250.0144781859126,
+      "ttft_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "tpot_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "itl_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 0,
+      "max_output_tokens_per_s": 0.0
+    },
+    {
+      "rr": 5.0,
+      "throughput_req_s": 0.0,
+      "output_throughput_tok_s": 0.0,
+      "total_token_throughput": 0.0,
+      "completed": 0,
+      "failed": 1000,
+      "duration_s": 200.01443239999935,
+      "ttft_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "tpot_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "itl_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 0,
+      "max_output_tokens_per_s": 0.0
+    },
+    {
+      "rr": 6.0,
+      "throughput_req_s": 0.0,
+      "output_throughput_tok_s": 0.0,
+      "total_token_throughput": 0.0,
+      "completed": 0,
+      "failed": 1000,
+      "duration_s": 166.6810504491441,
+      "ttft_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "tpot_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "itl_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 0,
+      "max_output_tokens_per_s": 0.0
+    },
+    {
+      "rr": 7.0,
+      "throughput_req_s": 0.0,
+      "output_throughput_tok_s": 0.0,
+      "total_token_throughput": 0.0,
+      "completed": 0,
+      "failed": 1000,
+      "duration_s": 142.87105638696812,
+      "ttft_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "tpot_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "itl_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 0,
+      "max_output_tokens_per_s": 0.0
+    },
+    {
+      "rr": 8.0,
+      "throughput_req_s": 0.0,
+      "output_throughput_tok_s": 0.0,
+      "total_token_throughput": 0.0,
+      "completed": 0,
+      "failed": 1000,
+      "duration_s": 125.01630223100074,
+      "ttft_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "tpot_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "itl_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "std": 0.0,
+        "p99": 0.0
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 0,
+      "max_output_tokens_per_s": 0.0
+    }
+  ]
+}

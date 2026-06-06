@@ -1,0 +1,45 @@
+=== run_benchmark_single_limit.sh started at Sat Apr 11 10:33:40 UTC 2026 ===
+
+=== Configuration ===
+MODEL_PATH:       /data/share/models/Qwen3-30B-A3B
+TP_SIZE:          2
+PORT:             8000
+GPU_USED_THRESHOLD: 50 MB
+MONITOR_GPU:     all GPUs
+OFFLOAD_LIMIT:    60
+RR_START:         1
+RR_END:           10
+RR_STEP:          1
+===========================
+
+[INFO] Waiting for GPUs [0 1 2 ] to be free (memory.used < 50MB)...
+[INFO] GPUs free at 2026-04-11 10:33:41 (max used: 15MB)
+[INFO] Results will be saved to: /root/workspace/expr/results/omoe/qwen3-30b-a3b/logs/20260411_103341_omoe-qwen3_limit60
+
+[INFO] Will run 10 RR values: 1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+7.0
+8.0
+9.0
+10.0
+[INFO] Last RR value: 10.0
+
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=60...
+[INFO] Service started in screen 'omoe_server'
+[INFO] Log file: /root/workspace/expr/results/omoe/qwen3-30b-a3b/logs/20260411_103341_omoe-qwen3_limit60/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 15s / 300s
+  Waiting... 30s / 300s
+  Waiting... 45s / 300s
+  Waiting... 60s / 300s
+  Waiting... 75s / 300s
+  Waiting... 90s / 300s
+  Waiting... 105s / 300s
+  Waiting... 120s / 300s
+  Waiting... 135s / 300s
+  Waiting... 150s / 300s
+  Waiting... 165s / 300s

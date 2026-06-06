@@ -1,0 +1,15 @@
+{
+  "framework": "omoe",
+  "model": "/data/share/models/qwen35_35b",
+  "model_name": "qwen35-35b",
+  "base_url": "http://localhost:8000",
+  "dataset_path": "/root/workspace/dataset/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "num_prompts": 1000,
+  "rr_range": {
+    "start": 10,
+    "end": 10,
+    "step": 1
+  },
+  "timestamp": "20260413_120256",
+  "exp_label": "omoe-qwen3.5_limit190"
+}

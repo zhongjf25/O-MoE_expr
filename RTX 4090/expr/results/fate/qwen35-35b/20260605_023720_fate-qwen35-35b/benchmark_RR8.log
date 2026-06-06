@@ -1,0 +1,10 @@
+[INFO] Log file: /root/workspace/expr/results/fate/qwen35-35b/20260605_023720_fate-qwen35-35b/benchmark_RR8.log
+[INFO] Config saved to /root/workspace/expr/results/fate/qwen35-35b/20260605_023720_fate-qwen35-35b/config.json
+[INFO] Checking server availability...
+[INFO] Server is ready
+[INFO] Model ID: /data/share/models/qwen35_35b
+
+>>> ============================================
+>>> Benchmark RR=8 req/s
+>>> ============================================
+/root/workspace/expr/scripts/fate/simple_benchmark_qwen35.sh: line 96: vllm: command not found

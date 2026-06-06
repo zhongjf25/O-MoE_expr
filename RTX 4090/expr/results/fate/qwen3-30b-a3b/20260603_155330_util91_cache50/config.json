@@ -1,0 +1,15 @@
+{
+  "framework": "fate",
+  "model": "/data/share/models/Qwen3-30B-A3B",
+  "model_name": "qwen3-30b-a3b",
+  "base_url": "http://localhost:8000",
+  "dataset_path": "/root/workspace/dataset/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "num_prompts": 1000,
+  "rr_range": {
+    "start": 0.2,
+    "end": 2,
+    "step": 0.2
+  },
+  "timestamp": "20260603_155330",
+  "exp_label": "util91_cache50"
+}

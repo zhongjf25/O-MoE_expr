@@ -1,0 +1,67 @@
+=== run_benchmark_single_limit.sh started at Sat Apr 11 13:59:41 UTC 2026 ===
+
+=== Configuration ===
+MODEL_PATH:       /data/share/models/Qwen3-30B-A3B
+TP_SIZE:          2
+PORT:             8000
+GPU_USED_THRESHOLD: 50 MB
+MONITOR_GPU:     all GPUs
+OFFLOAD_LIMIT:    60
+RR_START:         1
+RR_END:           3
+RR_STEP:          1
+===========================
+
+[INFO] Waiting for GPUs [0 1 2 ] to be free (memory.used < 50MB)...
+[INFO] GPUs free at 2026-04-11 13:59:42 (max used: 15MB)
+[INFO] Results will be saved to: /root/workspace/expr/results/omoe/qwen3-30b-a3b/logs/20260411_135942_omoe-qwen3_limit60
+
+[INFO] Will run 3 RR values: 1.0
+2.0
+3.0
+[INFO] Last RR value: 3.0
+
+[INFO] Starting service with OFFLOAD_EXPERT_LIMIT=60...
+[INFO] Service started in screen 'omoe_server'
+[INFO] Log file: /root/workspace/expr/results/omoe/qwen3-30b-a3b/logs/20260411_135942_omoe-qwen3_limit60/server.log
+[INFO] Waiting for service to be ready...
+  Waiting... 15s / 300s
+  Waiting... 30s / 300s
+  Waiting... 45s / 300s
+  Waiting... 60s / 300s
+  Waiting... 75s / 300s
+  Waiting... 90s / 300s
+[INFO] Service is ready (model: /data/share/models/Qwen3-30B-A3B)
+[INFO] Service is ready, starting benchmarks...
+
+============================================
+  Running benchmark with RR=1.0 (OFFLOAD_LIMIT=60)
+============================================
+============================================
+  O-MoE Qwen3 Benchmark Config
+============================================
+  Model:        /data/share/models/Qwen3-30B-A3B
+  Base URL:     http://localhost:8000
+  Dataset:      /root/workspace/dataset/ShareGPT_V3_unfiltered_cleaned_split.json
+  Num Prompts:  1000
+  RR Range:     1.0 ~ 1.0 (step 1)
+  Results:      /root/workspace/expr/results/omoe/qwen3-30b-a3b/logs/20260411_135942_omoe-qwen3_limit60
+============================================
+[INFO] Log file: /root/workspace/expr/results/omoe/qwen3-30b-a3b/logs/20260411_135942_omoe-qwen3_limit60/benchmark_RR1.0.log
+[INFO] Config saved to /root/workspace/expr/results/omoe/qwen3-30b-a3b/logs/20260411_135942_omoe-qwen3_limit60/config.json
+[INFO] Checking server availability...
+[INFO] Server is ready
+[INFO] Model ID: /data/share/models/Qwen3-30B-A3B
+
+>>> ============================================
+>>> Benchmark RR=1.0 req/s
+>>> ============================================
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x75bacefa6fc0>, trust_remote_code=False, seed=0, num_prompts=1000, dataset_name='sharegpt', no_stream=False, dataset_path='/root/workspace/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://localhost:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='/data/share/models/Qwen3-30B-A3B', input_len=None, output_len=None, tokenizer=None, tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=1.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=omoe,model=qwen3-30b-a3b,request_rate=1.0'], result_dir='/root/workspace/expr/results/omoe/qwen3-30b-a3b/logs/20260411_135942_omoe-qwen3_limit60/rr_1.0', result_filename=None, ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-d39cbdca-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, lora_assignment='random', ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds=[25.0, 50.0], plot_dataset_stats=False)
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 1.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/1000 [00:00<?, ?it/s]  0%|          | 1/1000 [00:08<2:18:59,  8.35s/it]  0%|          | 2/1000 [00:14<1:58:11,  7.11s/it]  0%|          | 3/1000 [00:21<1:56:01,  6.98s/it]  0%|          | 4/1000 [00:29<2:01:19,  7.31s/it]  0%|          | 5/1000 [00:34<1:48:23,  6.54s/it]  1%|          | 7/1000 [00:35<56:09,  3.39s/it]    1%|          | 8/1000 [00:36<48:08,  2.91s/it]  1%|          | 9/1000 [00:36<35:46,  2.17s/it]  1%|          | 10/1000 [00:40<42:12,  2.56s/it]  1%|          | 11/1000 [00:41<35:18,  2.14s/it]  1%|          | 12/1000 [00:42<27:55,  1.70s/it]  1%|▏         | 13/1000 [00:44<29:48,  1.81s/it]  1%|▏         | 14/1000 [00:45<25:16,  1.54s/it]

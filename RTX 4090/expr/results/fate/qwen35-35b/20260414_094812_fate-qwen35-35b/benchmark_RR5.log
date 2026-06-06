@@ -1,0 +1,61 @@
+[INFO] Log file: /root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b/benchmark_RR5.log
+[INFO] Config saved to /root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b/config.json
+[INFO] Checking server availability...
+[INFO] Server is ready
+[INFO] Model ID: /data/share/models/qwen35_35b
+
+>>> ============================================
+>>> Benchmark RR=5 req/s
+>>> ============================================
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x74e1429a6fc0>, trust_remote_code=False, seed=0, num_prompts=50, dataset_name='sharegpt', no_stream=False, dataset_path='/root/workspace/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://localhost:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='/data/share/models/qwen35_35b', input_len=None, output_len=None, tokenizer=None, tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=5.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=fate,model=qwen35-35b,request_rate=5'], result_dir='/root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b/rr_5', result_filename=None, ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-620f66a9-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, lora_assignment='random', ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds=[25.0, 50.0], plot_dataset_stats=False)
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 5.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [00:18<14:46, 18.10s/it]  4%|▍         | 2/50 [00:21<07:38,  9.55s/it]  6%|▌         | 3/50 [00:25<05:25,  6.93s/it]  8%|▊         | 4/50 [00:27<03:49,  4.99s/it] 10%|█         | 5/50 [00:28<02:39,  3.55s/it] 12%|█▏        | 6/50 [00:30<02:12,  3.01s/it] 14%|█▍        | 7/50 [00:33<02:09,  3.01s/it] 16%|█▌        | 8/50 [00:34<01:39,  2.37s/it] 18%|█▊        | 9/50 [00:40<02:22,  3.48s/it] 20%|██        | 10/50 [00:43<02:12,  3.32s/it] 22%|██▏       | 11/50 [00:50<02:52,  4.42s/it] 24%|██▍       | 12/50 [00:52<02:20,  3.70s/it] 26%|██▌       | 13/50 [00:56<02:19,  3.77s/it] 28%|██▊       | 14/50 [01:00<02:26,  4.07s/it] 30%|███       | 15/50 [01:01<01:49,  3.13s/it] 32%|███▏      | 16/50 [01:14<03:18,  5.83s/it] 34%|███▍      | 17/50 [01:33<05:28,  9.96s/it] 36%|███▌      | 18/50 [01:40<04:44,  8.89s/it] 38%|███▊      | 19/50 [01:54<05:29, 10.62s/it] 40%|████      | 20/50 [02:01<04:44,  9.48s/it] 42%|████▏     | 21/50 [02:07<04:04,  8.42s/it] 44%|████▍     | 22/50 [02:12<03:25,  7.33s/it] 46%|████▌     | 23/50 [02:18<03:12,  7.12s/it] 48%|████▊     | 24/50 [02:22<02:41,  6.23s/it] 50%|█████     | 25/50 [02:42<04:12, 10.11s/it] 52%|█████▏    | 26/50 [02:54<04:19, 10.82s/it] 54%|█████▍    | 27/50 [03:07<04:24, 11.51s/it] 56%|█████▌    | 28/50 [03:10<03:13,  8.78s/it] 58%|█████▊    | 29/50 [03:13<02:27,  7.05s/it] 60%|██████    | 30/50 [03:17<02:05,  6.26s/it] 62%|██████▏   | 31/50 [03:21<01:47,  5.66s/it] 64%|██████▍   | 32/50 [03:32<02:08,  7.12s/it] 66%|██████▌   | 33/50 [03:43<02:23,  8.45s/it] 68%|██████▊   | 34/50 [03:44<01:37,  6.12s/it] 70%|███████   | 35/50 [03:45<01:07,  4.48s/it] 72%|███████▏  | 36/50 [03:50<01:07,  4.82s/it] 74%|███████▍  | 37/50 [04:09<01:55,  8.86s/it] 76%|███████▌  | 38/50 [04:09<01:16,  6.38s/it] 78%|███████▊  | 39/50 [04:18<01:18,  7.14s/it] 80%|████████  | 40/50 [04:36<01:43, 10.37s/it] 82%|████████▏ | 41/50 [04:55<01:57, 13.05s/it] 84%|████████▍ | 42/50 [05:07<01:40, 12.62s/it] 86%|████████▌ | 43/50 [05:16<01:20, 11.54s/it] 88%|████████▊ | 44/50 [05:40<01:31, 15.20s/it] 90%|█████████ | 45/50 [05:44<00:59, 11.98s/it] 92%|█████████▏| 46/50 [05:57<00:49, 12.32s/it] 94%|█████████▍| 47/50 [06:11<00:37, 12.63s/it] 96%|█████████▌| 48/50 [06:24<00:25, 12.74s/it] 98%|█████████▊| 49/50 [06:48<00:16, 16.15s/it]100%|██████████| 50/50 [06:48<00:00, 11.44s/it]100%|██████████| 50/50 [06:48<00:00,  8.18s/it]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     50        
+Failed requests:                         0         
+Request rate configured (RPS):           5.00      
+Benchmark duration (s):                  408.80    
+Total input tokens:                      12852     
+Total generated tokens:                  10681     
+Request throughput (req/s):              0.12      
+Output token throughput (tok/s):         26.13     
+Peak output token throughput (tok/s):    74.00     
+Peak concurrent requests:                50.00     
+Total token throughput (tok/s):          57.57     
+---------------Time to First Token----------------
+Mean TTFT (ms):                          13029.90  
+Median TTFT (ms):                        12245.83  
+P99 TTFT (ms):                           17621.45  
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          865.56    
+Median TPOT (ms):                        894.52    
+P99 TPOT (ms):                           1123.33   
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           723.64    
+Median ITL (ms):                         795.87    
+P99 ITL (ms):                            1026.99   
+==================================================
+[OK] RR=5 done -> /root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b/rr_5/result.json
+
+>>> ============================================
+>>> Generating summary report...
+>>> ============================================
+  RR= 5.0: throughput=0.12 req/s, TTFT_mean=13029.9ms, TPOT_mean=865.56ms
+
+[OK] Summary saved: /root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b/summary.json
+[OK] Summary MD saved: /root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b/summary.md
+
+============================================
+  All Benchmarks Complete!
+============================================
+  Results:      /root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b
+  Summary:      /root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b/summary.json
+  Summary MD:   /root/workspace/expr/results/fate/qwen35-35b/20260414_094812_fate-qwen35-35b/summary.md
+============================================

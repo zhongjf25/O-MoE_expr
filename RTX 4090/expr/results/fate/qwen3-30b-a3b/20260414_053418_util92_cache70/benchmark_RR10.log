@@ -1,0 +1,73 @@
+[INFO] Log file: /root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70/benchmark_RR10.log
+[INFO] Config saved to /root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70/config.json
+[INFO] Checking server availability...
+[INFO] Server is ready
+[INFO] Model ID: /data/share/models/Qwen3-30B-A3B
+
+>>> ============================================
+>>> Benchmark RR=10 req/s
+>>> ============================================
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x77f31c79efc0>, trust_remote_code=False, seed=0, num_prompts=200, dataset_name='sharegpt', no_stream=False, dataset_path='/root/workspace/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://localhost:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='/data/share/models/Qwen3-30B-A3B', input_len=None, output_len=None, tokenizer=None, tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=10.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=fate,model=qwen3-30b-a3b,request_rate=10'], result_dir='/root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70/rr_10', result_filename=None, ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-1432f5ab-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, lora_assignment='random', ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds=[25.0, 50.0], plot_dataset_stats=False)
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 10.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/200 [00:00<?, ?it/s]  0%|          | 1/200 [00:00<01:14,  2.68it/s]  3%|▎         | 6/200 [00:00<00:14, 13.01it/s]  4%|▍         | 8/200 [00:00<00:18, 10.14it/s]  5%|▌         | 10/200 [00:01<00:24,  7.75it/s]  6%|▌         | 11/200 [00:01<00:25,  7.41it/s]  6%|▋         | 13/200 [00:01<00:21,  8.63it/s]  7%|▋         | 14/200 [00:01<00:27,  6.73it/s]  9%|▉         | 18/200 [00:02<00:17, 10.62it/s] 10%|█         | 20/200 [00:02<00:21,  8.51it/s] 11%|█         | 22/200 [00:02<00:28,  6.15it/s] 12%|█▏        | 24/200 [00:03<00:25,  6.80it/s] 13%|█▎        | 26/200 [00:03<00:21,  8.25it/s] 14%|█▍        | 28/200 [00:03<00:22,  7.64it/s] 15%|█▌        | 30/200 [00:03<00:18,  8.97it/s] 16%|█▌        | 32/200 [00:03<00:17,  9.49it/s] 17%|█▋        | 34/200 [00:04<00:15, 10.43it/s] 18%|█▊        | 37/200 [00:04<00:13, 11.76it/s] 20%|█▉        | 39/200 [00:04<00:18,  8.78it/s] 20%|██        | 41/200 [00:04<00:16,  9.56it/s] 22%|██▏       | 43/200 [00:04<00:15,  9.96it/s] 22%|██▎       | 45/200 [00:05<00:13, 11.29it/s] 24%|██▎       | 47/200 [00:05<00:12, 12.13it/s] 26%|██▌       | 51/200 [00:05<00:09, 15.15it/s] 26%|██▋       | 53/200 [00:05<00:16,  8.90it/s] 28%|██▊       | 57/200 [00:06<00:11, 12.11it/s] 30%|███       | 60/200 [00:06<00:09, 14.34it/s] 32%|███▏      | 63/200 [00:06<00:08, 16.01it/s] 34%|███▎      | 67/200 [00:06<00:08, 15.79it/s] 34%|███▍      | 69/200 [00:06<00:09, 14.20it/s] 36%|███▌      | 71/200 [00:07<00:12, 10.10it/s] 36%|███▋      | 73/200 [00:07<00:16,  7.72it/s] 38%|███▊      | 75/200 [00:07<00:15,  7.95it/s] 40%|████      | 81/200 [00:07<00:08, 13.96it/s] 42%|████▏     | 84/200 [00:08<00:07, 14.61it/s] 43%|████▎     | 86/200 [00:08<00:07, 15.06it/s] 44%|████▍     | 89/200 [00:08<00:07, 15.73it/s] 46%|████▌     | 91/200 [00:08<00:09, 11.89it/s] 46%|████▋     | 93/200 [00:08<00:08, 12.62it/s] 48%|████▊     | 95/200 [00:09<00:08, 12.58it/s] 48%|████▊     | 97/200 [00:09<00:07, 13.63it/s] 50%|████▉     | 99/200 [00:09<00:07, 12.76it/s] 50%|█████     | 101/200 [00:09<00:07, 13.93it/s] 52%|█████▏    | 103/200 [00:09<00:07, 13.30it/s] 52%|█████▎    | 105/200 [00:09<00:10,  9.43it/s] 54%|█████▎    | 107/200 [00:10<00:09,  9.90it/s] 55%|█████▍    | 109/200 [00:10<00:07, 11.41it/s] 56%|█████▌    | 111/200 [00:10<00:10,  8.57it/s] 56%|█████▋    | 113/200 [00:10<00:11,  7.79it/s] 57%|█████▊    | 115/200 [00:11<00:10,  8.23it/s] 58%|█████▊    | 117/200 [00:11<00:10,  8.02it/s] 60%|█████▉    | 119/200 [00:11<00:10,  7.52it/s] 60%|██████    | 120/200 [00:11<00:10,  7.67it/s] 60%|██████    | 121/200 [00:11<00:10,  7.64it/s] 62%|██████▏   | 123/200 [00:12<00:11,  6.51it/s] 62%|██████▏   | 124/200 [00:12<00:10,  6.96it/s] 63%|██████▎   | 126/200 [00:12<00:08,  8.40it/s] 64%|██████▍   | 129/200 [00:12<00:06, 11.42it/s] 66%|██████▌   | 131/200 [00:12<00:05, 12.30it/s] 67%|██████▋   | 134/200 [00:13<00:04, 15.74it/s] 68%|██████▊   | 136/200 [00:13<00:04, 14.25it/s] 69%|██████▉   | 138/200 [00:13<00:04, 12.86it/s] 70%|███████   | 140/200 [00:13<00:04, 12.67it/s] 71%|███████   | 142/200 [00:13<00:05, 10.40it/s] 72%|███████▏  | 144/200 [00:14<00:06,  9.13it/s] 73%|███████▎  | 146/200 [00:14<00:06,  8.33it/s] 74%|███████▍  | 148/200 [00:14<00:06,  8.06it/s] 74%|███████▍  | 149/200 [00:14<00:06,  8.03it/s] 75%|███████▌  | 150/200 [00:15<00:11,  4.22it/s] 76%|███████▌  | 152/200 [00:15<00:09,  5.23it/s] 77%|███████▋  | 154/200 [00:15<00:06,  6.87it/s] 78%|███████▊  | 156/200 [00:16<00:05,  7.62it/s] 79%|███████▉  | 158/200 [00:16<00:05,  7.72it/s] 80%|████████  | 161/200 [00:16<00:03,  9.84it/s] 82%|████████▏ | 163/200 [00:16<00:03, 10.01it/s] 82%|████████▎ | 165/200 [00:17<00:05,  6.48it/s] 83%|████████▎ | 166/200 [00:17<00:05,  6.18it/s] 84%|████████▍ | 169/200 [00:17<00:03,  8.43it/s] 86%|████████▌ | 172/200 [00:17<00:02, 11.54it/s] 88%|████████▊ | 175/200 [00:17<00:01, 12.85it/s] 89%|████████▉ | 178/200 [00:18<00:01, 11.22it/s] 90%|█████████ | 180/200 [00:18<00:01, 11.99it/s] 91%|█████████ | 182/200 [00:18<00:01, 13.06it/s] 92%|█████████▏| 184/200 [00:18<00:01, 13.99it/s] 93%|█████████▎| 186/200 [00:18<00:01,  9.67it/s] 94%|█████████▍| 188/200 [00:19<00:01, 10.22it/s] 95%|█████████▌| 190/200 [00:19<00:00, 10.62it/s] 97%|█████████▋| 194/200 [00:19<00:00, 10.44it/s] 98%|█████████▊| 196/200 [00:19<00:00, 10.27it/s]100%|██████████| 200/200 [00:20<00:00, 14.33it/s]100%|██████████| 200/200 [00:20<00:00, 10.00it/s]
+/root/workspace/vllm/vllm/benchmarks/serve.py:913: UserWarning: All requests failed. This is likely due to a misconfiguration on the benchmark arguments.
+  metrics, actual_output_lens = calculate_metrics(
+Failed requests during benchmark run detected (capping to 10):
+Error 0: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 1: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 2: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 3: Internal Server Error
+Error 4: Internal Server Error
+Error 5: Internal Server Error
+Error 6: Internal Server Error
+Error 7: Internal Server Error
+Error 8: Internal Server Error
+Error 9: Internal Server Error
+============ Serving Benchmark Result ============
+Successful requests:                     0         
+Failed requests:                         200       
+Request rate configured (RPS):           10.00     
+Benchmark duration (s):                  20.01     
+Total input tokens:                      0         
+Total generated tokens:                  0         
+Request throughput (req/s):              0.00      
+Output token throughput (tok/s):         0.00      
+Peak output token throughput (tok/s):    0.00      
+Peak concurrent requests:                0.00      
+Total token throughput (tok/s):          0.00      
+---------------Time to First Token----------------
+Mean TTFT (ms):                          0.00      
+Median TTFT (ms):                        0.00      
+P99 TTFT (ms):                           0.00      
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          0.00      
+Median TPOT (ms):                        0.00      
+P99 TPOT (ms):                           0.00      
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           0.00      
+Median ITL (ms):                         0.00      
+P99 ITL (ms):                            0.00      
+==================================================
+[OK] RR=10 done -> /root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70/rr_10/result.json
+
+>>> ============================================
+>>> Generating summary report...
+>>> ============================================
+  RR=10.0: throughput=0.00 req/s, TTFT_mean=0.0ms, TPOT_mean=0.00ms
+
+[OK] Summary saved: /root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70/summary.json
+[OK] Summary MD saved: /root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70/summary.md
+
+============================================
+  All Benchmarks Complete!
+============================================
+  Results:      /root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70
+  Summary:      /root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70/summary.json
+  Summary MD:   /root/workspace/expr/results/fate/qwen3-30b-a3b/20260414_053418_util92_cache70/summary.md
+============================================

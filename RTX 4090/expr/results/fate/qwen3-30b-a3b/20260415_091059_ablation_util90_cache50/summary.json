@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "fate",
+    "model": "qwen3-30b-a3b",
+    "results_dir": "/root/workspace/expr/results/fate/qwen3-30b-a3b/20260415_091059_ablation_util90_RR6"
+  },
+  "experiments": [
+    {
+      "rr": 6.0,
+      "throughput_req_s": 0.6815934909651363,
+      "output_throughput_tok_s": 137.51148680221627,
+      "total_token_throughput": 285.6851405836001,
+      "completed": 1000,
+      "failed": 0,
+      "duration_s": 1467.150160991121,
+      "ttft_ms": {
+        "mean": 253109.33264704747,
+        "median": 229653.68267847225,
+        "std": 234067.40597657263,
+        "p99": 666044.7036796785
+      },
+      "tpot_ms": {
+        "mean": 1319.3062158304415,
+        "median": 1324.2856257588517,
+        "std": 47.97646758505575,
+        "p99": 1411.0868934437167
+      },
+      "itl_ms": {
+        "mean": 1294.273992564549,
+        "median": 1306.9344419054687,
+        "std": 105.24446770418395,
+        "p99": 1459.1815215349197
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 851,
+      "max_output_tokens_per_s": 256.0
+    }
+  ]
+}

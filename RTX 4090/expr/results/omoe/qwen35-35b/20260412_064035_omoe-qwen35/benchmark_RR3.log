@@ -1,0 +1,61 @@
+[INFO] Log file: /root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35/benchmark_RR3.log
+[INFO] Config saved to /root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35/config.json
+[INFO] Checking server availability...
+[INFO] Server is ready
+[INFO] Model ID: /data/share/models/qwen35_35b
+
+>>> ============================================
+>>> Benchmark RR=3 req/s
+>>> ============================================
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x70df97faafc0>, trust_remote_code=False, seed=0, num_prompts=100, dataset_name='sharegpt', no_stream=False, dataset_path='/root/workspace/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://localhost:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='/data/share/models/qwen35_35b', input_len=None, output_len=None, tokenizer=None, tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=3.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=omoe,model=qwen35-35b,request_rate=3'], result_dir='/root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35/rr_3', result_filename=None, ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-89a66196-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, lora_assignment='random', ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds=[25.0, 50.0], plot_dataset_stats=False)
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 3.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/100 [00:00<?, ?it/s]  1%|          | 1/100 [00:20<33:16, 20.17s/it]  3%|▎         | 3/100 [00:21<08:59,  5.56s/it]  4%|▍         | 4/100 [00:21<06:18,  3.95s/it]  5%|▌         | 5/100 [00:22<04:14,  2.68s/it]  6%|▌         | 6/100 [00:22<03:13,  2.06s/it]  7%|▋         | 7/100 [00:23<02:31,  1.63s/it]  8%|▊         | 8/100 [00:23<01:56,  1.26s/it] 10%|█         | 10/100 [00:24<01:03,  1.42it/s] 12%|█▏        | 12/100 [00:24<00:39,  2.21it/s] 14%|█▍        | 14/100 [00:24<00:30,  2.83it/s] 16%|█▌        | 16/100 [00:25<00:27,  3.07it/s] 18%|█▊        | 18/100 [00:25<00:23,  3.54it/s] 20%|██        | 20/100 [00:25<00:20,  3.90it/s] 21%|██        | 21/100 [00:26<00:20,  3.91it/s] 23%|██▎       | 23/100 [00:26<00:14,  5.17it/s] 24%|██▍       | 24/100 [00:26<00:16,  4.69it/s] 25%|██▌       | 25/100 [00:27<00:25,  2.98it/s] 26%|██▌       | 26/100 [00:27<00:24,  3.04it/s] 27%|██▋       | 27/100 [00:27<00:22,  3.29it/s] 28%|██▊       | 28/100 [00:28<00:18,  3.81it/s] 29%|██▉       | 29/100 [00:29<00:38,  1.84it/s] 30%|███       | 30/100 [00:29<00:31,  2.26it/s] 31%|███       | 31/100 [00:30<00:36,  1.89it/s] 32%|███▏      | 32/100 [00:31<00:39,  1.71it/s] 35%|███▌      | 35/100 [00:31<00:22,  2.83it/s] 36%|███▌      | 36/100 [00:32<00:27,  2.34it/s] 37%|███▋      | 37/100 [00:32<00:23,  2.70it/s] 38%|███▊      | 38/100 [00:33<00:29,  2.13it/s] 39%|███▉      | 39/100 [00:33<00:26,  2.32it/s] 40%|████      | 40/100 [00:33<00:21,  2.78it/s] 42%|████▏     | 42/100 [00:34<00:15,  3.72it/s] 43%|████▎     | 43/100 [00:34<00:17,  3.22it/s] 44%|████▍     | 44/100 [00:34<00:16,  3.45it/s] 45%|████▌     | 45/100 [00:34<00:16,  3.43it/s] 46%|████▌     | 46/100 [00:35<00:23,  2.28it/s] 48%|████▊     | 48/100 [00:37<00:33,  1.57it/s] 50%|█████     | 50/100 [00:38<00:25,  1.97it/s] 51%|█████     | 51/100 [00:38<00:26,  1.83it/s] 52%|█████▏    | 52/100 [00:39<00:25,  1.87it/s] 53%|█████▎    | 53/100 [00:39<00:25,  1.86it/s] 54%|█████▍    | 54/100 [00:40<00:28,  1.63it/s] 56%|█████▌    | 56/100 [00:41<00:22,  1.93it/s] 57%|█████▋    | 57/100 [00:41<00:19,  2.16it/s] 58%|█████▊    | 58/100 [00:42<00:17,  2.38it/s] 59%|█████▉    | 59/100 [00:42<00:14,  2.87it/s] 61%|██████    | 61/100 [00:43<00:18,  2.06it/s] 62%|██████▏   | 62/100 [00:44<00:18,  2.01it/s] 63%|██████▎   | 63/100 [00:44<00:17,  2.16it/s] 64%|██████▍   | 64/100 [00:45<00:19,  1.88it/s] 65%|██████▌   | 65/100 [00:45<00:17,  1.97it/s] 66%|██████▌   | 66/100 [00:47<00:26,  1.30it/s] 67%|██████▋   | 67/100 [00:47<00:21,  1.51it/s] 68%|██████▊   | 68/100 [00:48<00:24,  1.32it/s] 69%|██████▉   | 69/100 [00:49<00:23,  1.35it/s] 70%|███████   | 70/100 [00:49<00:22,  1.36it/s] 71%|███████   | 71/100 [00:50<00:18,  1.56it/s] 72%|███████▏  | 72/100 [00:51<00:20,  1.38it/s] 73%|███████▎  | 73/100 [00:52<00:27,  1.01s/it] 74%|███████▍  | 74/100 [00:53<00:20,  1.26it/s] 75%|███████▌  | 75/100 [00:53<00:18,  1.38it/s] 76%|███████▌  | 76/100 [00:54<00:16,  1.47it/s] 77%|███████▋  | 77/100 [00:55<00:21,  1.06it/s] 78%|███████▊  | 78/100 [00:59<00:36,  1.64s/it] 79%|███████▉  | 79/100 [01:00<00:32,  1.54s/it] 80%|████████  | 80/100 [01:02<00:32,  1.64s/it] 81%|████████  | 81/100 [01:03<00:30,  1.60s/it] 82%|████████▏ | 82/100 [01:04<00:22,  1.23s/it] 83%|████████▎ | 83/100 [01:06<00:25,  1.50s/it] 84%|████████▍ | 84/100 [01:06<00:17,  1.09s/it] 85%|████████▌ | 85/100 [01:06<00:13,  1.13it/s] 86%|████████▌ | 86/100 [01:08<00:17,  1.22s/it] 87%|████████▋ | 87/100 [01:09<00:14,  1.10s/it] 88%|████████▊ | 88/100 [01:10<00:12,  1.08s/it] 90%|█████████ | 90/100 [01:10<00:06,  1.63it/s] 92%|█████████▏| 92/100 [01:13<00:07,  1.10it/s] 93%|█████████▎| 93/100 [01:15<00:07,  1.05s/it] 95%|█████████▌| 95/100 [01:18<00:06,  1.26s/it] 96%|█████████▌| 96/100 [01:19<00:04,  1.16s/it] 97%|█████████▋| 97/100 [01:24<00:06,  2.05s/it] 98%|█████████▊| 98/100 [01:24<00:03,  1.63s/it] 99%|█████████▉| 99/100 [01:24<00:01,  1.27s/it]100%|██████████| 100/100 [01:30<00:00,  2.44s/it]100%|██████████| 100/100 [01:30<00:00,  1.11it/s]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     100       
+Failed requests:                         0         
+Request rate configured (RPS):           3.00      
+Benchmark duration (s):                  90.24     
+Total input tokens:                      24128     
+Total generated tokens:                  22749     
+Request throughput (req/s):              1.11      
+Output token throughput (tok/s):         252.11    
+Peak output token throughput (tok/s):    789.00    
+Peak concurrent requests:                64.00     
+Total token throughput (tok/s):          519.50    
+---------------Time to First Token----------------
+Mean TTFT (ms):                          4789.96   
+Median TTFT (ms):                        3880.93   
+P99 TTFT (ms):                           14312.75  
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          110.01    
+Median TPOT (ms):                        89.75     
+P99 TPOT (ms):                           682.75    
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           87.68     
+Median ITL (ms):                         76.74     
+P99 ITL (ms):                            153.23    
+==================================================
+[OK] RR=3 done -> /root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35/rr_3/result.json
+
+>>> ============================================
+>>> Generating summary report...
+>>> ============================================
+  RR= 3.0: throughput=1.11 req/s, TTFT_mean=4790.0ms, TPOT_mean=110.01ms
+
+[OK] Summary saved: /root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35/summary.json
+[OK] Summary MD saved: /root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35/summary.md
+
+============================================
+  All Benchmarks Complete!
+============================================
+  Results:      /root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35
+  Summary:      /root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35/summary.json
+  Summary MD:   /root/workspace/expr/results/omoe/qwen35-35b/20260412_064035_omoe-qwen35/summary.md
+============================================

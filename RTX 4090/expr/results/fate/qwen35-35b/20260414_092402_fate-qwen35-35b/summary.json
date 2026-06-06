@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "fate",
+    "model": "qwen35-35b",
+    "results_dir": "/root/workspace/expr/results/fate/qwen35-35b/20260414_092402_fate-qwen35-35b"
+  },
+  "experiments": [
+    {
+      "rr": 5.0,
+      "throughput_req_s": 0.07184670811299877,
+      "output_throughput_tok_s": 0.14369341622599754,
+      "total_token_throughput": 1.0058539135819828,
+      "completed": 1,
+      "failed": 49,
+      "duration_s": 13.918522174004465,
+      "ttft_ms": {
+        "mean": 11350.797347957268,
+        "median": 11350.797347957268,
+        "std": 0.0,
+        "p99": 11350.797347957268
+      },
+      "tpot_ms": {
+        "mean": 732.5375229120255,
+        "median": 732.5375229120255,
+        "std": 0.0,
+        "p99": 732.5375229120255
+      },
+      "itl_ms": {
+        "mean": 732.5388139579445,
+        "median": 732.5388139579445,
+        "std": 0.0,
+        "p99": 732.5388139579445
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 1,
+      "max_output_tokens_per_s": 1.0
+    }
+  ]
+}
