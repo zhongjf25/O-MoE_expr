@@ -1,0 +1,86 @@
+============================================================
+ Qwen3.5-122B Serving Benchmark (omoe-ascend)
+============================================================
+ Model/tokenizer:   /home/ma-user/work/models/Qwen3.5-122B-A10B
+ Base URL:          http://127.0.0.1:8000
+ Dataset:           /home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json
+ Backend:           openai
+ Num prompts:       1000
+ Request rates:     5 .. 5 (step 1)
+ ShareGPT out len:  dataset default
+ Results:           /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_105019_omoe-util0.96-offload100-rr5-n1000
+============================================================
+[INFO] Checking server availability...
+[INFO] Server model ID: Qwen3.5-122B-A10B
+
+>>> Benchmark request rate: 5 req/s
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-01 10:50:49 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-01 10:50:49 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-01 10:50:49 [__init__.py:58] Loading plugin ascend
+INFO 08-01 10:50:49 [__init__.py:212] Platform plugin ascend is activated
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0xffff3156ea20>, trust_remote_code=False, seed=0, num_prompts=1000, dataset_name='sharegpt', no_stream=False, dataset_path='/home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://127.0.0.1:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='Qwen3.5-122B-A10B', input_len=None, output_len=None, tokenizer='/home/ma-user/work/models/Qwen3.5-122B-A10B', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=5.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=omoe-ascend', 'model=qwen35-122b', 'request_rate=5'], result_dir='/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_105019_omoe-util0.96-offload100-rr5-n1000/rr_5', result_filename='result.json', ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-7f82fefd-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False)
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 5.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/1000 [00:00<?, ?it/s]  0%|          | 1/1000 [02:07<35:22:05, 127.45s/it]  0%|          | 2/1000 [02:27<17:46:10, 64.10s/it]   0%|          | 3/1000 [03:34<18:11:33, 65.69s/it] 79%|███████▊  | 787/1000 [03:34<00:27,  7.79it/s] 100%|██████████| 1000/1000 [03:35<00:00,  4.65it/s]
+Failed requests during benchmark run detected (capping to 10):
+Error 0: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 1: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 2: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 3: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 4: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 5: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 6: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 7: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 8: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+Error 9: Never received a valid chunk to calculate TTFT.This response will be marked as failed!
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     113       
+Failed requests:                         887       
+Request rate configured (RPS):           5.00      
+Benchmark duration (s):                  215.17    
+Total input tokens:                      27180     
+Total generated tokens:                  445       
+Request throughput (req/s):              0.53      
+Output token throughput (tok/s):         2.07      
+Peak output token throughput (tok/s):    112.00    
+Peak concurrent requests:                113.00    
+Total token throughput (tok/s):          128.39    
+---------------Time to First Token----------------
+Mean TTFT (ms):                          108405.70 
+Median TTFT (ms):                        111208.49 
+P99 TTFT (ms):                           129199.86 
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          9303.48   
+Median TPOT (ms):                        9384.88   
+P99 TPOT (ms):                           12453.56  
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           9537.86   
+Median ITL (ms):                         10122.67  
+P99 ITL (ms):                            13353.60  
+==================================================
+benchmark result is incomplete: completed=113, failed=887, expected=1000
+[ERROR] Benchmark failed for RR=5
+RR=5.0: throughput=0.53 req/s, TTFT=108405.7 ms, TPOT=9303.48 ms
+[OK] Summary JSON: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_105019_omoe-util0.96-offload100-rr5-n1000/summary.json
+[OK] Summary Markdown: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_105019_omoe-util0.96-offload100-rr5-n1000/summary.md
+
+============================================================
+ Benchmark complete
+ Results: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_105019_omoe-util0.96-offload100-rr5-n1000
+ Summary: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_105019_omoe-util0.96-offload100-rr5-n1000/summary.json
+============================================================
+[ERROR] 1 request-rate run(s) failed

@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "vllm-ascend",
+    "model": "minimax-m2.7",
+    "results_dir": "/home/ma-user/work/experiments/results/vllm-ascend/minimax-m2.7/20260803_020908_baseline-util0.985-rr15-n2000"
+  },
+  "experiments": [
+    {
+      "rr": 15.0,
+      "throughput_req_s": 0.23081579291509974,
+      "output_throughput_tok_s": 46.13211385887287,
+      "total_token_throughput": 97.10535815834703,
+      "completed": 2000,
+      "failed": 0,
+      "duration_s": 8664.91835216689,
+      "ttft_ms": {
+        "mean": 3988508.5754477684,
+        "median": 3886624.8731199885,
+        "std": 2347699.7690219763,
+        "p99": 8217840.470317122
+      },
+      "tpot_ms": {
+        "mean": 336.14677123507613,
+        "median": 280.6905271994226,
+        "std": 283.93403786161286,
+        "p99": 1286.6272019388098
+      },
+      "itl_ms": {
+        "mean": 300.0129916520372,
+        "median": 265.19795786589384,
+        "std": 771.1984868130498,
+        "p99": 448.072961717844
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 1969,
+      "max_output_tokens_per_s": 89.0
+    }
+  ]
+}

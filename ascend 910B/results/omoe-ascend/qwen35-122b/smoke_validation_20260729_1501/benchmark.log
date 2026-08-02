@@ -1,0 +1,15 @@
+============================================================
+ O-MoE Ascend Qwen3.5-122B Benchmark
+============================================================
+ Model/tokenizer:   /home/ma-user/work/models/Qwen3.5-122B-A10B
+ Base URL:          /cedc4280-58d6-46dd-913b-638385ad0543
+ Dataset:           /home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json
+ Backend:           openai
+ Num prompts:       1
+ Request rates:     1 .. 1 (step 1)
+ ShareGPT out len:  8
+ Results:           /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/smoke_validation_20260729_1501
+============================================================
+[INFO] Checking server availability...
+curl: (3) URL using bad/illegal format or missing URL
+[ERROR] Cannot connect to /cedc4280-58d6-46dd-913b-638385ad0543/v1/models

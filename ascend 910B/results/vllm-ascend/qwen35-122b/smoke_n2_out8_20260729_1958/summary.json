@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "vllm-ascend",
+    "model": "qwen35-122b",
+    "results_dir": "/home/ma-user/work/experiments/results/vllm-ascend/qwen35-122b/smoke_n2_out8_20260729_1958"
+  },
+  "experiments": [
+    {
+      "rr": 1.0,
+      "throughput_req_s": 0.12424041309902124,
+      "output_throughput_tok_s": 0.99392330479217,
+      "total_token_throughput": 3.2302507405745526,
+      "completed": 2,
+      "failed": 0,
+      "duration_s": 16.09782155510038,
+      "ttft_ms": {
+        "mean": 2120.4696035711095,
+        "median": 2120.4696035711095,
+        "std": 186.93450454156846,
+        "p99": 2303.6654180218466
+      },
+      "tpot_ms": {
+        "mean": 1704.492985919517,
+        "median": 1704.492985919517,
+        "std": 20.278254507242632,
+        "p99": 1724.3656753366147
+      },
+      "itl_ms": {
+        "mean": 1704.493033782845,
+        "median": 1351.999441976659,
+        "std": 954.1679605403807,
+        "p99": 4027.500854840037
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 2,
+      "max_output_tokens_per_s": 2.0
+    }
+  ]
+}

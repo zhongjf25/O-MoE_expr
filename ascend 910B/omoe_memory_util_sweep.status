@@ -1,0 +1,7 @@
+state=interrupted
+run_id=20260801_003354
+current_util=
+detail=controller received a signal
+run_dir=/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100
+metrics_file=/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100/metrics.tsv
+updated_at=2026-08-01 01:25:07 CST

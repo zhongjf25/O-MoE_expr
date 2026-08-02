@@ -1,0 +1,23 @@
+# Serving Benchmark Result Summary
+
+## Experiment Config
+- **Framework:** omoe-ascend
+- **Model:** /home/ma-user/work/models/Qwen3.5-122B-A10B
+- **Served model:** Qwen3.5-122B-A10B
+- **Dataset:** /home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json
+- **Num prompts:** 1000
+- **Request rate:** {'start': 5.0, 'end': 5.0, 'step': 1.0}
+- **Timestamp:** 20260801_105019
+- **Label:** omoe-util0.96-offload100-rr5-n1000
+
+## Benchmark Results
+
+| RR | Throughput (req/s) | TTFT Mean (ms) | TTFT P99 (ms) | TPOT Mean (ms) | TPOT P99 (ms) | ITL Mean (ms) | Completed | Failed |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 5.0 | 0.53 | 108405.70 | 129199.86 | 9303.48 | 12453.56 | 9537.86 | 113 | 887 |
+
+## Detailed Metrics
+
+| RR | TPOT Median (ms) | ITL Median (ms) | E2EL Mean (ms) | E2EL P99 (ms) | Output Throughput (tok/s) | Peak Concurrent |
+|---|---:|---:|---:|---:|---:|---:|
+| 5.0 | 9384.88 | 10122.67 | N/A | N/A | 2.07 | 113 |

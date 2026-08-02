@@ -1,0 +1,6 @@
+{
+  "model": "MiniMax-M2.7",
+  "prompt": "Explain why the sky is blue in one sentence.",
+  "max_tokens": 16,
+  "temperature": 0
+}

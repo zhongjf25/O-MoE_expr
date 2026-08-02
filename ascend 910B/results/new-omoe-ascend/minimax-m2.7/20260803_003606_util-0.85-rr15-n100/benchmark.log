@@ -1,0 +1,73 @@
+============================================================
+ Qwen3.5-122B Serving Benchmark (new-omoe-ascend)
+============================================================
+ Model/tokenizer:   /home/ma-user/work/models/minimax-m2.7
+ Base URL:          http://127.0.0.1:8000
+ Dataset:           /home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json
+ Backend:           openai
+ Num prompts:       100
+ Request rates:     15 .. 15 (step 1)
+ ShareGPT out len:  dataset default
+ Results:           /home/ma-user/work/experiments/results/new-omoe-ascend/minimax-m2.7/20260803_003606_util-0.85-rr15-n100
+============================================================
+[INFO] Checking server availability...
+[INFO] Server model ID: MiniMax-M2.7
+
+>>> Benchmark request rate: 15 req/s
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-03 00:36:37 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-03 00:36:37 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-03 00:36:37 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 08-03 00:36:37 [__init__.py:212] Platform plugin ascend is activated
+INFO 08-03 00:36:47 [__init__.py:108] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0xffff2a1bd300>, trust_remote_code=False, seed=0, num_prompts=100, dataset_name='sharegpt', no_stream=False, dataset_path='/home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://127.0.0.1:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='MiniMax-M2.7', input_len=None, output_len=None, tokenizer='/home/ma-user/work/models/minimax-m2.7', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=15.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=new-omoe-ascend', 'model=minimax-m2.7', 'request_rate=15'], result_dir='/home/ma-user/work/experiments/results/new-omoe-ascend/minimax-m2.7/20260803_003606_util-0.85-rr15-n100/rr_15', result_filename='result.json', ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-e144067a-', top_p=None, top_k=None, min_p=None, temperature=0.0, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False)
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 15.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/100 [00:00<?, ?it/s]  1%|          | 1/100 [00:05<08:24,  5.09s/it]  2%|▏         | 2/100 [00:05<03:55,  2.40s/it]  3%|▎         | 3/100 [00:06<02:31,  1.56s/it]  4%|▍         | 4/100 [00:06<01:52,  1.17s/it]  5%|▌         | 5/100 [00:07<01:29,  1.07it/s]  6%|▌         | 6/100 [00:08<01:27,  1.07it/s]  7%|▋         | 7/100 [00:08<01:12,  1.28it/s]  8%|▊         | 8/100 [00:09<01:02,  1.46it/s] 10%|█         | 10/100 [00:10<01:02,  1.45it/s] 11%|█         | 11/100 [00:11<00:56,  1.57it/s] 12%|█▏        | 12/100 [00:11<00:52,  1.69it/s] 13%|█▎        | 13/100 [00:11<00:48,  1.78it/s] 15%|█▌        | 15/100 [00:12<00:35,  2.40it/s] 16%|█▌        | 16/100 [00:12<00:35,  2.34it/s] 17%|█▋        | 17/100 [00:13<00:45,  1.81it/s] 18%|█▊        | 18/100 [00:14<00:43,  1.89it/s] 20%|██        | 20/100 [00:16<00:56,  1.43it/s] 23%|██▎       | 23/100 [00:16<00:33,  2.29it/s] 25%|██▌       | 25/100 [00:18<00:44,  1.69it/s] 26%|██▌       | 26/100 [00:18<00:42,  1.76it/s] 27%|██▋       | 27/100 [00:19<00:46,  1.56it/s] 30%|███       | 30/100 [00:22<00:54,  1.29it/s] 31%|███       | 31/100 [00:23<00:49,  1.39it/s] 32%|███▏      | 32/100 [00:23<00:45,  1.51it/s] 33%|███▎      | 33/100 [00:28<01:58,  1.76s/it] 34%|███▍      | 34/100 [00:33<02:34,  2.35s/it] 35%|███▌      | 35/100 [00:36<02:55,  2.69s/it] 36%|███▌      | 36/100 [00:37<02:21,  2.21s/it] 37%|███▋      | 37/100 [00:38<01:48,  1.72s/it] 38%|███▊      | 38/100 [00:39<01:41,  1.63s/it] 39%|███▉      | 39/100 [00:47<03:36,  3.55s/it] 40%|████      | 40/100 [00:55<04:38,  4.65s/it] 41%|████      | 41/100 [00:56<03:37,  3.68s/it] 42%|████▏     | 42/100 [00:56<02:38,  2.73s/it] 43%|████▎     | 43/100 [00:57<01:57,  2.06s/it] 44%|████▍     | 44/100 [01:03<03:00,  3.23s/it] 46%|████▌     | 46/100 [01:03<01:39,  1.85s/it] 47%|████▋     | 47/100 [01:09<02:26,  2.75s/it] 48%|████▊     | 48/100 [01:12<02:29,  2.88s/it] 49%|████▉     | 49/100 [01:14<02:14,  2.64s/it] 50%|█████     | 50/100 [01:15<01:48,  2.18s/it] 51%|█████     | 51/100 [01:17<01:44,  2.13s/it] 52%|█████▏    | 52/100 [01:23<02:32,  3.18s/it] 53%|█████▎    | 53/100 [01:27<02:48,  3.59s/it] 54%|█████▍    | 54/100 [01:30<02:33,  3.34s/it] 55%|█████▌    | 55/100 [01:31<01:52,  2.49s/it] 56%|█████▌    | 56/100 [01:38<02:47,  3.81s/it] 58%|█████▊    | 58/100 [01:39<01:35,  2.28s/it] 59%|█████▉    | 59/100 [01:40<01:29,  2.19s/it] 60%|██████    | 60/100 [01:43<01:28,  2.22s/it] 61%|██████    | 61/100 [01:45<01:27,  2.24s/it] 62%|██████▏   | 62/100 [01:48<01:35,  2.51s/it] 63%|██████▎   | 63/100 [01:50<01:26,  2.33s/it] 64%|██████▍   | 64/100 [01:51<01:04,  1.79s/it] 65%|██████▌   | 65/100 [01:53<01:07,  1.94s/it] 66%|██████▌   | 66/100 [01:55<01:05,  1.91s/it] 67%|██████▋   | 67/100 [02:04<02:09,  3.94s/it] 68%|██████▊   | 68/100 [02:09<02:25,  4.54s/it] 69%|██████▉   | 69/100 [02:11<01:51,  3.59s/it] 70%|███████   | 70/100 [02:19<02:29,  4.97s/it] 71%|███████   | 71/100 [02:23<02:12,  4.58s/it] 72%|███████▏  | 72/100 [02:29<02:23,  5.13s/it] 73%|███████▎  | 73/100 [02:33<02:10,  4.85s/it] 74%|███████▍  | 74/100 [02:47<03:11,  7.37s/it] 75%|███████▌  | 75/100 [02:50<02:32,  6.12s/it] 76%|███████▌  | 76/100 [02:54<02:16,  5.68s/it] 77%|███████▋  | 77/100 [03:07<02:57,  7.73s/it] 78%|███████▊  | 78/100 [03:08<02:09,  5.87s/it] 79%|███████▉  | 79/100 [03:14<01:58,  5.62s/it] 80%|████████  | 80/100 [03:17<01:39,  5.00s/it] 81%|████████  | 81/100 [03:19<01:15,  3.95s/it] 82%|████████▏ | 82/100 [03:19<00:52,  2.92s/it] 83%|████████▎ | 83/100 [03:22<00:47,  2.79s/it] 84%|████████▍ | 84/100 [03:26<00:54,  3.38s/it] 85%|████████▌ | 85/100 [03:42<01:48,  7.21s/it] 86%|████████▌ | 86/100 [03:50<01:43,  7.39s/it] 87%|████████▋ | 87/100 [03:54<01:21,  6.27s/it] 88%|████████▊ | 88/100 [04:01<01:19,  6.61s/it] 89%|████████▉ | 89/100 [04:09<01:17,  7.04s/it] 90%|█████████ | 90/100 [04:10<00:52,  5.26s/it] 92%|█████████▏| 92/100 [04:24<00:47,  5.92s/it] 93%|█████████▎| 93/100 [04:33<00:47,  6.74s/it] 94%|█████████▍| 94/100 [04:37<00:36,  6.06s/it] 95%|█████████▌| 95/100 [04:45<00:31,  6.40s/it] 96%|█████████▌| 96/100 [04:47<00:20,  5.24s/it] 97%|█████████▋| 97/100 [05:59<01:12, 24.29s/it] 98%|█████████▊| 98/100 [06:02<00:36, 18.06s/it] 99%|█████████▉| 99/100 [06:07<00:14, 14.38s/it]100%|██████████| 100/100 [06:13<00:00, 11.86s/it]100%|██████████| 100/100 [06:13<00:00,  3.73s/it]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     100       
+Failed requests:                         0         
+Request rate configured (RPS):           15.00     
+Benchmark duration (s):                  373.34    
+Total input tokens:                      22815     
+Total generated tokens:                  21584     
+Request throughput (req/s):              0.27      
+Output token throughput (tok/s):         57.81     
+Peak output token throughput (tok/s):    272.00    
+Peak concurrent requests:                98.00     
+Total token throughput (tok/s):          118.92    
+---------------Time to First Token----------------
+Mean TTFT (ms):                          907.36    
+Median TTFT (ms):                        895.41    
+P99 TTFT (ms):                           1399.93   
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          479.25    
+Median TPOT (ms):                        472.09    
+P99 TPOT (ms):                           571.62    
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           471.62    
+Median ITL (ms):                         460.73    
+P99 ITL (ms):                            560.15    
+==================================================
+[OK] RR=15 -> /home/ma-user/work/experiments/results/new-omoe-ascend/minimax-m2.7/20260803_003606_util-0.85-rr15-n100/rr_15/result.json
+RR=15.0: throughput=0.27 req/s, TTFT=907.4 ms, TPOT=479.25 ms
+[OK] Summary JSON: /home/ma-user/work/experiments/results/new-omoe-ascend/minimax-m2.7/20260803_003606_util-0.85-rr15-n100/summary.json
+[OK] Summary Markdown: /home/ma-user/work/experiments/results/new-omoe-ascend/minimax-m2.7/20260803_003606_util-0.85-rr15-n100/summary.md
+
+============================================================
+ Benchmark complete
+ Results: /home/ma-user/work/experiments/results/new-omoe-ascend/minimax-m2.7/20260803_003606_util-0.85-rr15-n100
+ Summary: /home/ma-user/work/experiments/results/new-omoe-ascend/minimax-m2.7/20260803_003606_util-0.85-rr15-n100/summary.json
+============================================================

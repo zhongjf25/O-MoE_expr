@@ -1,0 +1,72 @@
+============================================================
+ Qwen3.5-122B Serving Benchmark (omoe-ascend)
+============================================================
+ Model/tokenizer:   /home/ma-user/work/models/Qwen3.5-122B-A10B
+ Base URL:          http://127.0.0.1:8000
+ Dataset:           /home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json
+ Backend:           openai
+ Num prompts:       10
+ Request rates:     5 .. 5 (step 1)
+ ShareGPT out len:  128
+ Results:           /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100/util_0.96
+============================================================
+[INFO] Checking server availability...
+[INFO] Server model ID: Qwen3.5-122B-A10B
+
+>>> Benchmark request rate: 5 req/s
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-01 00:39:06 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-01 00:39:06 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-01 00:39:06 [__init__.py:58] Loading plugin ascend
+INFO 08-01 00:39:06 [__init__.py:212] Platform plugin ascend is activated
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0xffff1ccbea20>, trust_remote_code=False, seed=0, num_prompts=10, dataset_name='sharegpt', no_stream=False, dataset_path='/home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=128, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://127.0.0.1:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='Qwen3.5-122B-A10B', input_len=None, output_len=None, tokenizer='/home/ma-user/work/models/Qwen3.5-122B-A10B', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=5.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=omoe-ascend', 'model=qwen35-122b', 'request_rate=5'], result_dir='/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100/util_0.96/rr_5', result_filename='result.json', ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-41392924-', top_p=None, top_k=None, min_p=None, temperature=0.0, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False)
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 5.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [01:37<14:37, 97.53s/it] 20%|██        | 2/10 [01:38<05:24, 40.59s/it] 90%|█████████ | 9/10 [01:38<00:05,  5.96s/it]100%|██████████| 10/10 [01:38<00:00,  9.88s/it]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     10        
+Failed requests:                         0         
+Request rate configured (RPS):           5.00      
+Benchmark duration (s):                  98.80     
+Total input tokens:                      1991      
+Total generated tokens:                  1280      
+Request throughput (req/s):              0.10      
+Output token throughput (tok/s):         12.96     
+Peak output token throughput (tok/s):    20.00     
+Peak concurrent requests:                10.00     
+Total token throughput (tok/s):          33.11     
+---------------Time to First Token----------------
+Mean TTFT (ms):                          4234.39   
+Median TTFT (ms):                        4244.96   
+P99 TTFT (ms):                           5986.37   
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          733.21    
+Median TPOT (ms):                        735.04    
+P99 TPOT (ms):                           753.74    
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           733.21    
+Median ITL (ms):                         715.81    
+P99 ITL (ms):                            766.82    
+==================================================
+[OK] RR=5 -> /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100/util_0.96/rr_5/result.json
+RR=5.0: throughput=0.10 req/s, TTFT=4234.4 ms, TPOT=733.21 ms
+[OK] Summary JSON: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100/util_0.96/summary.json
+[OK] Summary Markdown: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100/util_0.96/summary.md
+
+============================================================
+ Benchmark complete
+ Results: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100/util_0.96
+ Summary: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_003354_memory-util-sweep-offload100/util_0.96/summary.json
+============================================================

@@ -1,0 +1,211 @@
+/home/ma-user/anaconda3/envs/PyTorch-2.7.1/lib/python3.12/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/anaconda3/envs/PyTorch-2.7.1/lib/python3.12/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/anaconda3/envs/PyTorch-2.7.1/lib/python3.12/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/anaconda3/envs/PyTorch-2.7.1/lib/python3.12/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+applied num_hidden_layers=4
+hotset_layers=[0, 1, 2, 3]
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-02 16:08:02 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-02 16:08:02 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-02 16:08:02 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 08-02 16:08:02 [__init__.py:212] Platform plugin ascend is activated
+[new-omoe-minimax-4layer] model=/home/ma-user/work/models/minimax-m2.7 tp=1 util=0.70 cached=8 offload_limit=248 w8a8_compute=ascendc_discrete port=8000
+INFO 08-02 16:08:13 [__init__.py:108] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+(APIServer pid=259756) INFO 08-02 16:08:13 [utils.py:293] 
+(APIServer pid=259756) INFO 08-02 16:08:13 [utils.py:293]        █     █     █▄   ▄█
+(APIServer pid=259756) INFO 08-02 16:08:13 [utils.py:293]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.16.1rc0
+(APIServer pid=259756) INFO 08-02 16:08:13 [utils.py:293]   █▄█▀ █     █     █     █  model   /home/ma-user/work/models/minimax-m2.7
+(APIServer pid=259756) INFO 08-02 16:08:13 [utils.py:293]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=259756) INFO 08-02 16:08:13 [utils.py:293] 
+(APIServer pid=259756) INFO 08-02 16:08:13 [utils.py:229] non-default args: {'model_tag': '/home/ma-user/work/models/minimax-m2.7', 'host': '0.0.0.0', 'model': '/home/ma-user/work/models/minimax-m2.7', 'trust_remote_code': True, 'max_model_len': 1024, 'quantization': 'ascend', 'enforce_eager': True, 'served_model_name': ['MiniMax-M2.7-4layer'], 'gpu_memory_utilization': 0.7, 'cached_num_experts': 8, 'offload_expert_limit': 248, 'dynamic_cache_enabled': True}
+(APIServer pid=259756) The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+(APIServer pid=259756) The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+(APIServer pid=259756) INFO 08-02 16:08:14 [model.py:532] Resolved architecture: MiniMaxM2ForCausalLM
+(APIServer pid=259756) INFO 08-02 16:08:14 [model.py:1556] Using max model len 1024
+(APIServer pid=259756) WARNING 08-02 16:08:14 [arg_utils.py:2063] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
+(APIServer pid=259756) INFO 08-02 16:08:14 [vllm.py:713] Asynchronous scheduling is disabled.
+(APIServer pid=259756) WARNING 08-02 16:08:14 [vllm.py:747] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=259756) WARNING 08-02 16:08:14 [vllm.py:758] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=259756) INFO 08-02 16:08:14 [vllm.py:898] Cudagraph is disabled under eager mode
+(APIServer pid=259756) WARNING 08-02 16:08:14 [platform.py:779] Ignored parameter 'use_trtllm_ragged_deepseek_prefill'. This is a GPU-specific feature not supported on Ascend. Resetting to False.
+(APIServer pid=259756) INFO 08-02 16:08:14 [ascend_config.py:433] Dynamic EPLB is False
+(APIServer pid=259756) INFO 08-02 16:08:14 [ascend_config.py:434] The number of redundant experts is 0
+(APIServer pid=259756) INFO 08-02 16:08:14 [ascend_config.py:55] Linear layer sharding enabled with config: None. Note: This feature works optimally with FLASHCOMM2 and DSA-CP enabled; using it without these features may result in significant performance degradation.
+(APIServer pid=259756) INFO 08-02 16:08:14 [platform.py:233] Compilation disabled, using eager mode by default
+(APIServer pid=259756) INFO 08-02 16:08:14 [platform.py:435] Set PYTORCH_NPU_ALLOC_CONF=expandable_segments:True
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-02 16:08:23 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-02 16:08:23 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-02 16:08:23 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 08-02 16:08:23 [__init__.py:212] Platform plugin ascend is activated
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:33 [__init__.py:108] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:33 [core.py:100] Initializing a V1 LLM engine (v0.16.1rc0) with config: model='/home/ma-user/work/models/minimax-m2.7', speculative_config=None, tokenizer='/home/ma-user/work/models/minimax-m2.7', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=1024, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=True, quantization=ascend, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=npu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=MiniMax-M2.7-4layer, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'vllm_ascend.compilation.compiler_interface.AscendCompiler', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [2048], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+(EngineCore_DP0 pid=261051) WARNING 08-02 16:08:33 [network_utils.py:36] The environment variable HOST_IP is deprecated and ignored, as it is often used by Docker and other software to interact with the container's network stack. Please use VLLM_HOST_IP instead to set the IP address for vLLM processes to communicate with each other.
+(EngineCore_DP0 pid=261051) /home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/transformers/models/auto/image_processing_auto.py:647: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+(EngineCore_DP0 pid=261051)   warnings.warn(
+(EngineCore_DP0 pid=261051) /home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/dynamo/torchair/__init__.py:8: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+(EngineCore_DP0 pid=261051)   import pkg_resources
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:38 [ascend_config.py:433] Dynamic EPLB is False
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:38 [ascend_config.py:434] The number of redundant experts is 0
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:38 [ascend_config.py:55] Linear layer sharding enabled with config: None. Note: This feature works optimally with FLASHCOMM2 and DSA-CP enabled; using it without these features may result in significant performance degradation.
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:39 [parallel_state.py:1307] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.16.0.253:47999 backend=hccl
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:39 [parallel_state.py:1535] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0, EPLB rank N/A
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:42 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=0 visible_npus=[0]
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:42 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:42 [cpu_binding.py:372] NPU0: main=[2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45]  acl=[46]  release=[[47]]
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:42 [cpu_binding.py:383] The 'migratepages' command is not available, skipping memory binding.
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:42 [base.py:106] Offloader set to NoopOffloader
+(EngineCore_DP0 pid=261051) INFO 08-02 16:08:42 [model_runner_v1.py:2748] Starting to load model /home/ma-user/work/models/minimax-m2.7...
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:   0% Completed | 0/54 [00:00<?, ?it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:   2% Completed | 1/54 [00:02<02:30,  2.83s/it]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:   4% Completed | 2/54 [00:05<02:33,  2.96s/it]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:   6% Completed | 3/54 [00:08<02:29,  2.94s/it]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:   7% Completed | 4/54 [00:10<02:00,  2.40s/it]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:   9% Completed | 5/54 [00:10<01:18,  1.60s/it]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  11% Completed | 6/54 [00:10<00:53,  1.12s/it]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  13% Completed | 7/54 [00:10<00:38,  1.24it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  15% Completed | 8/54 [00:11<00:28,  1.64it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  17% Completed | 9/54 [00:11<00:21,  2.11it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  19% Completed | 10/54 [00:11<00:16,  2.61it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  20% Completed | 11/54 [00:11<00:13,  3.11it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  22% Completed | 12/54 [00:11<00:11,  3.59it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  24% Completed | 13/54 [00:11<00:10,  4.04it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  26% Completed | 14/54 [00:12<00:09,  4.40it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  28% Completed | 15/54 [00:12<00:08,  4.71it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  30% Completed | 16/54 [00:12<00:07,  4.93it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  31% Completed | 17/54 [00:12<00:07,  5.10it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  33% Completed | 18/54 [00:12<00:06,  5.22it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  35% Completed | 19/54 [00:13<00:06,  5.32it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  37% Completed | 20/54 [00:13<00:06,  5.38it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  39% Completed | 21/54 [00:13<00:06,  5.44it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  41% Completed | 22/54 [00:13<00:05,  5.50it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  43% Completed | 23/54 [00:13<00:05,  5.52it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  44% Completed | 24/54 [00:13<00:05,  5.54it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  46% Completed | 25/54 [00:14<00:05,  5.56it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  48% Completed | 26/54 [00:14<00:05,  5.54it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  50% Completed | 27/54 [00:14<00:04,  5.53it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  52% Completed | 28/54 [00:14<00:04,  5.52it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  54% Completed | 29/54 [00:14<00:04,  5.53it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  56% Completed | 30/54 [00:15<00:04,  5.51it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  57% Completed | 31/54 [00:15<00:04,  5.53it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  59% Completed | 32/54 [00:15<00:03,  5.54it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  61% Completed | 33/54 [00:15<00:03,  5.55it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  63% Completed | 34/54 [00:15<00:03,  5.55it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  65% Completed | 35/54 [00:15<00:03,  5.56it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  67% Completed | 36/54 [00:16<00:03,  5.56it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  69% Completed | 37/54 [00:16<00:03,  5.57it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  70% Completed | 38/54 [00:16<00:02,  5.57it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  72% Completed | 39/54 [00:16<00:02,  5.55it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  74% Completed | 40/54 [00:16<00:02,  5.55it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  76% Completed | 41/54 [00:17<00:02,  5.56it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  78% Completed | 42/54 [00:17<00:02,  5.56it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  80% Completed | 43/54 [00:17<00:01,  5.58it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  81% Completed | 44/54 [00:17<00:01,  5.56it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  83% Completed | 45/54 [00:17<00:01,  5.54it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  85% Completed | 46/54 [00:17<00:01,  5.55it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  87% Completed | 47/54 [00:18<00:01,  5.54it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  89% Completed | 48/54 [00:18<00:01,  5.56it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  91% Completed | 49/54 [00:18<00:00,  5.55it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  93% Completed | 50/54 [00:18<00:00,  5.57it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  94% Completed | 51/54 [00:18<00:00,  5.55it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  96% Completed | 52/54 [00:19<00:00,  5.55it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards:  98% Completed | 53/54 [00:19<00:00,  5.53it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards: 100% Completed | 54/54 [00:19<00:00,  4.33it/s]
+(EngineCore_DP0 pid=261051) Loading safetensors checkpoint shards: 100% Completed | 54/54 [00:19<00:00,  2.76it/s]
+(EngineCore_DP0 pid=261051) 
+(EngineCore_DP0 pid=261051) [minimax-4layer] skipped_later_layer_tensors=134676
+(EngineCore_DP0 pid=261051) INFO 08-02 16:09:06 [default_loader.py:293] Loading weights took 19.83 seconds
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-02 16:09:21 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-02 16:09:21 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-02 16:09:21 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 08-02 16:09:21 [__init__.py:212] Platform plugin ascend is activated
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:45 [model_runner_v1.py:2766] Loading model weights took 2.5742 GB
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [worker.py:376] NPU KV cache memory profiling summary: total=29.49 GiB, init_free=29.12 GiB, requested=20.64 GiB (util=0.700), weights=2.57 GiB, torch_peak_increase=11.99 GiB, non_torch_increase=0.03 GiB, non_torch_before_empty_cache=0.40 GiB, non_torch_cleared_by_empty_cache=0.37 GiB, non_kv_cache_memory=14.60 GiB, free_after_profile=16.66 GiB.
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [worker.py:395] Available KV cache memory: 6.05 GiB
+(EngineCore_DP0 pid=261051) `torch_dtype` is deprecated! Use `dtype` instead!
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [block_utils.py:1194] [debug] available_memory: 6492089139,         num_blocks: 12375, num_huge_blocks: 1375,         kv_page_size: 524288, huge_page_size: 4718592,         num_expert_in_huge_block: 1,         num_conv_in_huge_block: -1,         num_ssm_in_huge_block: -1
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [block_utils.py:1691] GPU KV cache size: 1,584,000 tokens
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [block_utils.py:1696] Maximum concurrency for 1,024 tokens per request: 1546.88x
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [model_runner_v1.py:2947] Initialized unified KV raw pool for expert offload: physical_raw_pools=1, kv_cache_tensor_entries=4, raw_bytes=6.0425 GiB
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [model_runner_v1.py:2870] Reusing shared KV raw pool for expert blocks: total_expert_blocks=1375, raw_bytes=6.0425 GiB
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [core.py:291] init engine (profile, create kv cache, warmup model) took 4.81 seconds
+(EngineCore_DP0 pid=261051) WARNING 08-02 16:10:50 [expert_hotset.py:418] Loading non-converged expert hotset profile from /home/ma-user/work/new_omoe/O-MoE/expert_hotset_profiles/minimax-m2.7.json (sampled_requests=50).
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:50 [expert_manager.py:146] Initializing expert cache: routed_layers=4, first_routed_layer=0, cached_num_experts=8, resident_layer_experts=280, requested_expert_blocks=840, total_expert_blocks=1375.
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:53 [vllm.py:713] Asynchronous scheduling is disabled.
+(EngineCore_DP0 pid=261051) WARNING 08-02 16:10:53 [vllm.py:747] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore_DP0 pid=261051) WARNING 08-02 16:10:53 [vllm.py:758] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:53 [vllm.py:898] Cudagraph is disabled under eager mode
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:53 [platform.py:233] Compilation disabled, using eager mode by default
+(EngineCore_DP0 pid=261051) INFO 08-02 16:10:53 [platform.py:435] Set PYTORCH_NPU_ALLOC_CONF=expandable_segments:True
+(APIServer pid=259756) INFO 08-02 16:10:53 [api_server.py:495] Supported tasks: ['generate']
+(APIServer pid=259756) WARNING 08-02 16:10:53 [model.py:1357] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'top_k': 40, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=259756) INFO 08-02 16:10:53 [serving.py:185] Warming up chat template processing...
+(APIServer pid=259756) INFO 08-02 16:10:54 [hf.py:318] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=259756) INFO 08-02 16:10:54 [serving.py:210] Chat template warmup completed in 735.4ms
+(APIServer pid=259756) INFO 08-02 16:10:54 [api_server.py:500] Starting vLLM API server 0 on http://0.0.0.0:8000
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:38] Available routes are:
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /openapi.json, Methods: HEAD, GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /docs, Methods: HEAD, GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /docs/oauth2-redirect, Methods: HEAD, GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /redoc, Methods: HEAD, GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /tokenize, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /detokenize, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /load, Methods: GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /version, Methods: GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /health, Methods: GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /metrics, Methods: GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/models, Methods: GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /ping, Methods: GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /ping, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /invocations, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/responses, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/completions, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/completions/render, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /v1/messages, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=259756) INFO 08-02 16:10:54 [launcher.py:47] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=259756) INFO:     Started server process [259756]
+(APIServer pid=259756) INFO:     Waiting for application startup.
+(APIServer pid=259756) INFO:     Application startup complete.
+(APIServer pid=259756) INFO:     127.0.0.1:38824 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=259756) INFO 08-02 16:23:54 [loggers.py:267] Engine 000: Avg prompt throughput: 0.9 tokens/s, Avg generation throughput: 1.6 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 78.5%, Expert cache: 360 resident experts, Pool free huge/KV/expert: 295/0/0, Est. available KV blocks: 2655, Prefix cache hit rate: 0.0%
+(APIServer pid=259756) INFO 08-02 16:24:04 [loggers.py:267] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 78.5%, Expert cache: 360 resident experts, Pool free huge/KV/expert: 295/0/0, Est. available KV blocks: 2655, Prefix cache hit rate: 0.0%

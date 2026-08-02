@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "omoe-ascend",
+    "model": "qwen35-122b",
+    "results_dir": "/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/offload_80"
+  },
+  "experiments": [
+    {
+      "rr": 5.0,
+      "throughput_req_s": 0.13487816172612802,
+      "output_throughput_tok_s": 30.683433011076865,
+      "total_token_throughput": 63.226835872357036,
+      "completed": 100,
+      "failed": 0,
+      "duration_s": 741.4098673961125,
+      "ttft_ms": {
+        "mean": 10642.284060611855,
+        "median": 11199.172269552946,
+        "std": 4399.6887937911615,
+        "p99": 16904.885403546505
+      },
+      "tpot_ms": {
+        "mean": 1484.981782589473,
+        "median": 1272.0644949831587,
+        "std": 683.094433091,
+        "p99": 4473.598657145854
+      },
+      "itl_ms": {
+        "mean": 1108.6559642551397,
+        "median": 1126.3923200313002,
+        "std": 447.565150067658,
+        "p99": 3446.8827478028834
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 100,
+      "max_output_tokens_per_s": 99.0
+    }
+  ]
+}

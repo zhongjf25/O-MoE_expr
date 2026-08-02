@@ -1,0 +1,72 @@
+============================================================
+ Qwen3.5-122B Serving Benchmark (omoe-ascend)
+============================================================
+ Model/tokenizer:   /home/ma-user/work/models/Qwen3.5-122B-A10B
+ Base URL:          http://127.0.0.1:8000
+ Dataset:           /home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json
+ Backend:           openai
+ Num prompts:       100
+ Request rates:     5 .. 5 (step 1)
+ ShareGPT out len:  dataset default
+ Results:           /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/offload_80
+============================================================
+[INFO] Checking server availability...
+[INFO] Server model ID: Qwen3.5-122B-A10B
+
+>>> Benchmark request rate: 5 req/s
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-01 13:54:51 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-01 13:54:51 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-01 13:54:51 [__init__.py:58] Loading plugin ascend
+INFO 08-01 13:54:51 [__init__.py:212] Platform plugin ascend is activated
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0xffff0da8a7a0>, trust_remote_code=False, seed=0, num_prompts=100, dataset_name='sharegpt', no_stream=False, dataset_path='/home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json', no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='openai', base_url='http://127.0.0.1:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=None, model='Qwen3.5-122B-A10B', input_len=None, output_len=None, tokenizer='/home/ma-user/work/models/Qwen3.5-122B-A10B', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=5.0, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=['framework=omoe-ascend', 'model=qwen35-122b', 'request_rate=5'], result_dir='/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/offload_80/rr_5', result_filename='result.json', ignore_eos=False, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-aea8455b-', top_p=None, top_k=None, min_p=None, temperature=0.0, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False)
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: 5.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+  0%|          | 0/100 [00:00<?, ?it/s]  1%|          | 1/100 [00:27<45:32, 27.60s/it]  2%|▏         | 2/100 [00:35<26:27, 16.20s/it]  3%|▎         | 3/100 [00:37<15:16,  9.45s/it]  5%|▌         | 5/100 [00:38<07:07,  4.50s/it]  6%|▌         | 6/100 [00:41<06:15,  4.00s/it]  7%|▋         | 7/100 [00:42<05:01,  3.24s/it]  8%|▊         | 8/100 [00:44<04:08,  2.70s/it]  9%|▉         | 9/100 [00:45<03:28,  2.29s/it] 10%|█         | 10/100 [00:46<03:01,  2.01s/it] 11%|█         | 11/100 [00:48<02:42,  1.82s/it] 12%|█▏        | 12/100 [00:49<02:28,  1.69s/it] 14%|█▍        | 14/100 [00:52<02:10,  1.51s/it] 16%|█▌        | 16/100 [00:54<02:00,  1.43s/it] 17%|█▋        | 17/100 [00:56<01:56,  1.40s/it] 18%|█▊        | 18/100 [00:57<01:53,  1.39s/it] 20%|██        | 20/100 [01:02<02:30,  1.88s/it] 21%|██        | 21/100 [01:04<02:18,  1.76s/it] 24%|██▍       | 24/100 [01:05<01:24,  1.11s/it] 25%|██▌       | 25/100 [01:06<01:25,  1.14s/it] 26%|██▌       | 26/100 [01:11<02:25,  1.97s/it] 28%|██▊       | 28/100 [01:14<02:02,  1.71s/it] 29%|██▉       | 29/100 [01:19<02:51,  2.42s/it] 30%|███       | 30/100 [01:25<03:52,  3.32s/it] 33%|███▎      | 33/100 [01:42<05:02,  4.52s/it] 34%|███▍      | 34/100 [01:46<04:48,  4.36s/it] 35%|███▌      | 35/100 [01:57<06:17,  5.80s/it] 36%|███▌      | 36/100 [02:07<07:10,  6.72s/it] 37%|███▋      | 37/100 [02:08<05:36,  5.34s/it] 38%|███▊      | 38/100 [02:15<06:03,  5.86s/it] 39%|███▉      | 39/100 [02:33<09:22,  9.22s/it] 40%|████      | 40/100 [02:45<10:00, 10.00s/it] 41%|████      | 41/100 [02:53<09:03,  9.21s/it] 42%|████▏     | 42/100 [03:01<08:39,  8.95s/it] 43%|████▎     | 43/100 [03:04<07:00,  7.37s/it] 44%|████▍     | 44/100 [03:10<06:27,  6.91s/it] 45%|████▌     | 45/100 [03:16<06:03,  6.60s/it] 46%|████▌     | 46/100 [03:18<04:47,  5.33s/it] 47%|████▋     | 47/100 [03:24<04:50,  5.48s/it] 48%|████▊     | 48/100 [03:36<06:17,  7.26s/it] 49%|████▉     | 49/100 [03:40<05:30,  6.48s/it] 50%|█████     | 50/100 [03:44<04:38,  5.58s/it] 51%|█████     | 51/100 [03:59<06:50,  8.37s/it] 52%|█████▏    | 52/100 [04:01<05:13,  6.53s/it] 53%|█████▎    | 53/100 [04:21<08:18, 10.60s/it] 55%|█████▌    | 55/100 [04:28<05:25,  7.23s/it] 56%|█████▌    | 56/100 [04:34<05:11,  7.07s/it] 57%|█████▋    | 57/100 [04:42<05:09,  7.20s/it] 58%|█████▊    | 58/100 [04:46<04:29,  6.42s/it] 59%|█████▉    | 59/100 [04:57<05:10,  7.57s/it] 60%|██████    | 60/100 [05:05<05:13,  7.83s/it] 62%|██████▏   | 62/100 [05:15<04:04,  6.43s/it] 64%|██████▍   | 64/100 [05:16<02:28,  4.12s/it] 65%|██████▌   | 65/100 [05:21<02:31,  4.34s/it] 66%|██████▌   | 66/100 [05:27<02:41,  4.75s/it] 67%|██████▋   | 67/100 [05:48<04:51,  8.83s/it] 68%|██████▊   | 68/100 [05:54<04:25,  8.30s/it] 69%|██████▉   | 69/100 [05:56<03:23,  6.57s/it] 70%|███████   | 70/100 [06:12<04:30,  9.03s/it] 71%|███████   | 71/100 [06:19<04:02,  8.37s/it] 72%|███████▏  | 72/100 [06:34<04:49, 10.34s/it] 73%|███████▎  | 73/100 [06:46<04:53, 10.87s/it] 74%|███████▍  | 74/100 [07:04<05:40, 13.10s/it] 75%|███████▌  | 75/100 [07:11<04:37, 11.08s/it] 76%|███████▌  | 76/100 [07:23<04:35, 11.48s/it] 77%|███████▋  | 77/100 [07:45<05:35, 14.60s/it] 78%|███████▊  | 78/100 [07:55<04:54, 13.37s/it] 79%|███████▉  | 79/100 [08:04<04:10, 11.92s/it] 80%|████████  | 80/100 [08:06<03:02,  9.10s/it] 81%|████████  | 81/100 [08:11<02:24,  7.63s/it] 82%|████████▏ | 82/100 [08:15<01:58,  6.57s/it] 83%|████████▎ | 83/100 [08:31<02:40,  9.44s/it] 84%|████████▍ | 84/100 [08:54<03:36, 13.51s/it] 85%|████████▌ | 85/100 [08:55<02:29,  9.94s/it] 86%|████████▌ | 86/100 [09:05<02:19,  9.93s/it] 88%|████████▊ | 88/100 [09:26<02:02, 10.18s/it] 89%|████████▉ | 89/100 [09:31<01:35,  8.71s/it] 90%|█████████ | 90/100 [09:38<01:24,  8.41s/it] 91%|█████████ | 91/100 [09:40<00:59,  6.66s/it] 92%|█████████▏| 92/100 [10:04<01:32, 11.56s/it] 93%|█████████▎| 93/100 [10:08<01:05,  9.38s/it] 94%|█████████▍| 94/100 [10:15<00:52,  8.78s/it] 95%|█████████▌| 95/100 [10:36<01:01, 12.21s/it] 96%|█████████▌| 96/100 [10:55<00:56, 14.17s/it] 97%|█████████▋| 97/100 [11:55<01:23, 27.71s/it] 98%|█████████▊| 98/100 [12:14<00:50, 25.24s/it] 99%|█████████▉| 99/100 [12:16<00:18, 18.34s/it]100%|██████████| 100/100 [12:21<00:00, 14.26s/it]100%|██████████| 100/100 [12:21<00:00,  7.41s/it]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     100       
+Failed requests:                         0         
+Request rate configured (RPS):           5.00      
+Benchmark duration (s):                  741.41    
+Total input tokens:                      24128     
+Total generated tokens:                  22749     
+Request throughput (req/s):              0.13      
+Output token throughput (tok/s):         30.68     
+Peak output token throughput (tok/s):    99.00     
+Peak concurrent requests:                100.00    
+Total token throughput (tok/s):          63.23     
+---------------Time to First Token----------------
+Mean TTFT (ms):                          10642.28  
+Median TTFT (ms):                        11199.17  
+P99 TTFT (ms):                           16904.89  
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          1484.98   
+Median TPOT (ms):                        1272.06   
+P99 TPOT (ms):                           4473.60   
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           1108.66   
+Median ITL (ms):                         1126.39   
+P99 ITL (ms):                            3446.88   
+==================================================
+[OK] RR=5 -> /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/offload_80/rr_5/result.json
+RR=5.0: throughput=0.13 req/s, TTFT=10642.3 ms, TPOT=1484.98 ms
+[OK] Summary JSON: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/offload_80/summary.json
+[OK] Summary Markdown: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/offload_80/summary.md
+
+============================================================
+ Benchmark complete
+ Results: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/offload_80
+ Summary: /home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/offload_80/summary.json
+============================================================

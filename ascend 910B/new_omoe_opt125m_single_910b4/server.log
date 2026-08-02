@@ -1,0 +1,212 @@
+/home/ma-user/anaconda3/envs/PyTorch-2.7.1/lib/python3.12/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/anaconda3/envs/PyTorch-2.7.1/lib/python3.12/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/anaconda3/envs/PyTorch-2.7.1/lib/python3.12/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/anaconda3/envs/PyTorch-2.7.1/lib/python3.12/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-02 15:04:52 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-02 15:04:52 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-02 15:04:52 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 08-02 15:04:52 [__init__.py:212] Platform plugin ascend is activated
+[new-omoe-opt125m] model=/home/ma-user/work/models/opt-125m tp=1 w8a8_compute=ascendc_discrete port=8000
+INFO 08-02 15:05:05 [__init__.py:108] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+(APIServer pid=160041) INFO 08-02 15:05:05 [utils.py:293] 
+(APIServer pid=160041) INFO 08-02 15:05:05 [utils.py:293]        █     █     █▄   ▄█
+(APIServer pid=160041) INFO 08-02 15:05:05 [utils.py:293]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.16.1rc0
+(APIServer pid=160041) INFO 08-02 15:05:05 [utils.py:293]   █▄█▀ █     █     █     █  model   /home/ma-user/work/models/opt-125m
+(APIServer pid=160041) INFO 08-02 15:05:05 [utils.py:293]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=160041) INFO 08-02 15:05:05 [utils.py:293] 
+(APIServer pid=160041) INFO 08-02 15:05:05 [utils.py:229] non-default args: {'model_tag': '/home/ma-user/work/models/opt-125m', 'host': '0.0.0.0', 'model': '/home/ma-user/work/models/opt-125m', 'max_model_len': 1024, 'enforce_eager': True, 'served_model_name': ['opt-125m'], 'gpu_memory_utilization': 0.8}
+(APIServer pid=160041) INFO 08-02 15:05:22 [model.py:532] Resolved architecture: OPTForCausalLM
+(APIServer pid=160041) INFO 08-02 15:05:22 [model.py:1556] Using max model len 1024
+(APIServer pid=160041) WARNING 08-02 15:05:22 [arg_utils.py:2063] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
+(APIServer pid=160041) INFO 08-02 15:05:23 [vllm.py:713] Asynchronous scheduling is disabled.
+(APIServer pid=160041) WARNING 08-02 15:05:23 [vllm.py:747] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=160041) WARNING 08-02 15:05:23 [vllm.py:758] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=160041) INFO 08-02 15:05:23 [vllm.py:898] Cudagraph is disabled under eager mode
+(APIServer pid=160041) WARNING 08-02 15:05:23 [platform.py:779] Ignored parameter 'use_trtllm_ragged_deepseek_prefill'. This is a GPU-specific feature not supported on Ascend. Resetting to False.
+(APIServer pid=160041) INFO 08-02 15:05:23 [ascend_config.py:433] Dynamic EPLB is False
+(APIServer pid=160041) INFO 08-02 15:05:23 [ascend_config.py:434] The number of redundant experts is 0
+(APIServer pid=160041) INFO 08-02 15:05:23 [ascend_config.py:55] Linear layer sharding enabled with config: None. Note: This feature works optimally with FLASHCOMM2 and DSA-CP enabled; using it without these features may result in significant performance degradation.
+(APIServer pid=160041) INFO 08-02 15:05:23 [platform.py:233] Compilation disabled, using eager mode by default
+(APIServer pid=160041) INFO 08-02 15:05:23 [platform.py:435] Set PYTORCH_NPU_ALLOC_CONF=expandable_segments:True
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2 owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/utils/collect_env.py:58: UserWarning: Warning: The /usr/local/Ascend/cann-8.5.2/aarch64-linux/ascend_toolkit_install.info owner does not match the current owner.
+  warnings.warn(f"Warning: The {path} owner does not match the current owner.")
+INFO 08-02 15:05:31 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 08-02 15:05:31 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 08-02 15:05:31 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 08-02 15:05:31 [__init__.py:212] Platform plugin ascend is activated
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:40 [__init__.py:108] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:40 [core.py:100] Initializing a V1 LLM engine (v0.16.1rc0) with config: model='/home/ma-user/work/models/opt-125m', speculative_config=None, tokenizer='/home/ma-user/work/models/opt-125m', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.float16, max_seq_len=1024, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=True, quantization=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=npu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=opt-125m, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'vllm_ascend.compilation.compiler_interface.AscendCompiler', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [2048], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+(EngineCore_DP0 pid=161948) WARNING 08-02 15:05:40 [network_utils.py:36] The environment variable HOST_IP is deprecated and ignored, as it is often used by Docker and other software to interact with the container's network stack. Please use VLLM_HOST_IP instead to set the IP address for vLLM processes to communicate with each other.
+(EngineCore_DP0 pid=161948) /home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/transformers/models/auto/image_processing_auto.py:647: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+(EngineCore_DP0 pid=161948)   warnings.warn(
+(EngineCore_DP0 pid=161948) /home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/torch_npu/dynamo/torchair/__init__.py:8: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+(EngineCore_DP0 pid=161948)   import pkg_resources
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:46 [ascend_config.py:433] Dynamic EPLB is False
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:46 [ascend_config.py:434] The number of redundant experts is 0
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:46 [ascend_config.py:55] Linear layer sharding enabled with config: None. Note: This feature works optimally with FLASHCOMM2 and DSA-CP enabled; using it without these features may result in significant performance degradation.
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:47 [parallel_state.py:1307] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.16.0.253:44761 backend=hccl
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:47 [parallel_state.py:1535] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:48 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=0 visible_npus=[0]
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:48 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:48 [cpu_binding.py:372] NPU0: main=[2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45]  acl=[46]  release=[[47]]
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:48 [cpu_binding.py:383] The 'migratepages' command is not available, skipping memory binding.
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:48 [base.py:106] Offloader set to NoopOffloader
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:48 [model_runner_v1.py:2748] Starting to load model /home/ma-user/work/models/opt-125m...
+(EngineCore_DP0 pid=161948) Loading pt checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(EngineCore_DP0 pid=161948) Loading pt checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.35it/s]
+(EngineCore_DP0 pid=161948) Loading pt checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.35it/s]
+(EngineCore_DP0 pid=161948) 
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:50 [default_loader.py:293] Loading weights took 0.74 seconds
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:51 [model_runner_v1.py:2766] Loading model weights took 0.2334 GB
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:52 [worker.py:376] NPU KV cache memory profiling summary: total=29.49 GiB, init_free=29.12 GiB, requested=23.59 GiB (util=0.800), weights=0.23 GiB, torch_peak_increase=0.02 GiB, non_torch_increase=0.02 GiB, non_torch_before_empty_cache=0.39 GiB, non_torch_cleared_by_empty_cache=0.37 GiB, non_kv_cache_memory=0.28 GiB, free_after_profile=28.84 GiB.
+(EngineCore_DP0 pid=161948) INFO 08-02 15:05:52 [worker.py:395] Available KV cache memory: 23.31 GiB
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156] EngineCore failed to start.
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156] Traceback (most recent call last):
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 1146, in run_engine_core
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     return func(*args, **kwargs)
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 890, in __init__
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     super().__init__(
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 116, in __init__
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     num_gpu_blocks, num_cpu_blocks, kv_cache_config = self._initialize_kv_caches(
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     return func(*args, **kwargs)
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 272, in _initialize_kv_caches
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     kv_cache_configs = get_kv_cache_configs(
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]                        ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/core/block_utils.py", line 1974, in get_kv_cache_configs
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     get_kv_cache_config_from_groups(
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/core/block_utils.py", line 1507, in get_kv_cache_config_from_groups
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     get_all_block_size(vllm_config, kv_cache_groups, available_memory)
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/core/block_utils.py", line 1176, in get_all_block_size
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     expert_page_size = get_expert_page_size(vllm_config)
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/core/block_utils.py", line 1150, in get_expert_page_size
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156]     raise AttributeError(
+(EngineCore_DP0 pid=161948) ERROR 08-02 15:05:52 [core.py:1156] AttributeError: MoE config missing moe_intermediate_size/intermediate_size for expert page sizing
+(EngineCore_DP0 pid=161948) Process EngineCore_DP0:
+(EngineCore_DP0 pid=161948) Traceback (most recent call last):
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore_DP0 pid=161948)     self.run()
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/multiprocessing/process.py", line 108, in run
+(EngineCore_DP0 pid=161948)     self._target(*self._args, **self._kwargs)
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 1160, in run_engine_core
+(EngineCore_DP0 pid=161948)     raise e
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 1146, in run_engine_core
+(EngineCore_DP0 pid=161948)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore_DP0 pid=161948)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore_DP0 pid=161948)     return func(*args, **kwargs)
+(EngineCore_DP0 pid=161948)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 890, in __init__
+(EngineCore_DP0 pid=161948)     super().__init__(
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 116, in __init__
+(EngineCore_DP0 pid=161948)     num_gpu_blocks, num_cpu_blocks, kv_cache_config = self._initialize_kv_caches(
+(EngineCore_DP0 pid=161948)                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore_DP0 pid=161948)     return func(*args, **kwargs)
+(EngineCore_DP0 pid=161948)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core.py", line 272, in _initialize_kv_caches
+(EngineCore_DP0 pid=161948)     kv_cache_configs = get_kv_cache_configs(
+(EngineCore_DP0 pid=161948)                        ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/core/block_utils.py", line 1974, in get_kv_cache_configs
+(EngineCore_DP0 pid=161948)     get_kv_cache_config_from_groups(
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/core/block_utils.py", line 1507, in get_kv_cache_config_from_groups
+(EngineCore_DP0 pid=161948)     get_all_block_size(vllm_config, kv_cache_groups, available_memory)
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/core/block_utils.py", line 1176, in get_all_block_size
+(EngineCore_DP0 pid=161948)     expert_page_size = get_expert_page_size(vllm_config)
+(EngineCore_DP0 pid=161948)                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore_DP0 pid=161948)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/core/block_utils.py", line 1150, in get_expert_page_size
+(EngineCore_DP0 pid=161948)     raise AttributeError(
+(EngineCore_DP0 pid=161948) AttributeError: MoE config missing moe_intermediate_size/intermediate_size for expert page sizing
+(APIServer pid=160041) Traceback (most recent call last):
+(APIServer pid=160041)   File "/home/ma-user/work/experiments/scripts/serve_new_omoe_opt125m_single_910b4.py", line 54, in <module>
+(APIServer pid=160041)     run()
+(APIServer pid=160041)   File "/home/ma-user/work/experiments/scripts/serve_new_omoe_opt125m_single_910b4.py", line 50, in run
+(APIServer pid=160041)     main()
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/entrypoints/cli/main.py", line 73, in main
+(APIServer pid=160041)     args.dispatch_function(args)
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/entrypoints/cli/serve.py", line 112, in cmd
+(APIServer pid=160041)     uvloop.run(run_server(args))
+(APIServer pid=160041)   File "/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/uvloop/__init__.py", line 92, in run
+(APIServer pid=160041)     return runner.run(wrapper())
+(APIServer pid=160041)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/asyncio/runners.py", line 118, in run
+(APIServer pid=160041)     return self._loop.run_until_complete(task)
+(APIServer pid=160041)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=160041)   File "/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/site-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=160041)     return await main
+(APIServer pid=160041)            ^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/entrypoints/openai/api_server.py", line 471, in run_server
+(APIServer pid=160041)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/entrypoints/openai/api_server.py", line 490, in run_server_worker
+(APIServer pid=160041)     async with build_async_engine_client(
+(APIServer pid=160041)   File "/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=160041)     return await anext(self.gen)
+(APIServer pid=160041)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/entrypoints/openai/api_server.py", line 96, in build_async_engine_client
+(APIServer pid=160041)     async with build_async_engine_client_from_engine_args(
+(APIServer pid=160041)   File "/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=160041)     return await anext(self.gen)
+(APIServer pid=160041)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/entrypoints/openai/api_server.py", line 137, in build_async_engine_client_from_engine_args
+(APIServer pid=160041)     async_llm = AsyncLLM.from_vllm_config(
+(APIServer pid=160041)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/async_llm.py", line 223, in from_vllm_config
+(APIServer pid=160041)     return cls(
+(APIServer pid=160041)            ^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/async_llm.py", line 152, in __init__
+(APIServer pid=160041)     self.engine_core = EngineCoreClient.make_async_mp_client(
+(APIServer pid=160041)                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/tracing/otel.py", line 178, in sync_wrapper
+(APIServer pid=160041)     return func(*args, **kwargs)
+(APIServer pid=160041)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core_client.py", line 125, in make_async_mp_client
+(APIServer pid=160041)     return AsyncMPClient(*client_args)
+(APIServer pid=160041)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/tracing/otel.py", line 178, in sync_wrapper
+(APIServer pid=160041)     return func(*args, **kwargs)
+(APIServer pid=160041)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core_client.py", line 842, in __init__
+(APIServer pid=160041)     super().__init__(
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/core_client.py", line 496, in __init__
+(APIServer pid=160041)     with launch_core_engines(vllm_config, executor_class, log_stats) as (
+(APIServer pid=160041)   File "/home/ma-user/work/envs/vllm-0.16.1rc0-py311/lib/python3.11/contextlib.py", line 144, in __exit__
+(APIServer pid=160041)     next(self.gen)
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/utils.py", line 925, in launch_core_engines
+(APIServer pid=160041)     wait_for_engine_startup(
+(APIServer pid=160041)   File "/home/ma-user/work/new_omoe/O-MoE/vllm/v1/engine/utils.py", line 984, in wait_for_engine_startup
+(APIServer pid=160041)     raise RuntimeError(
+(APIServer pid=160041) RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+(APIServer pid=160041) [ERROR] 2026-08-02-15:05:59 (PID:160041, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception

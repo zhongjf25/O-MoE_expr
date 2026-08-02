@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "framework": "omoe-ascend",
+    "model": "qwen35-122b",
+    "results_dir": "/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/smoke_validation_20260729_1501_final"
+  },
+  "experiments": [
+    {
+      "rr": 1.0,
+      "throughput_req_s": 0.1675819686315165,
+      "output_throughput_tok_s": 1.340655749052132,
+      "total_token_throughput": 3.35163937263033,
+      "completed": 1,
+      "failed": 0,
+      "duration_s": 5.9672291008755565,
+      "ttft_ms": {
+        "mean": 1534.1691868379712,
+        "median": 1534.1691868379712,
+        "std": 0.0,
+        "p99": 1534.1691868379712
+      },
+      "tpot_ms": {
+        "mean": 490.1216495782137,
+        "median": 490.1216495782137,
+        "std": 0.0,
+        "p99": 490.1216495782137
+      },
+      "itl_ms": {
+        "mean": 490.1217781339905,
+        "median": 485.9584190417081,
+        "std": 13.966768912451341,
+        "p99": 521.5614564018324
+      },
+      "e2el_ms": {
+        "mean": null,
+        "median": null,
+        "std": null,
+        "p99": null
+      },
+      "max_concurrent_requests": 1,
+      "max_output_tokens_per_s": 3.0
+    }
+  ]
+}

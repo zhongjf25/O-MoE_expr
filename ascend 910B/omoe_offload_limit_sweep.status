@@ -1,0 +1,11 @@
+state=failed
+run_id=20260801_130354
+gpu_memory_utilization=0.92
+current_offload_limit=100
+num_prompts=100
+request_rate=5
+detail=controller exited with code 130
+run_dir=/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100
+metrics_file=/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/metrics.tsv
+summary_file=/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_130354_offload-limit-sweep-util0.92-rr5-n100/summary.json
+updated_at=2026-08-01 14:14:49 CST

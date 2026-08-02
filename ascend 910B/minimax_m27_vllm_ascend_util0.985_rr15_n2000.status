@@ -1,0 +1,11 @@
+state=complete
+run_id=20260803_020908
+framework=vllm-ascend
+model=minimax-m2.7
+gpu_memory_utilization=0.985
+num_prompts=2000
+request_rate=15
+temperature=0
+results_dir=/home/ma-user/work/experiments/results/vllm-ascend/minimax-m2.7/20260803_020908_baseline-util0.985-rr15-n2000
+updated_at=2026-08-03 04:34:35 CST
+exit_code=0

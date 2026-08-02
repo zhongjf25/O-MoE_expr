@@ -1,0 +1,9 @@
+state=failed
+run_id=20260801_105019
+gpu_memory_utilization=0.96
+offload_expert_limit=100
+num_prompts=1000
+rr=5
+results_dir=/home/ma-user/work/experiments/results/omoe-ascend/qwen35-122b/20260801_105019_omoe-util0.96-offload100-rr5-n1000
+updated_at=2026-08-01 10:54:50 CST
+exit_code=1

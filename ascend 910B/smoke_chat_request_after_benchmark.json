@@ -1,0 +1,11 @@
+{
+  "model": "Qwen3.5-122B-A10B",
+  "messages": [
+    {
+      "role": "user",
+      "content": "请只回答：服务正常"
+    }
+  ],
+  "max_tokens": 32,
+  "temperature": 0
+}
