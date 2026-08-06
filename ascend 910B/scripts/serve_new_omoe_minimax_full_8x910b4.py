@@ -24,6 +24,7 @@ def run() -> None:
     cached_num_experts = os.getenv("CACHED_NUM_EXPERTS", "8")
     offload_expert_limit = os.getenv("OFFLOAD_EXPERT_LIMIT", "248")
     gpu_util = os.getenv("GPU_MEMORY_UTIL", "0.85")
+    max_num_seqs = os.getenv("MAX_NUM_SEQS")
     sys.argv = [
         "vllm",
         "serve",
@@ -53,10 +54,13 @@ def run() -> None:
         "--no-enable-chunked-prefill",
         "--no-async-scheduling",
     ]
+    if max_num_seqs:
+        sys.argv.extend(["--max-num-seqs", max_num_seqs])
     print(
         "[new-omoe-minimax-full-8x910b4] "
         f"model={MODEL} tp=8 util={gpu_util} "
         f"cached={cached_num_experts} offload_limit={offload_expert_limit} "
+        f"max_num_seqs={max_num_seqs or 'default'} "
         f"w8a8_compute={os.environ['OMOE_W8A8_COMPUTE']} port={PORT}",
         flush=True,
     )

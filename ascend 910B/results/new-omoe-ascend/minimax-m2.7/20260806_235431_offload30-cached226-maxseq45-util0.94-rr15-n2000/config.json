@@ -1,0 +1,19 @@
+{
+  "framework": "new-omoe-ascend",
+  "model": "/home/ma-user/work/models/minimax-m2.7",
+  "model_name": "minimax-m2.7",
+  "served_model_id": "MiniMax-M2.7",
+  "base_url": "http://127.0.0.1:8000",
+  "dataset_path": "/home/ma-user/work/models/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "num_prompts": 2000,
+  "request_rate": {
+    "start": 15.0,
+    "end": 15.0,
+    "step": 1.0
+  },
+  "timestamp": "20260806_235431",
+  "exp_label": "offload30-cached226-maxseq45-util0.94-rr15-n2000",
+  "backend": "openai",
+  "seed": 0,
+  "sharegpt_output_len": null
+}

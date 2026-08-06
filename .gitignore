@@ -1,0 +1,11 @@
+# Runtime logs and process state
+logs/
+*.log
+*.out
+*.err
+*.pid
+*.current
+
+# Python caches
+__pycache__/
+*.py[cod]
